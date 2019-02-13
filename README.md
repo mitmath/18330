@@ -7,3 +7,5 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 02: Numerical Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/02_Numerical_Integration.ipynb)
 
 [Lecture 03: Solving ODEs](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/03_Solving_ODEs.ipynb)
+
+[Lecture 03a: The Big-O notation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/03a_Big_O_Notation.ipynb)
