@@ -11,3 +11,5 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 03a: The Big-O notation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/03a_Big_O_Notation.ipynb)
 
 [Lecture 04: Machine Arithmetic](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/04_Machine_Arithmetic.ipynb)
+
+[Lecture 05: Numerical Differentiation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/05_Numerical_Differentiation.ipynb)
