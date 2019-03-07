@@ -13,3 +13,7 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 04: Machine Arithmetic](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/04_Machine_Arithmetic.ipynb)
 
 [Lecture 05: Numerical Differentiation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/05_Numerical_Differentiation.ipynb)
+
+[Lecture 06: Boundary Value Problems](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/06_Boundary_Value_Problems.ipynb)
+
+[Lecture 07: Richardson Extrapolation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/07_Richardson_Extrapolation.ipynb)
