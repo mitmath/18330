@@ -19,3 +19,5 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 07: Richardson Extrapolation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/07_Richardson_Extrapolation.ipynb)
 
 [Lecture 08: Root Finding](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/08_Root_Finding.ipynb)
+
+[Lecture 09: Numerical Optimization](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/09_Numerical_Optimization.ipynb)
