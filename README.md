@@ -21,3 +21,7 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 08: Root Finding](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/08_Root_Finding.ipynb)
 
 [Lecture 09: Numerical Optimization](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/09_Numerical_Optimization.ipynb)
+
+[Lecture 10: Roots vs Extrema](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/10_Roots_vs_Extrema.ipynb)
+
+[Lecture 11: Numerical Linear Algebra](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/11_Numerical_Linear_Algebra.ipynb)
