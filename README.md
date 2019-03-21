@@ -25,3 +25,5 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 10: Roots vs Extrema](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/10_Roots_vs_Extrema.ipynb)
 
 [Lecture 11: Numerical Linear Algebra](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/11_Numerical_Linear_Algebra.ipynb)
+
+[Lecture 12: Eigenvalues and Eigenvectors](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/12_Eigenvalues_and_Eigenvectors.ipynb)
