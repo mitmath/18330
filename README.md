@@ -29,3 +29,5 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 12: Eigenvalues and Eigenvectors](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/12_Eigenvalues_and_Eigenvectors.ipynb)
 
 [Lecture 13: Monte Carlo Integration](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/13_Monte_Carlo_Integration.ipynb)
+
+[Lecture 14: Fourier Analysis I](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/14_Fourier_Analysis_I.ipynb)
