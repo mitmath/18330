@@ -33,3 +33,5 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 14: Fourier Analysis I](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/14_Fourier_Analysis_I.ipynb)
 
 [Lecture 15: Fourier Analysis II](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/15_Fourier_Analysis_II.ipynb)
+
+[Lecture 16: The Discrete Fourier Transform](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/16_Discrete_Fourier_Transform.ipynb)
