@@ -39,3 +39,5 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 17: The Fast Fourier Transform](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/17_Fast_Fourier_Transform.ipynb)
 
 [Lecture 18: Clenshaw-Curtis Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/18_Clenshaw_Curtis_Quadrature.ipynb)
+
+[Lecture 19: Function Interpolation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/19_Function_Interpolation.ipynb)
