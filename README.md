@@ -45,3 +45,5 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 20: Chebyshev methods](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/20_Chebyshev_Methods.ipynb)
 
 [Lecture 21: Gauss Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/21_Gauss_Quadrature.ipynb)
+
+[Extra Notebook: Solving a simple PDE with finite differences and using a spectral method](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/Spectral_PDEs.ipynb)
