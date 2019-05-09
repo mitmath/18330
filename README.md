@@ -43,3 +43,5 @@ To view the Jupyter notebooks from class online, click on the links below:
 [Lecture 19: Function Interpolation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/19_Function_Interpolation.ipynb)
 
 [Lecture 20: Chebyshev methods](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/20_Chebyshev_Methods.ipynb)
+
+[Lecture 21: Gauss Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/21_Gauss_Quadrature.ipynb)
