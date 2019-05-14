@@ -46,4 +46,6 @@ To view the Jupyter notebooks from class online, click on the links below:
 
 [Lecture 21: Gauss Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/21_Gauss_Quadrature.ipynb)
 
+[Lecture 21: Ewald Summation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/22_Ewald_Summation.ipynb)
+
 [Extra Notebook: Solving a simple PDE with finite differences and using a spectral method](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/Spectral_PDEs.ipynb)
