@@ -39,12 +39,12 @@ To get the files, use `git` from the command line (or from a GUI), as follows
 
 - Clone the repository once with
 ```
-git clone https://github.com/dpsanders/18.330
+git clone https://github.com/mitmath/18330
 ```
-This will create a new directory called `6.S083` with the matierials.
+This will create a new directory called `18330` with the matierials.
 
 
-- Update it to pull in new changes
+- Update it to pull in new changes each time with
 ```
 git pull
 ```
