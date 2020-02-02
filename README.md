@@ -1,51 +1,52 @@
-# 18.330: Intro to Numerical Analysis (Spring 2019)
+# 18.330: Introduction to numerical analysis
 
-To view the Jupyter notebooks from class online, click on the links below:
+## Spring 2020
 
-[Lecture 01: Invitation, Infinite Sums](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/01_Invitation.ipynb)
+Welcome to 18.330! This is an introductory course on numerical analysis.
 
-[Lecture 02: Numerical Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/02_Numerical_Integration.ipynb)
+## Logistics
 
-[Lecture 03: Solving ODEs](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/03_Solving_ODEs.ipynb)
+- Visiting professor David P. Sanders ([sandersd@mit.edu](mailto:sandersd@mit.edu))
 
-[Lecture 03a: The Big-O notation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/03a_Big_O_Notation.ipynb)
+- MWF 1--2, room 2-139.
 
-[Lecture 04: Machine Arithmetic](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/04_Machine_Arithmetic.ipynb)
+- Office hours: MW 5-6 in the Julia lab, 7th floor of Stata Center (turn left from Gates building elevator)
 
-[Lecture 05: Numerical Differentiation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/05_Numerical_Differentiation.ipynb)
+- For help with Julia you should be able to find people in the Julia lab most of the time
 
-[Lecture 06: Boundary Value Problems](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/06_Boundary_Value_Problems.ipynb)
+- Piazza forum: https://piazza.com/class/k65ke8eo9x760n
 
-[Lecture 07: Richardson Extrapolation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/07_Richardson_Extrapolation.ipynb)
+### Evaluation
 
-[Lecture 08: Root Finding](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/08_Root_Finding.ipynb)
+- 8 problem sets (50%)
+- 1 midterm exam (20%): Wednesday March 18
+- 1 final project (30%)
 
-[Lecture 09: Numerical Optimization](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/09_Numerical_Optimization.ipynb)
+Problem sets will consist of a mixture of theory and coding. They will be submitted and graded online.
 
-[Lecture 10: Roots vs Extrema](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/10_Roots_vs_Extrema.ipynb)
+The final project will be an exploration of a topic in numerical analysis that we have not covered in class (although at the level of the class), and will include a discussion of the mathematics behind the method, together with your own implementation.
 
-[Lecture 11: Numerical Linear Algebra](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/11_Numerical_Linear_Algebra.ipynb)
 
-[Lecture 12: Eigenvalues and Eigenvectors](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/12_Eigenvalues_and_Eigenvectors.ipynb)
+### Windows users
 
-[Lecture 13: Monte Carlo Integration](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/13_Monte_Carlo_Integration.ipynb)
+If you use Windows, please download Git for Windows [here](https://gitforwindows.org)
 
-[Lecture 14: Fourier Analysis I](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/14_Fourier_Analysis_I.ipynb)
+### Getting the files
 
-[Lecture 15: Fourier Analysis II](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/15_Fourier_Analysis_II.ipynb)
+To get the files, use `git` from the command line (or from a GUI), as follows
 
-[Lecture 16: The Discrete Fourier Transform](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/16_Discrete_Fourier_Transform.ipynb)
+- Clone the repository once with
+```
+git clone https://github.com/dpsanders/18.330
+```
+This will create a new directory called `6.S083` with the matierials.
 
-[Lecture 17: The Fast Fourier Transform](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/17_Fast_Fourier_Transform.ipynb)
 
-[Lecture 18: Clenshaw-Curtis Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/18_Clenshaw_Curtis_Quadrature.ipynb)
+- Update it to pull in new changes
+```
+git pull
+```
+This needs to be executed from within the directory. (Use `cd` to change directory.)
 
-[Lecture 19: Function Interpolation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/19_Function_Interpolation.ipynb)
-
-[Lecture 20: Chebyshev methods](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/20_Chebyshev_Methods.ipynb)
-
-[Lecture 21: Gauss Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/21_Gauss_Quadrature.ipynb)
-
-[Lecture 22: Ewald Summation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/22_Ewald_Summation.ipynb)
-
-[Extra Notebook: Solving a simple PDE with finite differences and using a spectral method](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/Spectral_PDEs.ipynb)
+### Syllabus
+See [here](syllabus.md) for the approximate course syllabus.
