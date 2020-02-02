@@ -4,6 +4,8 @@
 
 Welcome to 18.330! This is an introductory course on numerical analysis.
 
+We will be using the [Julia language](www.julialang.org). Please follow [these installation instructions](installation.md).
+
 ## Logistics
 
 - Visiting professor David P. Sanders ([sandersd@mit.edu](mailto:sandersd@mit.edu))
