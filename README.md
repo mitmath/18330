@@ -16,6 +16,10 @@ We will be using the [Julia language](www.julialang.org). Please follow [these i
 
 - Piazza forum: https://piazza.com/class/k65ke8eo9x760n
 
+### Notebooks and recordings from lectures
+
+- Screen recordings of lectures are available [here](https://www.dropbox.com/sh/ubkqwrqxnukgllc/AAA2cH9r7YQL7WmYVt-bblxta?dl=0)
+
 ### Evaluation
 
 - 10 problem sets (50%). No late submissions, but the lowest score will be dropped.
