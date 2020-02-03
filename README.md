@@ -20,9 +20,9 @@ We will be using the [Julia language](www.julialang.org). Please follow [these i
 
 ### Evaluation
 
-- 10 problem sets (50%). The lowest score will be dropped.
-- 1 midterm exam (20%): Wednesday March 18
-- Final project (30%)
+- 10 problem sets (50%). No late submissions, but the lowest score will be dropped.
+- 1 midterm exam (20%): Wednesday, March 18
+- Final project (30%): Due Monday, May 11 
 
 Problem sets will consist of a mixture of theory and coding. They will be submitted and graded online.
 
