@@ -14,8 +14,6 @@ We will be using the [Julia language](www.julialang.org). Please follow [these i
 
 - Office hours: MW 5-6 in the **Julia lab**, 7th floor of Stata Center (turn left from Gates building elevator)
 
-- For help with Julia you should be able to find people in the Julia lab most of the time (see above for directions)
-
 - Piazza forum: https://piazza.com/class/k65ke8eo9x760n
 
 ### Evaluation
@@ -28,6 +26,13 @@ Problem sets will consist of a mixture of theory and coding. They will be submit
 
 The final project will be an exploration of a topic in numerical analysis that we have not covered in class (although at the level of the class), and will include a discussion of the mathematics behind the method, together with your own implementation.
 
+### Learning Julia
+
+- Prof. Steven Johnson will give an introduction to Julia on Friday, Feb 7 from 5-7pm in 32-141. Make sure to install Julia beforehand. See https://github.com/mitmath/julia-mit for information and resources on Julia.
+
+- For help with Julia you should be able to find people in the Julia lab most of the time (see above for directions)
+
+- More learning resources are available at https://julialang.org/learning/
 
 ### Windows users
 
