@@ -16,9 +16,13 @@ We will be using the [Julia language](www.julialang.org). Please follow [these i
 
 - Piazza forum: https://piazza.com/class/k65ke8eo9x760n
 
-### Notebooks and recordings from lectures
+### Slides, notebooks and recordings from lectures
+ 
+- Slides and notebooks for each lecture are available in the [lectures](lectures) directory.
 
 - Screen recordings of lectures are available [here](https://www.dropbox.com/sh/ubkqwrqxnukgllc/AAA2cH9r7YQL7WmYVt-bblxta?dl=0)
+
+- Summaries of each lecture are [here](summaries.md)
 
 ### Evaluation
 
