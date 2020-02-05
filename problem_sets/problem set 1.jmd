@@ -55,7 +55,7 @@ Does this agree with your benchmarks? (Feel free to perform
 
 The Babylonian algorithm for calculating $x = \sqrt{y}$ is the following iteration:
 
-$$x_{n+1} = \frac{1}{2} \left( x_n + \frac{y}{x_n} \right).$$
+$$x_{n+1    } = \frac{1}{2} \left( x_n + \frac{y}{x_n} \right).$$
 
 1. *Suppose* that $x_n$ converges to some limiting value $x^*$ as $n \to \infty$. Show that
 then we must have $x^* = \sqrt{y}$.
