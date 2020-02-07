@@ -9,6 +9,8 @@ Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras). **Highly rec
 
 - *Numerical Analysis*, Burden & Faires
 
+- *Introduction to Numerical Analysis*, Stoer & Bulirsch
+
 
 
 
