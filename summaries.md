@@ -1,6 +1,6 @@
 # Summaries of lectures: 18.330 (spring 2020)
 
-## Lecture 1: Invitation (3 Feb 2020)
+## Lecture 1: Invitation (3 Feb)
 
 We started off discussing the logistics of the course and advertised
 Steven Johnson's Julia tutorial on Friday Feb 7 from 5-7pm in 32-141.
@@ -25,7 +25,7 @@ $f(t^*) = 0$, when they will just touch.
 As an example of a root-finding algorithm, we implemented the bisection algorithm
 including a tolerance $\epsilon$, and showed that it worked with `BigFloat`.
 
-## Lecture 2: Representing numbers (5 Feb 2020)
+## Lecture 2: Representing numbers (5 Feb)
 
 We began by looking at a visualization of a hard sphere fluid (using the Julia
 package https://github.com/JuliaDynamics/HardSphereDynamics.jl that I wrote).
@@ -54,3 +54,26 @@ To represent real numbers we started off thinking about **fixed-point numbers**,
 But these can't represent a wide enough range of numbers, so instead we turned to **floating-point numbers**. These are still just special rational numbers, with denominators that are powers of 2. They are spaced in an unusual way along the line: larger values have more space between them (although the *relative* spacing is the same).
 
 We saw how to "peel apart" a float in Julia and reconstruct its value.
+
+## Lecture 3: Representing functions (7 Feb)
+
+I started with a few comments about the [bibliography](`bibliography.md`). The book `Fundamentals of Numerical Computation` by Driscoll and Braun is a nice, recent, modern point of view at the level of the course. It covers much of what we will see in the course.
+
+Then we briefly discussed floating-point arithmetic. The fundamental operations `+`, `-`, `*`, `/` and `sqrt` are guaranteed by the IEEE 754 standard to be **correctly rounded**: the result is the *closest* floating-point number to the true result, as if it were calculated in infinite precision. In practice the CPU only needs to use a few extra "guard bits" to do this.
+
+Next we moved on to thinking about how to evaluate a function $f$, for example  $f(x) = \exp(x)$ (exponential). Since that's a difficult problem, we replace it by a simpler problem: we **approximate** $f$ by a function that is simpler to evaluate.
+
+The only functions that we can actually calculate are **polynomials**, which are a finite sum of terms of the form
+$p(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n$. We can evaluate
+these just with the basic arithmetic operations `+`, `-` and `*`.
+[In fact we can also evaluate *ratios* of two polynomials, $p_1(x) / p_2(x)$; these are called **rational functions**, and play an increasingly important role in numerical analysis.]
+
+Then we saw that it is actually possible to approximate *any* continuous function $f$ on a *finite* interval $[a, b]$, arbitrarily close by a polynomial; this is the content of the **Weierstrass approximation theorem**.
+
+How can we actually *find*, or *construct*, an approximating polynomial, though? We will see several methods to do so during the course, but we started with one motivated in mathematics: **Taylor series**.
+
+For example, we know that $\exp(x) = \sum_{n=0}^\infty \frac{x^n}{n!}$. We still can't evaluate this **power series**, since it has an infinite number of terms. Instead, we **truncate** it by stopping after $N$ terms, which gives a polynomial, called the **Taylor polynomial of degree $N$** for the function $f$.
+
+In doing so we commit a **truncation error** by omitting the infinite tail of the series. The Lagrange form of this remainder is a way of writing this as a single term involving evaluating the $(N+1)$ the derivative of $f$; however, it is evaluated at an unknown point $\xi$ in the interval. Nonetheless, this allows us to calculate a *bound* of the truncation error.
+
+We then saw how to use the `TaylorModels.jl` package to do this calculation rigorously, using **interval arithmetic** to calculate guaranteed (mathematically rigorous) lower and upper bounds of all errors in the calculation (rounding errors and truncation error). We also saw how the `Interact.jl` package can easily generate nice interactive visualizations.
