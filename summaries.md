@@ -77,3 +77,20 @@ For example, we know that $\exp(x) = \sum_{n=0}^\infty \frac{x^n}{n!}$. We still
 In doing so we commit a **truncation error** by omitting the infinite tail of the series. The Lagrange form of this remainder is a way of writing this as a single term involving evaluating the $(N+1)$ the derivative of $f$; however, it is evaluated at an unknown point $\xi$ in the interval. Nonetheless, this allows us to calculate a *bound* of the truncation error.
 
 We then saw how to use the `TaylorModels.jl` package to do this calculation rigorously, using **interval arithmetic** to calculate guaranteed (mathematically rigorous) lower and upper bounds of all errors in the calculation (rounding errors and truncation error). We also saw how the `Interact.jl` package can easily generate nice interactive visualizations.
+
+
+## Lecture 4: Root finding (10 Feb)
+
+We looked at some methods for finding **roots** (**zeros**) of a function $f(x)$, which will also solve equations of the form $g(x) = h(x)$ by solving $f(x) := g(x) - h(x) = 0$.
+
+We started off reviewing roots of polynomials: the fundamental theorem of algebra guarantees that a degree-$n$ polynomial has exactly $n$ roots in the complex plane $\mathbb{C}$, although some of those may be **multiple roots**. Although there are exact formulae in terms of basic arithmetic and $r$th roots for polynomials of degree $\le 4$, in general it is known that no such formula is possible or degree $\ge 5$.
+
+Thus any general numerical method for finding roots must be an **approximation algorithm**. A usual formulation would be as an **iterative algorithm** of the form $x_{n+1} = g(x_n)$, where $g$ is an algorithm that is applied to one iterate to calculate the next one. We hope that the sequence $x_0, x_1, \ldots$ converges to some $x^*$, in which case we must have $x^* = g(x^*)$ if $g$ is a continuous function. Thus *if* the sequence converges, it converges to a **fixed point** of $g$.
+
+In order to solve the equation $f(x)$ we must thus arrange for a fixed point of $g$ to be a root of $f$; e.g. $g(x) = x + f(x)$, or rearrange $f(x)$ to isolate $x$ on one side.
+
+We looked at conditions that guarantee the existence and uniqueness of a fixed point in a certain interval, and discussed when we can expect the iterative algorithm to converge to a root or not, depending on the value of the derivative at the fixed point. Note that it is often difficult to actually check these conditions in practice, however.
+
+We defined the **order of convergence** of a sequence as being that value of $\alpha$ such that $\delta_{n+1} \sim \delta_n^\alpha$ when $n \to \infty$. Bisection is order 1 ("linearly convergent"), whereas the Babylonian algorithm is order 2 ("quadratically convergent"). But note that a "linearly convergent" sequence converges *exponentially* fast, whereas a quadratically convergence algorithm converges **super-exponentially**, i.e. "really very fast indeed".
+
+We finished by looking at the Newton method, which is a workhorse of numerical root-finding methods, and turns out to be quadratically convergent. But that is true only if you are *close enough* to a root, and it is difficult to know when you are close enough. If you are not close enough then the Newton method can behave very badly.
