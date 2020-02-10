@@ -1,0 +1,237 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+# 4. Root finding
+
+## Last time
+
+- Approximating functions by polynomials
+
+- Taylor series
+
+- Taylor polynomials + Lagrange remainder
+
+## Goal for today
+
+- Methods for finding **roots** of functions
+
+- Convergence of those methods
+
+
+## Solving equations
+
+
+- Suppose we need to solve the equation $g(x) = h(x)$
+
+- Write $f(x) := g(x) - h(x)$
+
+- Equivalent to solve $f(x) = 0$ instead
+
+- Solutions $x^*$ such that $f(x^*) = 0$: **roots** or **zeros** of $f$
+
+- We may want to find a single root or all roots
+
+## Roots of polynomials
+
+- Suppose $p(x) = a_0 + a_1 x + \cdots + a_n x^n$ is **polynomial**
+
+- How many roots does $p$ have?
+
+- [**Fundamental theorem of algebra**](https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra):
+
+    > a degree-$n$ polynomial has exactly $n$ roots in $\mathbb{C}$
+
+- So can factor $p$ as
+    $$p(x) = (x - x_1)^{m_1} (x - x_2)^{m_2} \cdots (x - x_k)^{m_k}$$
+
+    where $x_i$ are the roots and $\sum_{i=1}^k m_i = n$
+
+- $m_i$ is the **multiplicity** of root $x_i$
+
+## Roots of polynomials II
+
+- Some of the roots may be **multiple roots**
+
+- E.g. $p = (x - 1)^2 (x^2 - 2)$ has roots $1$, $1$, $\sqrt{2}$ and $-\sqrt{2}$
+
+
+- Roots may be complex even if coefficients $a_i$ are real
+
+- E.g. $x^2 + 1$ has roots $x_{1,2} = \pm i$ and *no* real roots
+
+## Can we find roots of polynomial analytically?
+
+- Suppose $p$ is a degree-$n$ polynomial with coefficients $a_i$
+
+- $n=2$ (quadratic): exact formula for roots in terms of $a_i$
+
+- $n=3, 4$: [more complicated formulae](https://en.wikipedia.org/wiki/Cubic_equation) exist
+
+- [Abel--Ruffini theorem](https://en.wikipedia.org/wiki/Abel%E2%80%93Ruffini_theorem):
+
+    > for $n \ge 5$, in general **no such formula exists**!
+
+
+## Numerical methods for root finding
+
+- Need **numerical methods** to **approximate** roots
+
+
+- Some methods for *all* roots of a polynomial simultaneously, e.g. [Aberth method](https://en.wikipedia.org/wiki/Aberth_method) (PS 2)
+
+- Here we focus on methods to find single root
+
+## Fixed-point iteration
+
+- Numerical method for roots must be **iterative**:
+
+    $$x_{n+1} = g(x_n)$$
+
+    - algorithm $g$ and initial guess $x_0$
+
+- Produces a sequence $x_0$, $x_1$, $x_2$, $\ldots$
+
+- *If* iteration converges, $x_n \to x^*$ as $n \to \infty$, then
+
+    $$g(x^*) = x^*$$
+
+    provided $g$ is **continuous**
+
+- $x^*$ is a **fixed point** of $g$; solves $f(x) := g(x) - x = 0$
+
+## Existence of fixed point
+
+- If $g$ is continuous and maps $[a, b]$ into itself,
+$\exists$ a fixed point.
+
+- If $|g'(x)| \le k$ $\forall x \in [a,b]$ with $k < 1$, then unique.
+
+- Called a **contraction mapping**
+
+## Dynamics of iterations
+
+- Such an iteration is a **discrete-time dynamical system**
+
+- Assume there is a fixed point $x^*$
+
+- What condition do we need for $(x_n)$ to converge?
+
+- Look at distance $\delta_n := x_n - x^*$
+
+## Dynamics II
+
+- We have
+
+$$\delta_{n+1} = x_{n+1} - x^*$$
+
+$$ = g(x_n) - x^* = g(x^* + \delta_n) - x^* \simeq \delta_n g'(x^*)$$
+
+- So (asymptotically) $\delta_{n+1} = \alpha \, \delta_n$ with $\alpha = g'(x^*)$
+
+- $\delta_{n+1} = \alpha \, \delta_n \Rightarrow \delta_n = \alpha^n$
+
+- Decays (**stable fixed point**) if $|\alpha| < 1$
+
+- Grows (**unstable fixed point**) if $\alpha > 1$
+
+
+## Rate of convergence
+
+- For $\sqrt{}$, Babylonian converges **faster** than bisection
+
+- How can we make this precise?
+
+- If $x_n \to x^*$ then $x_n - x^* \to 0$
+
+- Estimate **distance** or **error** $|x_n - x^*|$ as function of $n$
+
+- In bisection, error reduces by constant factor $2$ at each step
+
+
+## Rate of convergence II
+
+- If there are constants $\lambda$ and $\alpha$ such that
+
+    $$ \lim_{n \to \infty} \frac{|x_{n+1} - x^*|}{|x_n - x^*|^\alpha} = \lambda$$
+
+    then the iteration is of **order $\alpha$**
+
+- $\alpha = 1$: **linearly convergent**
+
+- $\alpha = 2$: **quadratic convergence**
+
+- Note that "linear" actually means that the sequence converges exponentially fast!
+
+
+## Newton method
+
+- Want to solve $f(x) = 0$; have guess $x_0$
+
+- Let $x = x_0 + \delta$; $\quad$ solve $f(x_0 + \delta) = 0$
+
+- Taylor theorem: $f(x_0) + \delta f'(x_0) + \frac{1}{2} \delta^2 f''(\xi)$ = 0
+
+- So $\delta \simeq \frac{-f(x_0)}{f'(x_0)}$
+
+- **Newton method**: $\quad x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$
+
+- **Quadratically convergent**!
+
+- Babylon is special case
+
+## Newton method viewed as a fixed-point iteration
+
+- How **design** quadratically-convergent algorithm for $f(x) = 0$?
+
+- Look for fixed-point algorithm with $g(x) := x - \phi(x) f(x)$
+
+- Impose $g'(x^*) = 0$ at root $f(x^*) = 0$
+
+- $g'(x) = 1 - \phi'(x) f(x) - \phi(x) f'(x)$
+
+- So $g'(x^*) = 1 - \phi(x^*) f'(x^*) = 0$
+
+- So need $\phi(x^*) = \frac{1}{f'(x^*)}$
+
+- Take $\phi(x) := \frac{1}{f'(x)}$ -- gives Newton method
+
+## Convergence of Newton method
+
+- Newton is very powerful *when it works*
+
+- Generalises 
+
+- When "sufficiently close" to a root, Newton converges fast
+
+- Otherwise, *not guaranteed* to converge; may fail
+
+- There are known conditions for Newton to converge:
+
+    - Smale $\alpha$ theory
+    - Radii polynomials
+
+- Interval Newton method: Use interval arithmetic to guarantee convergence
+
+
+## Summary
+
+- There are many methods for finding **roots** of functions
+
+- Rewrite as **fixed-point iteration**
+
+- Do not always converge
+
+- Methods differ in **convergence rate**
