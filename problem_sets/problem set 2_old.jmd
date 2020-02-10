@@ -1,0 +1,184 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.6'
+
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+
+# 18.330 Problem set 2 (spring 2020)
+
+## Submission deadline: 11:59pm on Monday, February 17
+
+
+#### Exercise 1: Fixed-point iteration
+
+In this question we will find the roots of the function
+
+$$f(α, x) = x^3 - \alpha x + \sqrt{2}$$
+
+by using fixed-point iterations.
+
+1. Define a Julia function for $f$ and draw it; make an interactive visualization as
+$\alpha$ changes. [Make sure to fix the plot limits so as to be
+able to see what's going on.]
+
+2. When $\alpha$ varies the number of real roots can change.
+For which approximate value of $\alpha$ does the number of real roots change?
+How many real roots are there?
+
+3. When $\alpha = 2.5$, approximately where are the roots? From now on fix $\alpha$
+to this value.
+
+The simplest thing we can try is $g(x) = x + f(α, x)$, since then a
+    fixed point of $g$ is a root of $f$.
+
+4. Plot the function $g(x)$ and the function $y=x$. Taking into account the results stated in the slides,
+which root do you expect to be able to calculate by iterating $g$? Fix an initial
+condition and show that it does converge there.
+
+5. What is the rate of convergence to that root?
+
+6. What happens with the initial condition $x=1.1$? Why?
+
+7. Draw a [cobweb diagram](https://en.wikipedia.org/wiki/Cobweb_plot) to illustrate this
+behaviour.
+
+8. By using algebraic transformations, find fixed-point iterations $g$ that
+converge to the other two roots.
+
+9. (**Extra credit**) Call $\alpha_c$ the **critical value** of $\alpha$ at which the number of roots
+changes. [This is called a **bifurcation point**.] Find $\alpha_c$ numerically.
+
+
+#### Exercise 2: Polynomials
+
+1. Define a type `Polynomial` to represent a polynomial. It should
+have fields `degree` and `coefficients`.
+
+2. Write a **constructor** function with the same name (`Polynomial`)
+that accepts a vector of coefficients and builds a `Polynomial`
+object whose degree it automatically calculates.
+
+3. Write a `show` method to display the polynomial nicely.
+
+4. Write a function to evaluate the polynomial at a point `x` as follows:
+
+    ```julia
+    function (p::Polynomial)(x)
+        # fill in
+    end
+    ```
+
+    Then if you have an object `p` of type polynomial, writing e.g. `p(3)`
+    will evaluate that polynomial at the value 3.
+
+5. Write a function `derivative` that takes a polynomial and returns a new polynomial
+that is its derivative.
+
+
+#### Exercise 3: Newton method
+
+1. Write a function `newton` to implement the Newton method. It should
+take a function $f$, its derivative $f\prime$ and an initial guess $x_0$.
+It should terminate when the residual is less than some tolerance, or when
+the number of iterations is too large.
+
+2. Write a specialised method of `newton` for polynomials that accepts
+an object of type `Polynomial`, written `p::Polynomial` and calculates its
+derivative automatically.
+
+3. Taking the same polynomial as in exercise 1,
+confirm that the Newton method has quadratic convergence by
+verifying numerically the defining limit.
+
+4. Can you find different roots by taking different initial conditions
+$x_0$? How will you know if/when you have found all of the roots like this?
+
+The Newton method works fantastically well when the starting point is close enough to a root,
+but can also behave very badly, as follows.
+
+5. How many roots does the function $f(z) = z^3 - 1$ have in the complex plane
+$\mathbb{C}$? Where are they?
+
+6. Calculate those roots using the Newton method with *complex* starting points $a + ib$
+forming a square grid in the complex plane. Store the imaginary part of the resulting root
+(or final value, if no root is reached) in a matrix.
+
+7. Plot the matrix with the `heatmap` function and plot the true roots as poin
+ts. What kind of object are you seeing? What does this imply for the Newton method?
+What happens close to the roots?
+
+
+
+#### Exercise 4: Aberth method
+
+1. Implement the [Aberth method](https://en.wikipedia.org/wiki/Aberth_method)
+for finding all roots of a polynomial.
+
+2. Make an interactive visualization of the progress over time on some random
+polynomials of degree 10 or 20.
+
+3. Find numerically the order of convergence of the method.
+
+4. Try polynomials with multiple roots. What happens?
+
+
+#### Exercise 5: Algorithmic differentiation
+
+1. Complete the implementation of the `Dual` type from class,
+including derivatives for subtraction, division, and integer powers.
+For $/$ you may assume that the denominator is not zero.
+
+    Add methods for each function to e.g. add a real number (type `::Real`) to a `Dual`.
+    Treat a real number as having derivative 0.
+
+2. Put these definitions in a file `dual.jl`.
+This may be included with `include("dual.jl")`
+from Juno or Jupyter, or from another file.
+(You must make sure the files are in the same directory,
+    or give the path to the file on your machine.)
+
+3. For functions $f$ such as `exp`, we define the action of the
+function on a `Dual` using
+
+    $$f(a + b\epsilon) = f(a) + \epsilon \, b f'(a)$$
+
+    Use this to define `exp`, `sin` and `log` on `Dual` numbers.
+
+4. Write a function `derivative` that takes a function $f$ and a
+point $a$, and uses `Dual` numbers to calculate the derivative
+$f'(a)$ of $f$ at $a$.
+
+5. Define a function to calculate the directional derivative of a
+function $f:\mathbb{R}^n \to \mathbb{R}$ in a direction $\mathbf{v}$.
+
+6. Use this to write a function `partial` to calculate the $i$th
+partial derivative of a function.
+
+7. Write functions to calculate the gradient and Jacobian
+of a function $f: \mathbb{R}^n$.
+
+8. Julia contains (in the standard library -- no installation
+    required) a module `Test` for testing that code is correct.
+    In a function `dual_test.jl`, load the module and write
+    tests of the functionality you have defined using tests of
+    the form
+
+    ```julia
+    @test a == b
+    ```
+
+    E.g. to test the sum of two `Dual` numbers you can write
+
+    ```julia
+    @test Dual(1, 2) + Dual(3, 4) == Dual(4, 6)
+    ```
+
+    When you run these tests, you should see the message `Test passed`.
+
+    To create the tests, do the calculations by hand.
