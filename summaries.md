@@ -94,3 +94,21 @@ We looked at conditions that guarantee the existence and uniqueness of a fixed p
 We defined the **order of convergence** of a sequence as being that value of $\alpha$ such that $\delta_{n+1} \sim \delta_n^\alpha$ when $n \to \infty$. Bisection is order 1 ("linearly convergent"), whereas the Babylonian algorithm is order 2 ("quadratically convergent"). But note that a "linearly convergent" sequence converges *exponentially* fast, whereas a quadratically convergence algorithm converges **super-exponentially**, i.e. "really very fast indeed".
 
 We finished by looking at the Newton method, which is a workhorse of numerical root-finding methods, and turns out to be quadratically convergent. But that is true only if you are *close enough* to a root, and it is difficult to know when you are close enough. If you are not close enough then the Newton method can behave very badly.
+
+
+## Lecture 5: Root finding II
+
+We started off looking at how to plot heatmaps and surfaces of 3D data (a value at each point in a 2D mesh) with Julia.
+
+Then we continued with our study of fixed-point iterations for solving equations by using the mean-value theorem to prove that a fixed-point iteration $x_{n+1} = g(x_n)$ converges under the following conditions: $g$ is continuous; $g$ maps an interval $[a, b]$ into itself; and $g$ has a derivative whose absolute value is bounded above by $k < 1$. In this case we stated (proof in Burden and Faires) that there is a unique fixed point. We showed that the fixed-point iteration converges from any initial $x_0 \in [a, b]$ to the fixed point, and that the order of convergence is $1$ or larger.
+
+Normally a fixed-point iteration will have order of convergence $\alpha = 1$, when the derivative $g'(x^*) \neq 0$. We next tried to design a method with faster convergence, by imposing that $g'(x^*)$ should be *equal* to 0. The simplest choice gives the Newton method.
+
+So how fast does the Newton method converge? We showed using a Taylor expansion that is has order of convergence $2$. Interestingly, the Babylonian algorithm (which was apparently literally known in Babylonian times, over 3000 years ago) turns out to be a special case of the Newton method, namely for solving the equation $f(x) := x^2 - y = 0$ for $x$ (with fixed $y$ whose square root we wish to calculate).
+
+The Newton method is not ideal, however, since it requires us to know how to calculate the *derivative* of the function $f$. Later in the course we will see (at least) two different types of methods to calculate derivatives, but for now we ask if there is a method somehow similar to Newton that has better convergence than a standard fixed-point iteration but does not require us to calculate a derivative, i.e. is **derivative-free**.
+
+It turns out that we can design such a method as follows. We use a different linear / affine approximation of our function $f$ to replace the tangent line approximation that Newton uses.
+To do so, instead of starting from *one* initial point $x_0$, we take *two* (distinct) initial starting points $x_0$ and $x_1$. Now we use the two data points $(x_0, f(x_0))$ and $(x_1, f(x_1))$ on the graph of the function $f$, and **interpolate** between them: we find the linear function $\ell(x)$ that joins those two points. Now we look where $\ell(x)$ intersects the $x$-axis to get the next approximation $x_2$. We repeat this process, using at each step the last two $x_i$ values that were produced.
+
+We showed that this **secant method** (so-called since the line joining two points on a curve is called a **secant**) converges with order $\alpha \simeq 1.62$. At first sight this seems to be a slower rate of convergence than for the Newton method. However, the secant method requires only *one* new evaluation of the function $f$ at each step, whereas Newton requires us to evaluate $f$ and $f'$ at each step. Thus, *per function evaluation* the secant method is more efficient. Since we are often trying to find roots of complicated functions, evaluating $f$ determines the speed of the overall method, so the secant method may converge faster in practice. This will be problem-dependent.
