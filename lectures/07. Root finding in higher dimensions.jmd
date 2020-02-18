@@ -1,0 +1,294 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+# 7. Root finding in higher dimensions
+
+## Last time
+
+- Feedback from problem set 1
+
+- Creating matrices in Julia
+
+
+## Goals for today
+
+- Nonlinear equations in higher dimensions
+
+- Systems of nonlinear equations
+
+- Review of derivatives for functions $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^n$
+
+- Newton in higher dimensions
+
+## Nonlinear equations in more dimensions
+
+- Have seen numerical methods to solve $f(x) = 0$ for $f: \mathbb{R} \to \mathbb{R}$
+
+\ \
+
+- What about functions with more variables?
+
+- E.g. $f(x, y) = 0$, so $f: \mathbb{R}^2 \to \mathbb{R}$
+
+- e.g. $x^2 + y^2 = 1$
+
+. . .
+
+- **Implicit equation**: relates values of $x$ and $y$
+
+- **Solving** the equation means finding **solution set**:
+
+- $\{(x, y) \in \mathbb{R}^2: f(x, y) = 0 \}$
+
+
+## Constraints
+
+- Think of $f(x, y) = 0$ as single **constraint**
+
+- Try to solve for $y = g(x)$
+
+. . .
+
+\ \
+
+- e.g. $x^2 + g(x)^2 = 1 \Longrightarrow g(x) = \pm \sqrt{1 - x^2}$
+
+. . .
+
+\ \
+
+- Non-unique in general
+
+- Often "locally unique", smooth **function** of $x$
+
+- Proved by **implicit function theorem**
+
+
+## Plotting implicit functions
+
+- Plot as **contours** or **level sets**
+
+- Think of $f(x, y)$ as height of surface at $(x, y)$
+
+- **Level set**: Set where the height is some constant $c$
+
+. . .
+
+\ \
+
+- `contour` function; option `levels = [0, 3]` specifies which values of $c$
+
+- Uses [marching squares algorithm](https://en.wikipedia.org/wiki/Marching_squares)
+
+- Alternative: **numerical continuation** -- "numerical version of implicit function theorem"
+
+
+## What can go wrong
+
+- Different types of "pathology" can occur:
+
+- $x \, y = 0$
+
+- $y^{2}\ =\ x^{2}\left(x\ +a\right)\left(1+x\right)$
+
+
+## Higher dimensions
+
+- $f(x, y) = 0$ is a 1-dimensional **curve** in 2D
+
+- $f(x, y, z) = 0$ is a 2-dimensional **surface** in 3D
+
+. . .
+
+- $f(\mathbf{x}) = 0$ is $(n-1)$-dimensional "surface" in $n$ dimensions
+
+- i.e. **codimension 1** manifold corresponding to 1 constraint
+
+
+## Systems of nonlinear equations
+
+- Now let's think about **systems** of nonlinear equations
+
+- e.g. 2 equations in 2 unknowns:
+    $$
+    \begin{aligned}
+    f(x, y) &:= x^2 + y^2 - 3 = 0 \\
+    g(x, y) &:= \left(\frac{x}{2} \right)^2 + (y-0.5)^2 - 1 = 0
+    \end{aligned}
+    $$
+
+. . .
+
+- Want *joint* roots $f(x^*, y^*) = g(x^*, y^*) = 0$
+
+- What will result look like?
+
+## Systems of nonlinear equations II
+
+- **Intersections** of curves: significantly harder than 1D
+
+- 2 constraints in 2 dimensions $⟹$ expect 0-dimensional **points**
+
+- How should we solve these?
+
+. . .
+
+
+- If the functions are polynomials, study of **algebraic geometry**
+
+
+## Vector form of system
+
+- Rewrite system of equations into vector form:
+
+- Write $f_1 = f$; $f_2 = g$; $x_1 = x$; $x_2 = y$
+
+- Get system $f_i(x_1, x_2) = 0$ for $i = 1, 2$
+
+. . .
+
+- Write vectors $\mathbf{x} = (x_1, \ldots, x_n)$ and $\mathbf{f} = (f_1, \ldots, f_n)$
+
+- Vector form: $\mathbf{f}(\mathbf{x}) = \mathbf{0}$
+
+## Numerical methods for systems of equations
+
+
+- If $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^n$, expect **isolated points** as solutions
+
+- Which numerical method could we try?
+
+. . .
+
+- Fixed-point iteration
+
+- [Multidimensional bisection](https://pp.bme.hu/me/article/view/1236)
+
+- Interval arithmetic
+
+## Multidimensional Newton
+
+- Apply same idea as for 1D Newton
+
+. . .
+
+- Initial guess $\mathbf{x}_0$; try to solve
+ $\mathbf{f}(\mathbf{x}_n + \pmb{\delta}) = \mathbf{0}$
+
+. . .
+
+- Need **Taylor expansion for higher dimensions**:
+
+    $$\mathbf{f}(\mathbf{a} + \pmb{\delta})
+    = \mathbf{f}(\mathbf{a})
+    +  \mathrm{D} \mathbf{f}(\mathbf{a}) \cdot \pmb{\delta}
+    + \mathcal{O}(\| \pmb{\delta} \|^2)
+    $$
+
+. . .
+
+- So $\mathbf{f}(\mathbf{x}_n + \pmb{\delta}) \simeq \mathbf{f}(\mathbf{x}_n) + \mathsf{J}(\mathbf{x}_n) \cdot \pmb{\delta}_n$
+
+. . .
+
+- Need to solve $\pmb{\delta}_n = - \mathsf{J}(\mathbf{x}_n)^{-1} \mathbf{f}(\mathbf{x}_n)$
+
+- $\mathsf{J} := \mathrm{D}\mathbf{f}(\mathbf{x}_n)$
+    is **Jacobian matrix** of all partial derivatives
+
+## Multidimensional Newton II
+
+- Reduced nonlinear system to iterated solution of **linear system**
+
+- Mathematics: calculate **matrix inverse**
+
+. . .
+
+- Numerics: instead **solve linear system** (see later)
+
+. . .
+
+- Can show that multi-dimensional Newton also has quadratic convergence if close enough to root
+
+## Solving linear systems in Julia
+
+- To solve linear system $\mathsf{A} \cdot \mathbf{x} = \mathbf{b}$ in Julia:
+
+    ```julia
+    using LinearAlgebra   # standard library; no installation required
+
+    A = rand(2, 2)   # random matrix
+    b = rand(2)      # random vector
+
+    x = A \ b
+
+    residual = (A * x) - b
+    ```
+
+- `A * x` is standard matrix--vector multiplication
+
+- `A \ b` is a **black box** that we will open up later in the course
+
+## Implicit function theorem
+
+- Consider $f(x, y) = 0$ again
+
+- Suppose we have found one point on curve: $f(x_0, y_0) = 0$
+
+. . .
+
+- What happens close to that point?
+
+. . .
+
+- [Implicit function theorem](https://en.wikipedia.org/wiki/Implicit_function_theorem) (2D, approximate statement):
+
+    > Suppose $\frac{\partial f}{\partial y}(x_0, y_0) \neq 0$.
+
+    > Then
+    there exists $g(x)$ with $f(x, g(x)) = 0$ and  $g(x_0) = y_0$ in
+    a neighbourhood.
+
+    > $g$ has similar smoothness to $f$. Its derivative may be calculated by implicit
+    differentiation
+
+## Towards optimization
+
+- **Optimization**: Find minima (or maxima) of a function $f: \mathbb{R}^n \to \mathbb{R}$
+
+- How can we do this?
+
+. . .
+
+- Find zeros of gradient $\nabla f$!
+
+- Necessary condition
+
+. . .
+
+- Use Newton on $\nabla f$ and $D(\nabla f)$
+
+- (Symmetric) **Hessian matrix** $H$
+
+- Matrix $\left( \frac{\partial^2 f}{\partial x_i \partial x_j} \right)_{i, j}$
+
+## Summary
+
+- Geometry of higher-dimensional functions
+
+- Higher-dimensional derivatives
+
+- Newton method in higher dimensions
