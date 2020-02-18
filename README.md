@@ -65,3 +65,7 @@ This needs to be executed from within the directory. (Use `cd` to change directo
 
 ### Syllabus
 See [here](syllabus.md) for the approximate course syllabus.
+
+### Bibliography
+
+See [here](bibliography.md) for bibliography and related online courses and learning materials.
