@@ -120,3 +120,19 @@ We covered some feedback from problem set I, namely some logistics and tips abou
 We discussed some points on the exercises from problem set 1.
 
 We also covered some useful Julia features, especially for constructing arrays.
+
+## Lecture 7: Systems of nonlinear equations
+
+We started by discussing the single nonlinear equation $f(x, y) = 0$ in two variables. The **solution set** is the set of $(x, y)$ pairs in $\mathbb{R}^2$ that satisfy the equation. A **level set** of $f(x, y)$ is a set where $f(x, y) = c$, with $c$ a constant. For a function $f: \mathbb{R}^2 \to \mathbb{R}$ this takes the form of a **contour line**.
+
+For example, if $f(x, y) = x^2 + y^2$ then the level sets are circles centered at the origin for $c > 0$, a single point for $c = 0$, and the empty set for $c < 0$. They are intersections of the graph of the function (in 3D) with a horizontal plane at height $c$. We saw how to use the `contour` function to plot them.
+
+In general we expect level sets of a function $f: \mathbb{R}^2 \to \mathbb{R}$ to look locally like **curves**, by the implicit function theorem. However, there can be [**singular points**](https://en.wikipedia.org/wiki/Singular_point_of_a_curve) where these curves join together.
+
+In higher dimensions, a function $f: \mathbb{R}^n \to \mathbb{R}$ has level sets that locally are $(n-1)-dimensional$ surfaces, or **manifolds**, also called **codimension 1 manifolds**. Each constraint $f(\mathbb{x}) = c$ is expected to decrease by $1$ the dimension of the resulting object (increase by 1 the codimension).
+
+A **system of nonlinear equations** is a set of nonlinear equations that must be satisfied *simultaneously*, i.e. we are interested in the **intersections** of the sets. If we have $n$ equations in $n$ unknowns, then we expect that the solutions are isolated points (although pathologies can also occur where this does not happen).
+
+In order to find these points numerically, we looked at the multidimensional Newton method. Its derivation mirrors that of the 1-dimensional Newton method, but now using the Jacobian matrix in place of the derivative, and requiring us -- mathematically -- to invert this matrix. Numerically we instead solve a linear system, using the `\` operator in Julia; we will study this in detail later in the course.
+
+We also reviewed the derivation of the gradient of a function $f: \mathbb{R}^n \to \mathbb{R}$ and the jacobian of a function $f: \mathbb{R}^n \to \mathbb{R}^n$.
