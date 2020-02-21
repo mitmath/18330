@@ -155,3 +155,32 @@ In order to actually calculate the derivative of a Julia function `f`,  we use t
 Finally, we saw that this may be extended to higher-dimensional functions such as $f(x, y)$. For example, $f(a_1 + v_1 \epsilon, a_2 + v_2 \epsilon) = f(a_1, a_2) + \epsilon \, \nabla f(a_1, a_2) \cdot \mathbf{v}$, so evaluating `f(Dual(a1, v1), Dual(a2, v2))` will calculate the **directional derivative** as its second (dual) field.
 
 Setting the vector $\mathbf{v}$ to be coordinate directions gives partial derivatives. This can then further be used to build up a complete Jacobian matrix $\mathsf{J}$, although often all we actually need is $\mathsf{J} \cdot v$, a Jacobian--vector product, which can be calculated more efficiently by building it out of $f(a + \epsilon v)$ terms.
+
+
+## Lecture 9: Conditioning (Feb 21)
+
+In this lecture we introduced the concept of **condition number** to measure the sensitivity of a problem $\phi$: how much does the output $y = \phi(x)$ change when the input $x$ changes?
+
+To define this, suppose we have an approximation $\hat{x}$ of $x$. We define $\hat{y} = \phi(\hat{x})$ to be the corresponding new output.
+
+Now we define the **absolute errors** $\Delta x := \hat{x} - x$ and $\Delta y := \hat{y} - y$. However, the absolute output error will change just because we change the scale of the input, so it's more useful to define instead the corresponding **relative errors**,
+
+$$\delta x := \Delta x / x; \quad \delta y := \Delta y / y$$
+
+We saw that the number of **accurate** or **significant digits** in the approximation is $-\log_{10}(|\delta x|)$.
+
+The **(relative) condition number**, $\kappa_\phi(x)$ of the problem $\phi$ at the point $x$ is then given by
+
+$$\kappa_\phi(x) := \frac{|\delta y|}{|\delta x|}$$
+
+When $\Delta x \to 0$ we can obtain a closed-form expression for $\kappa$ as
+
+$$\kappa_\phi(x) = \left| \frac{x \phi'(x)}{\phi(x)} \right|$$
+
+For example, $\phi(x) = x^2$ has a condition number of 2, which is low; hence the problem of squaring a value is **well-conditioned**. Note that a condition number is attached to a **problem**, and is independent of any algorithm that we might use to actually solve that problem in practice.
+
+We derived the (relative) condition number for addition/subtraction; despite being one of the simplest operations, we saw that it is *ill-conditioned* if we subtract two numbers that are very close together. This is the effect known as **catastrophic cancellation** where we can lose many accurate digits by subtracting two close numbers.
+
+This occurs, for example, when we try and solve a quadratic equation $ax^2 + bx + c$ by using the quadratic formula: if $ac$ is close to $0$ then we end up subtracting two very close numbers, and hence losing accuracy. A way round this is to realise that the calculation of the other root is well-conditioned, so we calculate that one and then use a relation between the two roots to calculate the difficult one. This is an example of a general idea: if part of your algorithm uses a step that is ill-conditioned, try to replace it by a different method!
+
+Finally, we looked at the condition number of the problem "find the roots of a quadratic equation". We saw that this is ill-conditioned if the roots are close together, i.e. close to a double root: when we shift the quadratic slightly, the roots move a lot.
