@@ -96,7 +96,7 @@ We defined the **order of convergence** of a sequence as being that value of $\a
 We finished by looking at the Newton method, which is a workhorse of numerical root-finding methods, and turns out to be quadratically convergent. But that is true only if you are *close enough* to a root, and it is difficult to know when you are close enough. If you are not close enough then the Newton method can behave very badly.
 
 
-## Lecture 5: Root finding II
+## Lecture 5: Root finding II (Feb 12)
 
 We started off looking at how to plot heatmaps and surfaces of 3D data (a value at each point in a 2D mesh) with Julia.
 
@@ -113,7 +113,7 @@ To do so, instead of starting from *one* initial point $x_0$, we take *two* (dis
 
 We showed that this **secant method** (so-called since the line joining two points on a curve is called a **secant**) converges with order $\alpha \simeq 1.62$. At first sight this seems to be a slower rate of convergence than for the Newton method. However, the secant method requires only *one* new evaluation of the function $f$ at each step, whereas Newton requires us to evaluate $f$ and $f'$ at each step. Thus, *per function evaluation* the secant method is more efficient. Since we are often trying to find roots of complicated functions, evaluating $f$ determines the speed of the overall method, so the secant method may converge faster in practice. This will be problem-dependent.
 
-## Lecture 6: Feedback from problem set I
+## Lecture 6: Feedback from problem set I (Feb 14)
 
 We covered some feedback from problem set I, namely some logistics and tips about how to approach the exercises; see the lecture 6 slides.
 
@@ -121,7 +121,7 @@ We discussed some points on the exercises from problem set 1.
 
 We also covered some useful Julia features, especially for constructing arrays.
 
-## Lecture 7: Systems of nonlinear equations
+## Lecture 7: Systems of nonlinear equations (Feb 18)
 
 We started by discussing the single nonlinear equation $f(x, y) = 0$ in two variables. The **solution set** is the set of $(x, y)$ pairs in $\mathbb{R}^2$ that satisfy the equation. A **level set** of $f(x, y)$ is a set where $f(x, y) = c$, with $c$ a constant. For a function $f: \mathbb{R}^2 \to \mathbb{R}$ this takes the form of a **contour line**.
 
@@ -136,3 +136,22 @@ A **system of nonlinear equations** is a set of nonlinear equations that must be
 In order to find these points numerically, we looked at the multidimensional Newton method. Its derivation mirrors that of the 1-dimensional Newton method, but now using the Jacobian matrix in place of the derivative, and requiring us -- mathematically -- to invert this matrix. Numerically we instead solve a linear system, using the `\` operator in Julia; we will study this in detail later in the course.
 
 We also reviewed the derivation of the gradient of a function $f: \mathbb{R}^n \to \mathbb{R}$ and the jacobian of a function $f: \mathbb{R}^n \to \mathbb{R}^n$.
+
+
+## Lecture 8: Algorithmic differentiation (Feb 19)
+
+We started off by realising that when we differentiate a complicated function, we are just following a set of well-defined rules. Computers are good at rule-following, so maybe we can encode those rules for the computer to use to calculate exact derivatives.
+
+We recalled the definition of derivative and commented that the limit that occurs in the definition is difficult to work with, so we rewrote it by introducing "little-o notation": $o(h)$ is an unspecified function that converges to 0 *faster than $h$* as $h \to 0$, i.e. that satisfies $o(h) / h \to 0$.
+
+In this way we get an equivalent definition of derivative that is easier to work with; in particular, if we can express $f(a + h)$ in the form $f(a + h) = A + Bh + o(h)$, then we know that $A$ must be $f(a)$ (this will usually be obvious) and, more importantly, that $B$ must be $f'(a)$. This gives a mechanism to *calculate* $f'(a)$.
+
+We applied this to derive the sum and product rules from calculus. Then we introduced the idea of **dual numbers**. These form a new type of algebra where we introduce an "infinitesimal" symbolic quantity $\epsilon$ satisfying $\epsilon^2 = 0$. Then we think of $c + \epsilon d$ as representing a function with value $c$ and derivative $d$ at some point of interest $a$. We define arithmetic operations on these dual numbers to encapsulate the differentiation rules, always remembering that the coefficient of $\epsilon$ corresponds to the derivative of the function.
+
+Then we saw how we can code this in Julia by defining a new composite thpe `Dual`. We made this a **parametric type** by allowing the fields inside the type to be of any type `T` that is a subtype of the abstract type `Real`. By overloading the arithmetic operations (which we must first `import` from `Base`), we arrange for `Dual(a, b)` to mimic the behaviour of $a + b\epsilon$.
+
+In order to actually calculate the derivative of a Julia function `f`,  we use the fact that $f(a + \epsilon) = f(a) + \epsilon f'(a)$. So `f(Dual(a, 1.0))` gives a new `Dual`, whose second (dual) field contains the derivative. We can think of `Dual(a, 1.0)` as representing the identity function $x \mapsto x$ at the point $a$, whose derivative is indeed 1.
+
+Finally, we saw that this may be extended to higher-dimensional functions such as $f(x, y)$. For example, $f(a_1 + v_1 \epsilon, a_2 + v_2 \epsilon) = f(a_1, a_2) + \epsilon \, \nabla f(a_1, a_2) \cdot \mathbf{v}$, so evaluating `f(Dual(a1, v1), Dual(a2, v2))` will calculate the **directional derivative** as its second (dual) field.
+
+Setting the vector $\mathbf{v}$ to be coordinate directions gives partial derivatives. This can then further be used to build up a complete Jacobian matrix $\mathsf{J}$, although often all we actually need is $\mathsf{J} \cdot v$, a Jacobian--vector product, which can be calculated more efficiently by building it out of $f(a + \epsilon v)$ terms.
