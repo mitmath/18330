@@ -184,3 +184,20 @@ We derived the (relative) condition number for addition/subtraction; despite bei
 This occurs, for example, when we try and solve a quadratic equation $ax^2 + bx + c$ by using the quadratic formula: if $ac$ is close to $0$ then we end up subtracting two very close numbers, and hence losing accuracy. A way round this is to realise that the calculation of the other root is well-conditioned, so we calculate that one and then use a relation between the two roots to calculate the difficult one. This is an example of a general idea: if part of your algorithm uses a step that is ill-conditioned, try to replace it by a different method!
 
 Finally, we looked at the condition number of the problem "find the roots of a quadratic equation". We saw that this is ill-conditioned if the roots are close together, i.e. close to a double root: when we shift the quadratic slightly, the roots move a lot.
+
+
+## Lecture 10: Polynomial interpolation (Feb 24)
+
+We started off by looking at the problem of how to "fit" discrete data using a function. We can either try to find a "best" approximation (within some particular class of functions), which we will look at later in the course; or we can look for a function that *passes through* each data point, i.e. we can **interpolate** the data, i.e.
+$f(t_i) = y_i$ for all $i$, where the $t_i$ are the **nodes** or **knots** where we have function values.
+
+A natural class of functions to try and use are polynomials. A polynomial of degree 1 is a straight line, i.e. an affine function $x \mapsto ax + b$. Given two points $(t_1, y_1)$ and $(t_2, y_2)$, we can find a unique straight line joining the two. A useful way to do it is to first construct **cardinal (basis) functions**, which satisfy $\ell_1(t_1) = 1$ and $\ell_1(t_2) = 0$, and vice versa. In this way the Lagrange interpolating polynomial is $L(x) = y_1 \ell_1(x) + y_2 \ell_2(x)$.
+
+We can then use this to do piecewise-linear interpolation, by constructing **hat functions**, which are piecewise linear and non-zero only at a single $t_k$.
+Any piecewise-linear function can then be written as a sum of these hat functions, so the hat functions form a basis for the space of piecewise-linear functions.
+
+We saw that by writing down the conditions for a degree-$n$ polynomial to interpolate in $n+1$ points, we get a linear system of equations to solve. This shows that there exists a solution and it's unique; but the numerical method obtained by trying to numerically solve the equations is ill-conditioned.
+
+Instead we constructed Lagrange cardinal basis functions as products of the form $(x - t_i)$, which is zero at $t_i$. This gives a constructive way to find interpolating polynomials for any data. However we commented that this goes very wrong when we try to do interpolation in equally-spaced points.
+
+We finished by seeing a visual demonstration of the fundamental theorem of algebra, by looking at the image of a circle of radius $\rho$ in the complex plane under a polynomial $f(z)$ of degre $n$ as we vary $\rho$ from a large value to $0$: The image curve crosses the origin $n$ times during the process.
