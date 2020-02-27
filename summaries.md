@@ -201,3 +201,26 @@ We saw that by writing down the conditions for a degree-$n$ polynomial to interp
 Instead we constructed Lagrange cardinal basis functions as products of the form $(x - t_i)$, which is zero at $t_i$. This gives a constructive way to find interpolating polynomials for any data. However we commented that this goes very wrong when we try to do interpolation in equally-spaced points.
 
 We finished by seeing a visual demonstration of the fundamental theorem of algebra, by looking at the image of a circle of radius $\rho$ in the complex plane under a polynomial $f(z)$ of degre $n$ as we vary $\rho$ from a large value to $0$: The image curve crosses the origin $n$ times during the process.
+
+
+## Lecture 11: Julia for mathematics (Feb 26)
+
+We looked at a mixture of philosophical views and practical tips on the link between Julia and mathematics.
+
+Code actually often requires us to be *more* precise than
+mathematics about exactly which object we are talking about and what type it is. E.g. if $f_r(x) = r x (1 - x)$
+is the logistic map, then we think of $f_r$ as a different univariate function for each $r$. In Julia we would write this as `f(r, x) = r * x * (1 - x)`, but then so far there is no way of talking about just `f(r)`.
+
+What we would like to do is define `f(r)` as another method of the function `f` which takes only a single variable -- the parameter `r` -- and *returns a function*. We can do this using anonymous functions by defining
+
+```julia
+f(r) = x -> f(r, x)
+```
+
+We can then pass e.g. `f(2.5)` to another function that expects a function as an argument.
+
+Then we talked about "vectors" in Julia. Here there is a tension between the mathematical meaning of "vector" -- basically, something that has components and can be added and multiplied by a number -- and the computer science meaning of "vector" as a 1-dimensional array, that is, just a *container for data*.
+
+Julia conflates (combines) the two meanings into a single concept `Vector`, which you can use both as a mathematical object *and* as a storage container; indeed, `push!(v, 3)` appends a new element to the `Vector` `v`, an operation which is simply not possible with a mathematical vector.
+
+However, the `StaticArrays.jl` package defines the `SVector{N,T}` type, which represents a vector of *fixed* length `N` holding objects of type `T`. These are implemented in a very efficient (performant) way, and are the vectors of choice for representing e.g. position and velocity vectors of particles in a simulation in a low number of dimensions.
