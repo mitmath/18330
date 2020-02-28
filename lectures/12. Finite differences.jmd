@@ -1,0 +1,241 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+# 12. Numerical derivatives
+
+## Last time
+
+- Julia for mathematics
+
+- Anonymous functions
+
+- Generic functions and methods
+
+- Vectors: mathematics vs containers
+
+
+## Goals for today
+
+- Finite differences
+
+- Taylor series
+
+- Interpolation
+
+- Matrices
+
+
+
+## Approximating derivatives
+
+- Recall definition of derivative of $f: \mathbb{R} \to \mathbb{R}$:
+
+    $$f'(a) := \lim_{h \to 0} \left[ \frac{f(a + h) - f(a)}{h} \right]$$
+
+    . . .
+
+- Simplest numerical method: **ignore limit**:
+
+    $$f'(a) \simeq \frac{f(a + h) - f(a)}{h}$$
+
+    for fixed, small $h$
+
+- **Finite difference** approximation ("finite" vs. infinitesimal)
+
+
+## Finite differences
+
+
+- Immediate questions arise:
+
+    - Is approximation good? How large is error from true $f'(a)$?
+
+    - How make better approximation?
+
+    - Is this well conditioned?
+
+
+
+
+## Derivation and error using Taylor series
+
+- Rearrange: $f(a + h) \simeq f(a) + h f'(a)$
+
+- Degree-1 Taylor polynomial
+
+    . . .
+
+- How large is the **truncation error**?
+
+    . . .
+
+    \ \
+
+- Use Lagrange remainder: $R_1 = \frac{1}{2} h^2 f''(\xi)$
+
+    . . .
+
+- So $f(a + h) = f(a) + h f'(a) + \mathcal{O}(h^2)$ assuming $f''$ bounded
+
+- So error in $f'(a)$ is $\mathcal{O}(h)$ -- **order 1**
+
+
+## Numerical calculation of error
+
+- $\delta(h) := \frac{f(a + h) - f(a)}{h} - f'(a)$
+
+- How does $\delta(h)$ behave as function of $h$?
+
+- Numerical calculation
+
+    . . .
+
+    \ \
+- Why?
+
+    . . .
+
+- $\delta(h)$ is **ill-conditioned** for $h$ near $0$
+
+## Higher-order finite difference approximations
+
+- How can we reduce error in finite differences?
+
+- Find approximation to $f'(a)$ of **higher order** -- how?
+
+     . . .
+
+- Write out Taylor series:
+
+    $$f(a + h) = f(a) + h f'(a) + \textstyle \frac{1}{2!} h^2 f''(a) + \frac{1}{3!} h^3 f'''(a) + \cdots$$
+
+    $$f(a - h) = f(a) - h f'(a) + \textstyle \frac{1}{2!} h^2 f''(a) - \frac{1}{3!} h^3 f'''(a) + \cdots$$
+
+## Higher-order finite difference approximations II
+
+
+$$f(a + h) = f(a) + h f'(a) + \textstyle \frac{1}{2!} h^2 f''(a) + \frac{1}{3!} h^3 f'''(a) + \cdots$$
+
+$$f(a - h) = f(a) - h f'(a) + \textstyle \frac{1}{2!} h^2 f''(a) - \frac{1}{3!} h^3 f'''(a) + \cdots$$
+
+. . .
+
+- Subtract:
+
+- $f(a + h) - f(a) = 2 h f'(a) + \mathcal{O}(h^3)$
+
+    . . .
+
+- Get **centered difference** approximation:
+    $$f'(a) = \frac{f(a + h) - f(a-h)}{2 h} + \mathcal{O}(h^2)$$
+
+- Order 2 -- compare numerically
+
+## Higher-order derivatives
+
+- Look at $f(a + h)$ and $f(a - h)$ again
+
+- Can we find an expression for $f''(a)$?
+
+    . . .
+
+    \ \
+
+- Add instead of subtract:
+
+    $$f(a + h) + f(a - h) = 2 f(a) + h^2 f''(a) + \mathcal{O}(h^4)$$
+
+    . . .
+
+- So $f''(a) = \frac{f(a + h) - 2 f(a) + f(a - h)}{h^2} + \mathcal{O}(h^2)$
+
+## Alterative derivation
+
+- Go back to simplest forward difference
+
+- How interpret geometrically?
+
+    . . .
+
+- Slope of line interpolating consecutive points
+
+    . . .
+
+- Generalise: General finite-difference formulae for non-uniformly
+points
+
+- Interpolate and differentiate interpolant!
+
+    . . .
+
+## Alternative derivation: Interpolation II
+
+- We are looking for **linear combination**
+
+    $$f'(t_k) \simeq \sum_{i} \delta_i t_i$$
+
+- **Fornberg algorithm** generates these recursively from interpolant
+
+- Also for higher derivatives
+
+## Multivariable functions
+
+- What happens for multivariable functions $f(x, y)$?
+
+- Finite difference formulae give partial derivatives
+
+- e.g. $\frac{\partial f}{\partial y}(a, b) \simeq \frac{f(a, b + h) - f(a, b)}{h}$
+
+    . . .
+
+- Build more complicated expressions, e.g.
+
+    $$\nabla^2 f(a, b) \simeq \frac{f(a + h, b) + f(a - h, b) + f(a, b + h) + f(a, b - h) - 4f(a, b)}{h^2}$$
+
+## Derivatives as matrices
+
+- Suppose represent polynomial $p(x) = a_n x^n + \cdots + a_1 x + a_0$ via its coefficients
+
+- Vector of coefficients $\mathbf{a} := (a_0, a_1, \ldots, a_n)$
+
+- Differentiation gives new polynomial with coefficients $(a_1, 2 a_2, 3 a_3, \ldots n a_n)$
+
+- It maps original vector to new vector and is **linear**
+
+- So can represent by a matrix!
+
+## Derivatives as matrices II
+
+- Different approach: Suppose have samples $f_i$ at equally-spaced points $t_i$
+
+- How calculate 2nd derivative?
+
+- Finite difference at each point: tridiagonal **Strang matrix**
+
+$$
+M = \begin{pmatrix}
+1 & -2 & 1 & 0 & \cdots 0 \\
+0 & 1 & -2 & 1  & \cdots 0 \\
+\vdots & \vdots & \vdots \\
+0 & 0 & 0   & \cdots 1 & -2 & 1 \\
+\end{pmatrix}
+$$
+
+## Summary
+
+- Finite-difference approximations for derivatives
+
+- Calculate order of error using Taylor expansions
+
+- Or via interpolation
