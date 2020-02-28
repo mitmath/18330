@@ -224,3 +224,18 @@ Then we talked about "vectors" in Julia. Here there is a tension between the mat
 Julia conflates (combines) the two meanings into a single concept `Vector`, which you can use both as a mathematical object *and* as a storage container; indeed, `push!(v, 3)` appends a new element to the `Vector` `v`, an operation which is simply not possible with a mathematical vector.
 
 However, the `StaticArrays.jl` package defines the `SVector{N,T}` type, which represents a vector of *fixed* length `N` holding objects of type `T`. These are implemented in a very efficient (performant) way, and are the vectors of choice for representing e.g. position and velocity vectors of particles in a simulation in a low number of dimensions.
+
+
+## Lecture 12: Finite-difference approximations of derivatives (Feb 28)
+
+Today we looked at a different way to find approximations to derivatives, using **finite differences**. The simplest example is where we ignore the limit in the definition of the derivative $f'(a)$ and approximate it by $(f(a + h) - f(a)) / h$ for a  small but non-zero value of $h$.
+
+Supposing that $f$ is smooth enough, we can do a Taylor expansion of $f$ to show that the error in this approximation is $\mathcal{O}(h)$. However, we saw that when we try to just evaluate this approximation for tiny values of $h$, close to machine epsilon  ($\epsilon_\text{mach}$), the error initially converges to $0$ linearly, as expected, but then starts to get bigger for $h < 10^{-8}$! This unexpected behaviour basically originates in catastrophic cancellation coming from the subtraction in the definition, and corresponds to the problem being ill-conditioned as $h \to 0$.
+
+We saw that by playing with Taylor expansions we can find higher-order approximations with errors going like $\mathcal{O}(h^n)$, and also approximations for higher derivatives. The goal is to find the coefficients for linear combinations of the function values to give these approximations. Doing so by manipulating Taylor series is not systematic, however.
+
+A systematic approach is possible by thinking of these approximations as first interpolating a polynomial through the data, and then differentiating the interpolant. The Fornberg algorithm makes this usable.
+
+One important application is to the discretization of differential equations: e.g. approximating a differential equation using finite differences reduces the Poisson equation to solving a linear system of equations.
+
+Finally, we saw that finite differences can be thought of as derivative *matrices* that apply on vectors representing the coefficients of the problem. This will also be important later on.
