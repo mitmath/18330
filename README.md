@@ -12,7 +12,11 @@ We will be using the [Julia language](www.julialang.org). Please follow [these i
 
 - MWF 1--2, room 2-139.
 
-- Office hours: MW 5-6 in the **Julia lab**, 7th floor of Stata Center (turn left from Gates building elevator)
+- Office hours: 
+
+  - Mon 5.20-6.20 in the **Julia lab**, 7th floor of Stata Center (turn left from Gates building elevator)
+  - Tues 5-6 in the Julia lab
+  - Thurs 5-6 in 2.332
 
 - Piazza forum: https://piazza.com/class/k65ke8eo9x760n
 
