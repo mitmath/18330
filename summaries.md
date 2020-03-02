@@ -239,3 +239,17 @@ A systematic approach is possible by thinking of these approximations as first i
 One important application is to the discretization of differential equations: e.g. approximating a differential equation using finite differences reduces the Poisson equation to solving a linear system of equations.
 
 Finally, we saw that finite differences can be thought of as derivative *matrices* that apply on vectors representing the coefficients of the problem. This will also be important later on.
+
+
+## Lecture 13: Numerical integration (Feb 28)
+
+We discussed the problem of how to numerically calculate definite integrals $I(f) := \int_a^b f(x) \, dx$, also called **quadrature**. We are looking for methods that approximate this by something of the form $\sum_k w_k f(t_k)$, where the function $f$ is evaluated at **nodes** $t_k$ and the $w_k$ are the **weights**, which should be independent of the function $f$.
+
+The Riemann integral definition of $\int_a^b f$ suggests the simplest numerical method, the **rectangule rule**, where we split $[a, b]$ into subintervals, or **panels**, and approximate the function $f$ with a piecewise constant function, and the integral of $f$ by the sum of the areas of the corresponding rectangles.
+
+We calculated the error of the resulting method as a function of the width $h$ of the intervals between equally-spaced points $t_i$, showing that the local error in the integral each subinterval is $\mathcal{O}(h^2)$, and so the global error is $\mathcal{O}(h)$.
+
+Next we asked how we could improve on this. We can do so by approximating the function $f$ more accurately, for example by interpolating it in certain points. The simplest interpolation method is to use a degree-$1$ polynomial, i.e. a straight line, joining $(a, f(a))$ and $(b, f(b))$. If we represent this in Lagrange form as $p(x) = f(a) \ell_0(x) + f(b) \ell_1(x)$ then we see that the weights are just given by $w_k := \int \ell_k$!
+These are independent of $f$, as desired. Doing this in equally-spaced points gives **Newton--Cotes** quadrature rules.
+
+It is possible to find a general formula for the error in Lagrange interpolation that looks similar to the Lagrange form of the remainder in Taylor's theorem. From there we find that interpolating with a degree-$n$ polynomial gives a global error that is $O(h^{n+1})$.
