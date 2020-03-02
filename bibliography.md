@@ -16,11 +16,14 @@ Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras). **Highly rec
 
 ## Somewhat more advanced
 
+- *A graduate introduction to numerical methods*, Fillion & Corless
+
 - *Numerical Analysis*, Gautschi
 
 - *Numerical Analysis in Modern Scientific Computing*, Deuflhard & Hohmann
 
 - *Numerical Recipes*, Press et al.
+
 
 
 ## Online courses
