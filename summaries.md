@@ -241,7 +241,7 @@ One important application is to the discretization of differential equations: e.
 Finally, we saw that finite differences can be thought of as derivative *matrices* that apply on vectors representing the coefficients of the problem. This will also be important later on.
 
 
-## Lecture 13: Numerical integration (Feb 28)
+## Lecture 13: Numerical integration (Mar 2)
 
 We discussed the problem of how to numerically calculate definite integrals $I(f) := \int_a^b f(x) \, dx$, also called **quadrature**. We are looking for methods that approximate this by something of the form $\sum_k w_k f(t_k)$, where the function $f$ is evaluated at **nodes** $t_k$ and the $w_k$ are the **weights**, which should be independent of the function $f$.
 
