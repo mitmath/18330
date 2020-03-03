@@ -228,7 +228,9 @@ that interpolates all $n + 1$ points simultaneously
 
 ## Global Lagrange interpolation II
 
-- $c_k = (t_k - t_1) \cdots \widehat{(t_k - t_k)} \cdots (x - t_n)$
+- We want $\ell_k(t_k) = 1$, so
+
+    $$c_k = \frac{1}{(t_k - t_1) \cdots \widehat{(t_k - t_k)} \cdots (x - t_n)}$$
 
     . . .
 
