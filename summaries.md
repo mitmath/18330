@@ -253,3 +253,23 @@ Next we asked how we could improve on this. We can do so by approximating the fu
 These are independent of $f$, as desired. Doing this in equally-spaced points gives **Newton--Cotes** quadrature rules.
 
 It is possible to find a general formula for the error in Lagrange interpolation that looks similar to the Lagrange form of the remainder in Taylor's theorem. From there we find that interpolating with a degree-$n$ polynomial gives a global error that is $O(h^{n+1})$.
+
+## Lecture 14: Ordinary differential equations (Mar 4)
+
+We started to discuss **ordinary differential equations** (ODEs), i.e. equations relating a function $x: t \mapsto x(t)$ with its derivatives $\dot{x}$ etc. A simple example is $\dot{x} = f(x)$. An ODE tells us in which direction and how fast to move, given where we are currently.
+
+An example is $\dot{x} = -\lambda x$, to which we must add an initial condition $x(t=0) = x_0$. In this particular case we know that the function $x(t) = x_0 \exp(-\lambda t)$ is a **solution**, i.e. a function which satisfies both the differential equation and the initial condition. But for a general ODE we will not usually be able to find an explicit analytical solution like this.
+
+Nonetheless, there are theorems which prove that solutions exist and are unique under certain technical conditions, for example if $f$ is continuously differentiable ($C^1$).
+
+So we would like to construct approximations to the solutions. One way to do so is **time stepping**: we find approximations $x_n$ to the exact solution $x(t_n)$ at a sequence of times $t_1$, $t_2$, \ldots, $t_N$. For now we will take equally-spaced times, $t_n := t_0 + n h$. We are only interested in numerical methods that are **convergent**, i.e. such that the approximate solution at a given time converges to the true solution at that time as $h \to 0$.
+
+The Euler method is the simplest such method, where we assume that the derivative $\dot{x}$ is constant over each step. This leads to the method
+
+$$x_{n+1} = x_n + h_n \, f(t_n, x_n)$$
+
+for an inhomogeneous ODE $\dot{x}(t) = f(t, x(t))$ that may depend explicitly on time.
+
+We saw that we can rewrite the differential equation as an integral equation and construct methods by approximating the integral, for example the trapezium rule. This turns out to give an *implicit* equation for $x_{n+1}$ in terms of itself, so we need to use a root finding method, such as Newton, to solve this at each step. Nonetheless this class of implicit methods are important for solving **stiff** equations, as we will see later.
+
+We finished by discussing systems of coupled ODEs. If we write them in a vector form then the Euler method has the *same* expression as above, except that each term (other than $t_n$) is now a vector. Thus the *same* code can be used to solve it.
