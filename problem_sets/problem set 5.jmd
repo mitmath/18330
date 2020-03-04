@@ -21,11 +21,11 @@ header-includes: |
 
 Consider the simplest forward finite-difference approximation for $f'(x)$:
 
-    $$g(h) := \frac{f(x + h) - f(x)}{h}$$
+$$g(h) := \frac{f(x + h) - f(x)}{h}$$
 
 When we calculate this numerically, there are *two* sources of error: truncation error, coming from approximating the exact Taylor expansion with a finite piece of it, *and* floating-point roundoff error.
 
-1. Suppose that we perturb the input, $h$, by $\Delta h$. Calculate (analytically) an approximation to the (absolute) error $\Delta g$ on the output to first order in $\Delta h$; you should find that it grows like $h^{-1}.
+1. Suppose that we perturb the input, $h$, by $\Delta h$. Calculate (analytically) an approximation to the (absolute) error $\Delta g$ on the output to first order in $\Delta h$; you should find that it grows like $h^{-1}$.
 
 2. Suppose that the input perturbation size is $\epsilon_\text{mach}$; the error from [1] is then the **roundoff error**. Find an estimate for the value of $h$ at which the truncation error balances with the roundoff error, and find the size of the error there. Compare this with the plot that we did in class.
 
