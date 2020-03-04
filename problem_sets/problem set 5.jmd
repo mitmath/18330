@@ -92,7 +92,7 @@ $$E(N) := \frac{I_\text{approx}(N) - I_\text{exact}}{I_\text{exact}}$$
 
     Plot the error in the trapezium rule in this case. How fast does it decay with $N$? [This will be important later in the course.]
 
-    Note that this integral can be calculated exactly as $2π J_0(1)$, where $J_0$ is a **Bessel function**, which can be evaluated at 1 using the `SpecialFunctions.jl` package as `besselj(0, 1)`.
+    Note that this integral can be calculated exactly as $2π I_0(1)$, where $I_0$ is a **modified Bessel function**, which can be evaluated at 1 using the `SpecialFunctions.jl` package as `besseli(0, 1)`.
 
 
 #### Exercise 4: Euler method for ODEs
