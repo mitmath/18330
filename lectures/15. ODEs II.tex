@@ -1,0 +1,375 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{Helvetica}
+  \setmonofont[Scale=0.8]{Source Code Pro}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=white,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=cyan,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{unicode-math}
+
+\date{}
+
+\begin{document}
+
+\hypertarget{odes-ii-rungekutta-methods}{%
+\section{15. ODEs II: Runge--Kutta
+methods}\label{odes-ii-rungekutta-methods}}
+
+\hypertarget{last-time}{%
+\subsection{Last time}\label{last-time}}
+
+\begin{itemize}
+\item
+  Review of ODEs
+\item
+  Euler method and error
+\item
+  Trapezium method
+\item
+  Systems of equations
+\end{itemize}
+
+\hypertarget{goals-for-today}{%
+\subsection{Goals for today}\label{goals-for-today}}
+
+\begin{itemize}
+\item
+  Systems of equations
+\item
+  Higher derivatives
+\item
+  Runge--Kutta methods
+\item
+  Adaptivity
+\end{itemize}
+
+\hypertarget{systems-of-equations}{%
+\subsection{Systems of equations}\label{systems-of-equations}}
+
+\begin{itemize}
+\item
+  General system of 1st-order ODEs:
+
+  \begin{align*}
+    \dot{x_1} &= f_1(t, x_1, \ldots, x_n) \\
+    \dot{x_2} &= f_2(t, x_1, \ldots, x_n) \\
+    &\vdots  \\
+    \dot{x_n} &= f_n(t, x_1, \ldots, x_n) \\
+    \end{align*}
+
+  . . .
+\item
+  Rewrite in vector form:
+  \(\dot{\mathbf{x}}(t) = \mathbf{f}(t, \mathbf{x}(t))\)
+\item
+  \(\mathbf{f} = (f_1, \ldots, f_n)\)
+\item
+  \(\mathbf{x}(t) = (x_1(t), x_2(t), \ldots, x_n(t))\)
+\item
+  \(\mathbf{f}\) is a \textbf{vector field}
+\end{itemize}
+
+\hypertarget{solving-systems-of-equations}{%
+\subsection{Solving systems of
+equations}\label{solving-systems-of-equations}}
+
+\begin{itemize}
+\item
+  \(\mathbf{x}(t) = (x_1(t), x_2(t), \ldots, x_d(t))\) if \(d\)
+  variables
+\item
+  Taylor expand:
+
+  \begin{align*}
+    x_i(t_k + h) &= x_i(t_k) + h \, \dot{x_i}(t_k) + \mathcal{O}(h^2) \\
+      &= x_i(t_k) + h \, f_i(t_k, x_1, \ldots, x_n) + \mathcal{O}(h^2)
+     \end{align*}
+\item
+  So obtain Euler method
+
+  \[\mathbf{x}_{k+1} = \mathbf{x}_k + h \, \mathbf{f}(\mathbf{x}_k)\]
+
+  . . .
+\item
+  \emph{Same} method but now with vectors
+\item
+  \emph{Same} code
+\end{itemize}
+
+\hypertarget{higher-derivatives}{%
+\subsection{Higher derivatives}\label{higher-derivatives}}
+
+\begin{itemize}
+\item
+  How treat higher-order equations (higher derivatives)?
+\item
+  E.g. damped harmonic oscillator
+
+  \[\ddot{x} + b \dot{x} + \omega^2 x = 0\]
+
+  . . .
+
+  ~\\
+\item
+  There are some special methods for second-order
+\end{itemize}
+
+\hypertarget{higher-derivatives-ii}{%
+\subsection{Higher derivatives II}\label{higher-derivatives-ii}}
+
+\begin{itemize}
+\item
+  Usually \textbf{reduce} to system of 1st-order equations:
+
+  . . .
+\item
+  Introduce new variable \(v := \dot{x}\)
+\item
+  Then \(\dot{v} = \ddot{x}\)
+
+  . . .
+
+  ~\\
+\item
+  So get system
+
+  \begin{align*}
+        \dot{x} &= v \\
+        \dot{v} &= -b v + \omega^2 x
+    \end{align*}
+\end{itemize}
+
+\hypertarget{reducing-error}{%
+\subsection{Reducing error}\label{reducing-error}}
+
+\begin{itemize}
+\item
+  Euler method is globally \(\mathcal{O}(h)\)
+\item
+  Trapezium method is getter, \(\mathcal{O}(h^2)\), but is
+  \textbf{implicit} so more expensive
+\item
+  Are there explicit methods of higher order?
+\item
+  How could we produce one?
+
+  . . .
+
+  ~\\
+\item
+  Yes: Runge--Kutta and multistep methods
+\item
+  We will look at Runge--Kutta methods
+\end{itemize}
+
+\hypertarget{second-order-taylor-methods}{%
+\subsection{Second-order Taylor
+methods}\label{second-order-taylor-methods}}
+
+\begin{itemize}
+\item
+  To get a higher-order method, use a higher-order Taylor expansion for
+  a step
+\item
+  Suppose \(\dot{x}(t) = f(t, x(t))\)
+\item
+  Expand to higher order:
+
+  \[x(t + h) = x(t) + h \dot{x}(t) + \textstyle \frac{1}{2} h^2 \ddot{x}(t) + \mathcal{O}(h^3)\]
+\item
+  How can we deal with \(\ddot{x}(t)\)?
+\end{itemize}
+
+\hypertarget{second-order-taylor-methods-ii}{%
+\subsection{Second-order Taylor methods
+II}\label{second-order-taylor-methods-ii}}
+
+\begin{itemize}
+\item
+  Differentiate the ODE:
+
+  \[\ddot{x}(t) = \textstyle \frac{d}{dt} \left[ f(t, x(t)) \right]\]
+
+  . . .
+\item
+  Get \(\ddot{x}(t) = f_t + f_x \dot{x}\)
+\item
+  Where \(f_t := \frac{\partial{f}}{\partial t}(t, x(t))\) and similarly
+  for \(f_x\)
+\item
+  So
+
+  \[x(t + h) \simeq x + h \, f + \textstyle \frac{1}{2} h^2 \left[ f_t + f_x \, f \right]\]
+\item
+  For clarity write \(f\) instead of \(f(t, x(t))\), etc. and write
+  \(x\) for \(x(t)\)
+\item
+  This is useful \emph{only} if we can calculate the derivatives of
+  \(f\)
+\end{itemize}
+
+\hypertarget{back-to-the-trapezium-rule}{%
+\subsection{Back to the trapezium
+rule}\label{back-to-the-trapezium-rule}}
+
+\begin{itemize}
+\item
+  Let's look at the trapezium rule again:
+
+  \[ x_{n+1} \simeq x_n + \textstyle \frac{h}{2} \left[ f(x_n) + f(x_{n+1}) \right]\]
+\item
+  Implicitness from \(f(x_{n+1})\) on the right
+\item
+  Could we approximate this to make it explicit?
+
+  . . .
+
+  ~\\
+\item
+  Use the Euler method! i.e.~take an \textbf{Euler step}:
+
+  \[x_{n+1} \simeq x_n + h \, f(x_n)\]
+\item
+  Use this only for term on the right
+\end{itemize}
+
+\hypertarget{rungekutta}{%
+\subsection{Runge--Kutta}\label{rungekutta}}
+
+\begin{itemize}
+\item
+  This gives a \textbf{multistage} method.
+\item
+  Use notation \(k_i\) for different evaluations of \(f\) in sequence:
+
+  \begin{align*}
+    k_1 :=& f(t_n, x_n)  \\
+    k_2 :=& f(t_n + h, x_n + h \, k_1) \\
+    x_{n+1} =& x_n + \textstyle \frac{h}{2} (k_1 + k_2)
+    \end{align*}
+\item
+  \textbf{Modifed Euler method}
+\end{itemize}
+
+\hypertarget{order-of-modified-euler}{%
+\subsection{Order of modified Euler}\label{order-of-modified-euler}}
+
+\begin{itemize}
+\item
+  Taylor expand:
+
+  \[k_2 = f + h \, f_t + h \, k_1 \, f_x + \mathcal{O}(h^2)\]
+\item
+  So \begin{align*}
+    x_{n+1} &= x_n + \textstyle \frac{h}{2} (k_1 + k_2) \\
+    & \simeq x_n + \textstyle \frac{h}{2} \left[ f + f + h f_t + h k_1 f_x + \mathcal{O}(h^2) \right] \\
+    &= x_n + h \, f + \textstyle \frac{1}{2} h^2 (f_t + f_x f) + \mathcal{O}(h^3)
+    \end{align*}
+\item
+  2nd-order Taylor expansion by nested evaluation of \(f\)!
+\end{itemize}
+
+\hypertarget{general-rungekutta-methods}{%
+\subsection{General Runge--Kutta
+methods}\label{general-rungekutta-methods}}
+
+\begin{itemize}
+\item
+  General idea: Match Taylor expansion
+\item
+  Add more coefficients in more \textbf{stages}
+
+  \begin{align*}
+    k_1 &= f(t_n, x_n) \\
+    k_2 &= f(t_n + c_1 \, h, x_n + a_{11} k_1 \\
+    k_3 &= f(t_n + c_2 \, h, x_n + a_{21} k_1 + a_{22} k_2 \\
+        \vdots \\
+    k_s &= f(t_n + c_1 \, h, x_n + a_{s-1,1} k_1 + \cdots + a_{s-1,s-1} k_{s-1} \\
+    x_{n+1} &= x_n + b_1 k_1 + \cdots + b_s k_s
+    \end{align*}
+\item
+  Coefficients must satisfy certain constraints
+\end{itemize}
+
+\hypertarget{butcher-tableaux}{%
+\subsection{Butcher tableaux}\label{butcher-tableaux}}
+
+\begin{itemize}
+\tightlist
+\item
+  Arrange coefficients of method in a \textbf{Butcher tableau}:
+\end{itemize}
+
+\[
+\begin{array}{c|cccc}
+0\\
+c_1 & a_{11}\\
+c_2 & a_{21} & a_{22} \\
+\vdots \\
+c_{s-1} & a_{s-1,1} & \cdots & a_{s-1, s-1} \\
+\hline
+& b_1 & b_2 & b_{s-1} & b_s
+\end{array}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  E.g. for modified Euler:
+\end{itemize}
+
+\[
+\begin{array}{c|cccc}
+0\\
+1 & 1\\
+\hline
+& \frac{1}{2} & \frac{1}{2}
+\end{array}
+\]
+
+\end{document}

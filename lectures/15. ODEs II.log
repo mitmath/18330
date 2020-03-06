@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.5.8)  4 MAR 2020 12:43
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.5.8)  5 MAR 2020 17:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"14. Ordinary differential equations.tex"
-(./14. Ordinary differential equations.tex
+**"15. ODEs II.tex"
+(./15. ODEs II.tex
 LaTeX2e <2018-12-01>
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -851,8 +851,8 @@ File: bkm-dvipdfm.def 2016/05/17 v1.26 bookmark driver for dvipdfm (HO)
 ))
 Package hyperref Info: Option `colorlinks' set `true' on input line 47.
 
-No file "14. Ordinary differential equations".aux.
-\openout1 = `"14. Ordinary differential equations.aux"'.
+(./15. ODEs II.aux)
+\openout1 = `"15. ODEs II.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
 LaTeX Font Info:    ... okay on input line 57.
@@ -1142,6 +1142,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 \AtBeginShipoutBox=\box49
 Package hyperref Info: Link coloring ON on input line 57.
+
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
@@ -1153,10 +1154,6 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 57.
 LaTeX Info: Redefining \pageref on input line 57.
 LaTeX Info: Redefining \nameref on input line 57.
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
-
 LaTeX Font Info:    Font shape `TU/Helvetica(0)/m/n' will be
 (Font)              scaled to size 14.4pt on input line 61.
 LaTeX Font Info:    Font shape `TU/Helvetica(0)/bx/n' will be
@@ -1165,29 +1162,28 @@ LaTeX Font Info:    Font shape `TU/Helvetica(0)/m/n' will be
 (Font)              scaled to size 12.0pt on input line 64.
 LaTeX Font Info:    Font shape `TU/Helvetica(0)/bx/n' will be
 (Font)              scaled to size 12.0pt on input line 64.
-LaTeX Font Info:    Font shape `TU/Helvetica(0)/bx/n' will be
-(Font)              scaled to size 10.0pt on input line 93.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.46161pt on input line 96.
+(Font)              scaled to size 8.46161pt on input line 98.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.044pt on input line 96.
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 96.
+(Font)              scaled to size 6.044pt on input line 98.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 98.
+
 (/usr/local/texlive/2019/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.08923pt on input line 96.
+(Font)              scaled to size 12.08923pt on input line 98.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.46246pt on input line 96.
+(Font)              scaled to size 8.46246pt on input line 98.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.04462pt on input line 96.
+(Font)              scaled to size 6.04462pt on input line 98.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 12.08694pt on input line 96.
+(Font)              scaled to size 12.08694pt on input line 98.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.46086pt on input line 96.
+(Font)              scaled to size 8.46086pt on input line 98.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.04347pt on input line 96.
-LaTeX Font Info:    Try loading font information for U+msa on input line 96.
+(Font)              scaled to size 6.04347pt on input line 98.
+LaTeX Font Info:    Try loading font information for U+msa on input line 98.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1195,7 +1191,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2019/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 96.
+LaTeX Font Info:    Try loading font information for U+msb on input line 98.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1203,73 +1199,62 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (/usr/local/texlive/2019/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Font shape `TU/Helvetica(0)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 125.
-LaTeX Font Info:    Font shape `TU/Helvetica(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 125.
+LaTeX Font Info:    Font shape `TU/Helvetica(1)/bx/n' will be
+(Font)              scaled to size 9.82574pt on input line 108.
+LaTeX Font Info:    Font shape `TU/Helvetica(1)/bx/n' will be
+(Font)              scaled to size 6.87802pt on input line 108.
+LaTeX Font Info:    Font shape `TU/Helvetica(1)/bx/n' will be
+(Font)              scaled to size 4.91287pt on input line 108.
+LaTeX Font Info:    Font shape `TU/Helvetica(0)/bx/n' will be
+(Font)              scaled to size 10.0pt on input line 114.
  [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 138--140
-
- []
-
 LaTeX Font Info:    Font shape `TU/Helvetica(0)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 149.
+(Font)              scaled to size 10.0pt on input line 139.
 
-Underfull \hbox (badness 10000) in paragraph at lines 153--155
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 161--163
-
- []
-
-[2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 295--297
+Underfull \hbox (badness 10000) in paragraph at lines 157--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--322
+Underfull \hbox (badness 10000) in paragraph at lines 177--179
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 203--205
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 272--274
 
  []
 
 [4]
-LaTeX Font Info:    Font shape `TU/Helvetica(1)/bx/n' will be
-(Font)              scaled to size 9.82574pt on input line 356.
-LaTeX Font Info:    Font shape `TU/Helvetica(1)/bx/n' will be
-(Font)              scaled to size 6.87802pt on input line 356.
-LaTeX Font Info:    Font shape `TU/Helvetica(1)/bx/n' will be
-(Font)              scaled to size 4.91287pt on input line 356.
- [5]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.404   \textbackslash begin\{align*\} \dot
-                                           {x} \&= v \textbackslash{} \dot{v}
-? ^^[[A
-Type <return> to proceed, S to scroll future error messages,
-R to run without stopping, Q to run quietly,
-I to insert something, E to edit your file,
-1 or ... or 9 to ignore the next 1 to 9 tokens of input,
-H for help, X to quit.
-? 
-! Emergency stop.
-<inserted text> 
-                $
-l.404   \textbackslash begin\{align*\} \dot
-                                           {x} \&= v \textbackslash{} \dot{v}
-End of file on the terminal!
-
- 
+! Extra alignment tab has been changed to \cr.
+<recently read> \endtemplate 
+                             
+l.356 & b_1 & b_2 & \cdots & b_{s-1} &
+                                       b_s
+? r
+OK, entering \nonstopmode...
+[5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 375.
+ [6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 375.
+ (./15. ODEs II.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 375.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 375.
+ ) 
 Here is how much of TeX's memory you used:
- 26660 strings out of 492916
- 489398 string characters out of 6133346
- 723078 words of memory out of 5000000
- 30487 multiletter control sequences out of 15000+600000
- 535994 words of font info for 78 fonts, out of 8000000 for 9000
+ 26671 strings out of 492916
+ 489505 string characters out of 6133346
+ 727769 words of memory out of 5000000
+ 30496 multiletter control sequences out of 15000+600000
+ 535978 words of font info for 76 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 54i,8n,118p,836b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
-Output written on 14. Ordinary differential equations.pdf (5 pages).
+ 54i,8n,118p,812b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on 15. ODEs II.pdf (6 pages).
