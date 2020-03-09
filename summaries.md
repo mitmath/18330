@@ -273,3 +273,30 @@ for an inhomogeneous ODE $\dot{x}(t) = f(t, x(t))$ that may depend explicitly on
 We saw that we can rewrite the differential equation as an integral equation and construct methods by approximating the integral, for example the trapezium rule. This turns out to give an *implicit* equation for $x_{n+1}$ in terms of itself, so we need to use a root finding method, such as Newton, to solve this at each step. Nonetheless this class of implicit methods are important for solving **stiff** equations, as we will see later.
 
 We finished by discussing systems of coupled ODEs. If we write them in a vector form then the Euler method has the *same* expression as above, except that each term (other than $t_n$) is now a vector. Thus the *same* code can be used to solve it.
+
+
+## Lecture 15: Ordinary differential equations II: Runge--Kutta methods (Mar 6)
+
+We started by seeing how higher-order differential equations, i.e. those with higher derivatives like $\ddot{x} + \omega^2 x = 0$, can be turned into systems of 1st-order equations. This is done by introducing a new variable for each derivative except the highest-order one. For example, defining $v := \dot{x}$ we have $\ddot{x} = \dot{v}$ and so $\dot{v} = -\omega^2 x$; in this way we replace the higher derivative with an additional first-order equation.
+
+Then we asked how we could turn the implicit trapezium rule into an explicit method. We need an estimate of the term $x_{n+1}$ that appears on the right-hand side of the trapezium rule. But we can do this using an Euler step! Since there is already a factor of the step size $h$ multiplying this in the expression for the trapezium rule, the term with $h$ in the Euler step actually becomes a term multiplied by $h^2$.
+Doing a Taylor expansion of the resulting method shows that it correctly captures Taylor expansion up to order $h^2$!
+
+This is only one example of a class of **Runge--Kutta methods**, consisting of several **stages**, each of which is a single evaluation of the function $f$ defining the ODE. These methods can be represented by a **Butcher tableau** containing the coefficients that define the method.
+
+We did not look at the theory of such methods (which is complicated), but there are methods known up to order 14 (!)
+
+## Lecture 16: Ordinary differential equations III: Variable step size and error control (Mar 9)
+
+We asked how we can know if a step of an ODE solver is a good one or not. We would like to compare the result with the true solution, but of course we don't have access to that.
+
+Instead, we use *another* approximate solution to compare with. We can do one of two things: (1) use the same method with half the step size, repeated twice, or another method of the same order with the same step size. In this case the difference between the resulting estimates, $\Delta y$, gives us an estimate of the error $C h^{p+1}$ (for an order-$p$ method), multiplied by a constant that depends on the order.
+
+(2) Use one method of order $p$ and one of order $p+1$. Then the difference $\Delta y$ between the two results gives us a direct (approximate) measurement of the error $C h^{p+1}$ in the lower-order method.
+
+In either case, we first *propose* a step, without carrying it out.
+Now we check the size of the error $\Delta y$. Suppose that we impose a desired error $\epsilon$, or an error per unit time, that we wish to attain. If $\Delta y < \epsilon$ then we **accept** the step and carry it out.
+
+If $\Delta y > \epsilon$ then we **reject** the step and remain where we were. We now *choose* a new step size $h'$ such that it *would* give error $\epsilon$. We do this even if the step was accepted, since then the function is "easy to integrate" in the current region.
+
+In this way we obtain an **adaptive** method, which adapts to the shape of the function: if the solution does not change shape fast, the method can take large steps. When the solution is changing in a complicated way, the method takes smaller steps to resolve those changes accurately.
