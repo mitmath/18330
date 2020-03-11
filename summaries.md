@@ -300,3 +300,34 @@ Now we check the size of the error $\Delta y$. Suppose that we impose a desired 
 If $\Delta y > \epsilon$ then we **reject** the step and remain where we were. We now *choose* a new step size $h'$ such that it *would* give error $\epsilon$. We do this even if the step was accepted, since then the function is "easy to integrate" in the current region.
 
 In this way we obtain an **adaptive** method, which adapts to the shape of the function: if the solution does not change shape fast, the method can take large steps. When the solution is changing in a complicated way, the method takes smaller steps to resolve those changes accurately.
+
+## Lecture 17: Ordinary differential equations IV: Taylor methods (Mar 11)
+
+We started off by noting that to solve the **non-autonomous** ODE $\dot{x}(t) = f(t, x(t))$, i.e. where $f$ has an explicit time dependence, you can replace it by an autonomous system by introducing a new variable $z$ such that $\dot{z} = 1$ and $z(0) = t_0$, so that basically $z$ is equal to time $t$. Then by adding the new equation $\dot{z} = 1$ we convert the original non-autonomous ODE into a system of autonomous ODEs.
+
+Then we asked whether for an autonomous ODE $\dot{x} = f(x)$ we could directly calculate a series solution $x(t) = x_0 + x_1 t + \cdots$ by finding the Taylor coefficients $x_0$, $x_1$ etc. (Note that these are the derivatives of $x$ evaluated at $0$.)
+Runge--Kutta and other methods try to calculate these indirectly with clever tricks, and provide methods that work for *any* $f$. If we are willing to do new calculations for each $f$ then we can actually get a specialized Taylor method that directly calculates the $x_i$.
+
+To do so, we suppose that we have Taylor expansions
+
+$$x(t) = x_0 + x_1 t + x_2 t^2 + \cdots$$
+
+and
+
+$$f(x(t)) = f_0 + f_1 t + f_2 t^2 + \cdots$$
+
+Note that these are both expansions in *powers of $t$*.
+
+
+Then
+$$\dot{x}(t) = x_1 + 2 x_2 t + \cdots$$
+
+so by equating coefficients of powers of $f$ we get $x_{n+1} = f_n / (n+1)$.
+
+Now we noted that $f_n$ depends only on the coefficients $x_0$ through $x_n$, and can be calculated by evaluating $f(x_0 + \cdots + x_n t^n)$, i.e. $f$ applied to the polynomial up to order $n$, and taking the coefficient of $t_n$ in the resulting expression, i.e. truncating $f$ to order $n$.
+
+In this way, starting from $x_0$ we can recursively calculate, in order, $f_0$, then $x_1$, then $f_1$, then ... then $x_n$, then $f_n$, etc, and hence calculate all the $x_n$ as high as we like. If we could use infinite precision real numbers, these would all be exact; in practice, we introduce round-off error when we use floating-point numbers instead.
+
+Finally we saw that there is an equivalent point of view using the integral representation, where we set up a **Picard iteration**: starting from $x_0$, we repeatedly integrate the polynomial and re-add the initial condition. In this way we produce a sequence of polynomials that converge to infinite series solution.
+
+Note that these power series usually have a finite **radius of convergence**, so the series solution is *not valid* beyond a certain $t^*$. We can use the error control techniques from the last lecture to determine how far to move in each step, before we re-calculate a new solution for the next step using the same Taylor method.
