@@ -1,12 +1,16 @@
 # Installation of Julia
 
+This document contains step-by-step instructions to install the Julia language, together with the necessary additional tools / environments that we will use in the course.
+
+Please follow the instructions carefully and one by one. You should be able to copy and paste from this document; otherwise you must be careful to use the correct capitalisation, e.g. `IJulia`, not `Ijulia` or `ijulia`.
+
 ## 1. Install Julia
 
-1. Download the current stable version of Julia (1.3.1 or 1.4.0-rc1) from https://julialang.org/downloads and install it.
+1. Download the current stable version of Julia (1.4.0) from https://julialang.org/downloads corresponding to your operating system, and install it.
 
-    - For Linux download the "generic binary" and note where you save it on your machine (i.e. in which directory).
+    - For Linux you should download the "generic binary" and note where you save it on your machine (i.e. in which directory).
 
-    - You may instead use your operating system's package installer (e.g. `homebrew` on Mac) to install Julia, *provided* that the version installed is at least 1.3.
+    - You may instead use your operating system's package installer (e.g. `homebrew` on Mac) to install Julia, *provided* that the version installed is at least 1.4.
 
 2. Make sure that Julia runs and execute `1 + 1`.
 
@@ -25,7 +29,7 @@ We will use the [Jupyter notebook](jupyter.org) computational environment. Insta
 
 ```jl
 julia> using Pkg
-julia> Pkg.install("IJulia")
+julia> Pkg.add("IJulia")
 ```
 
 3. When that has finished, at the Julia prompt `julia> ` type
@@ -35,9 +39,10 @@ julia> using IJulia
 julia> notebook()
 ```
 
-4. Answer `y` when asked if you want to install JupyterLab.
+4. Answer `y` when asked if you want to install the Jupyter notebook.
 
-A good alternative is to use the more modern [JupyterLab](https://jupyterlab.readthedocs.io/en/stable), but that requires slightly different set-up steps.
+A good alternative is to use the more modern [JupyterLab](https://jupyterlab.readthedocs.io/en/stable). To do so, type `jupyterlab()` instead of `notebook()`.
+
 
 5. Install interactive capabilities that we will use:
 
@@ -46,6 +51,9 @@ julia> Pkg.add("WebIO")
 julia> using WebIO
 julia> WebIO.install_jupyter_nbextension()
 ```
+
+If you use JupyterLab, replace the last line with `julia> WebIO.install_jupyter_labextension()`.
+
 
 ## 3. Install packages we will need
 
@@ -68,8 +76,8 @@ We will also use the Juno IDE (Integrated Development Environment). This consist
 
 3. In the Atom menu, choose `Preferences -> Install` and install the Atom package named `uber-juno`. This will install the Juno IDE, which is a collection of packages for Atom as well as some Julia packages for communicating with Atom.
 
-4. Save a file `hello.jl` with the contents `1 + 1`.
+4. Save a file called `hello.jl` with the contents `1 + 1`.
 
-5. Type `Shift-Enter` to run the code.
+5. Type `Shift-Enter` to run the code (with your cursor somewhere on the line containing `1 + 1`).
 
 6. For more information about Juno, see the [Juno home page](https://junolab.org).
