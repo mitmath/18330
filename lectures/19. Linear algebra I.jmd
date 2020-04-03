@@ -1,0 +1,523 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+# 19. Linear algebra
+
+## Last time
+
+- Mid-term review
+
+- Designing auxiliary problems
+
+- Convergence
+
+
+## Goals for today
+
+- Conceptual review of linear algebra
+
+- Emphasising **geometry**
+
+    \ \
+
+- Vectors
+
+- Linear transformations
+
+- Matrices
+
+- Mostly think about $\mathbb{R}^2$
+
+
+
+## What is linear algebra?
+
+- **Linear**: Something related to "lines"
+
+    . . .
+
+    -- **flatness**
+
+    . . .
+
+    \ \
+
+- **Algebra**: Manipulating, solving, understanding "structure"
+
+
+    . . .
+
+    \ \
+
+- Study of **vectors** and **linear transformations** between them
+
+
+## Why linear algebra?
+
+- Have repeatedly seen systems of linear equations crop up:
+
+    - First-order Taylor expansion
+
+    - Newton's method (linear equations to solve nonlinear equations)
+
+    - Coefficients of interpolating polynomial (Vandermonde matrix)
+
+
+
+    . . .
+
+    \ \
+
+
+- Discretising many PDEs gives linear systems
+
+
+- Numerical linear algebra: fundamental importance in science and engineering
+
+## Why linear algebra II
+
+- **Algebraic**: simplest relation between $\ge 2$ variables:
+
+    $$a x + b y = c$$
+
+    -- linear equation relating variables $x$ and $y$
+
+    . . .
+
+    \ \
+
+- (Relative) simplicity allows us to obtain much information
+
+    . . .
+
+    \ \
+
+- **Geometry**: "flat" objects -- lines, planes, hyperplanes
+
+- Flatness makes much easier to understand than general
+curved surfaces
+
+    -- "rigidity"
+
+
+## Vectors
+
+- **Vectors** are the cornerstone of linear algebra
+
+- What is a vector?
+
+    . . .
+
+    \ \
+
+- Directed / oriented piece of line
+
+- Displacement through space
+
+- Column of numbers
+
+## Operations on vectors
+
+- Must be able to operate on vectors in 2 ways:
+
+1. **Scalar multiplication**: $\alpha v$
+
+    . . .
+
+    - Geometry: Stretch vector by factor $\alpha$ in same direction
+
+    . . .
+
+    - "Scaling"
+
+    . . .
+
+    \ \
+
+2. **Addition**: $v_1 + v_2$
+
+    . . .
+
+    - Geometry: Move along one vector and then the other
+
+
+
+
+## Linear combinations
+
+- In general, + and scalar multiplication *only* operations
+
+- So we can only form (finite) **linear combinations**
+
+    $$\alpha_1 v_1 + \cdots + \alpha_n v_n$$
+
+
+    . . .
+
+    \ \
+
+- Define **span** $\langle v_1, \ldots, v_n\rangle$ as
+    set of *all* linear combinations
+
+
+
+## Geometry of spans
+
+- What are spans geometrically?
+
+    . . .
+
+- Points in space that are **reachable** using given vectors
+
+    . . .
+
+    \ \
+
+- Simplest case: 1 vector
+
+    . . .
+
+    $\langle v \rangle$  is line through origin in direction of $v$
+
+    . . .
+
+    \ \
+
+
+- 2 vectors:
+
+    $\langle v_1, v_2 \rangle$: unique plane containing $v_1$ and $v_2$
+
+    . . .
+
+    **except** if $v_2$ is in $\langle v_1 \rangle$
+
+    i.e. if $v_2 = \beta v_1$ -- **linearly dependent**
+
+
+## Geometry of spans III
+
+- 3 vectors:
+
+    $\langle v_1, v_2, v_3 \rangle$: 3D hyperplane containing the vectors
+
+    . . .
+
+    - all of space if $v_i \in \mathbb{R}^3$
+
+    . . .
+
+    - **unless** e.g. $v_3 \in \langle v_1, v_2 \rangle$
+
+
+    . . .
+
+    \ \
+
+- All spans contain 0
+
+- A span is a **vector subspace**
+
+
+## Lines
+
+- Vector subspaces must pass through the origin
+
+- More general: **affine subspace**
+
+    . . .
+
+- Simplest is straight line: need one point on line and direction
+
+    . . .
+
+
+- $\ell(t) = p + t v$ -- parametric equation
+
+    . . .
+
+- E.g. Line joining points $a$ and $b$:
+
+    $$(1- \alpha) a + \alpha b$$
+
+- $\alpha = 0$ gives $a$ and $\alpha = 1$ gives $b$
+
+## Vector equations
+
+- Suppose
+$\mathbf{u} := \begin{bmatrix} u_1 \\ u_2 \end{bmatrix}$ and
+$\mathbf{v} := \begin{bmatrix} v_1 \\ v_2 \end{bmatrix}$
+span $\mathbb{R}^2$
+
+- Suppose $\mathbf{b} := \begin{bmatrix} b_1 \\ b_2 \end{bmatrix} \in \mathbb{R}^2$
+
+    . . .
+
+    \ \
+
+- Then there must exist scalars $x$ and $y$ such that
+
+    $$x \, \mathbf{u} + y \, \mathbf{v} = \mathbf{b}$$
+
+
+    . . .
+
+- $x$, $y$: "how much $\mathbf{u}$ and $\mathbf{v}$ need to reach $\mathbf{b}$"
+
+
+## Vector equations II
+
+- Suppose $x \mathbf{u} + y \mathbf{v} = \mathbf{b}$
+
+
+
+- Rewrite in terms of components:
+
+
+    $$x \, \begin{bmatrix} u_1 \\ u_2 \end{bmatrix}
+    + y \, \begin{bmatrix} v_1 \\ v_2 \end{bmatrix}
+    = \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}$$
+
+    . . .
+
+    \ \
+
+- Take components:
+    \begin{align*}
+    u_1 x + v_1 y &= b_1 \\
+    u_2 x + v_2 y &= b_2
+    \end{align*}
+
+    . . .
+
+- So linear system can be interpreted as finding correct linear combination
+of vectors
+
+
+## Linear maps
+
+- Consider a function / map $f: \mathbb{R}^n \to \mathbb{R}^m$
+
+- In general: complicated and hard to understand
+
+    . . .
+
+    \ \
+
+- To understand and calculate, study maps with **structure**
+
+- i.e. restrict to some *subset* of all maps
+
+    . . .
+
+    \ \
+
+- One very important subclass are **linear** maps
+
+## Linear maps II
+
+- A map $f: X \to Y$ is **linear** if
+
+    $$f(\alpha x + \beta y) = \alpha f(x) + \beta f(y) \quad \forall x, y \in X$$
+
+    . . .
+
+    \ \
+
+
+- A linear map **preserves** operations `+` and `*`
+
+- Doesn't matter whether we do them before or after applying the map
+
+
+## Linear maps II
+
+- Geometrical interpretation of this linearity condition?
+
+    . . .
+
+- What is action of linear map on a line?
+
+    . . .
+
+    $$f \left( (1- \alpha) \, a + \alpha \, b \right) = (1 - \alpha) \, a' + \alpha \, b'$$
+
+    where $a' := f(a)$ and $b' := f(b)$
+
+    . . .
+
+
+- So linear map maps lines to lines
+
+    and moves along them at the same speed
+
+<!--
+## Linear map acting on a plane
+
+- If vary $\alpha$ in $\alpha x + \beta y$ with $\beta$ fixed, we describe a line
+
+- Similarly, varying $\beta$ with $\alpha$ fixed traces out another line
+
+- So set of all $\alpha$ and $\beta$ describes a plane made out of ("foliated by") lines -->
+
+## Linear maps III
+
+- Linearity *greatly* restricts what $f$ can do
+
+    . . .
+
+    \ \
+
+- Suppose $x$ and $y$ span $\mathbb{R}^2$
+
+- Suppose $f$ is linear map from $\mathbb{R}^2$ to $\mathbb{R}^2$
+
+- Then we know *exactly* what $f$ does for *every* point on the plane!
+
+## Geometry of linear maps
+
+- What does a linear map (or **linear transformation**) do geometrically?
+
+    . . .
+
+- Squishes unit square into parallelogram
+
+- Or rotates it
+
+- Or reflects it
+
+
+
+
+## How do we specify a linear map?
+
+- What does a general linear map look like?
+
+- Specifying action on any two (non-collinear) vectors
+
+    $f(a) =: a'$ and $f(b) =: b'$
+
+    specifies everything
+
+    . . .
+
+    \ \
+
+
+- In $\mathbb{R}^2$ encode via action on **standard basis vectors**
+$e_1 := \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ and
+$e_2 := \begin{bmatrix} 0 \\ 1 \end{bmatrix}$
+
+## Matrices
+
+- $e_1$ mapped to $a_1 := f(e_1)$
+- $e_2$ mapped to $a_2 := f(e_2)$
+
+- Need 4 parameters; encode as **matrix**
+
+    $$\begin{bmatrix}
+    | & | \\
+    a_1 & a_2 \\
+    | & |
+    \end{bmatrix}
+    $$
+
+- First **column** is image of $e_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$
+
+- Second **column** is image of $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$
+
+- $A e_1 = a_{1, 1} e_1 + a_{2, 1} e_2$
+
+## Matrix--vector multiplication
+
+- Let matrix $A$ represent linear map $f$
+
+- Define **matrix--vector product** by
+
+    $$A \, x := f(x)$$
+
+    . . .
+
+- Let $A$ have columns $a_1$ and $a_2$
+
+- Let $x$ be $\begin{bmatrix}
+x_1 \\ x_2
+\end{bmatrix}$
+
+- Then $f(x) = f(x_1 e_1 + x_2 e_2) = x_1 f(e_1) + x_2 f(e_2) = x_1 a_1 + x_2 a_2$
+
+- So $A \, x$ is **linear combination of columns of $A$**
+
+## Matrix--vector multiplication
+
+- For matrix $A$ and vector $x$ define $A \cdot x$ as
+
+    $$
+    A \cdot x := \begin{bmatrix}
+    | & | \\
+    a_1 & a_2 \\
+    | & |
+    \end{bmatrix}
+    %
+    \begin{bmatrix}
+    x \\ y
+    \end{bmatrix}
+    :=
+    x a_1 + y a_2
+    $$
+
+- Matrix--vector multiplication is **linear combination** of columns of $A$
+
+    . . .
+
+    \ \
+
+- Linear system becomes
+
+    $$A \, x = b$$
+
+
+
+## Matrix--matrix multiplication
+
+- Let $A$, $B$ represent linear mapS $f$, $g$ resp.
+
+    . . .
+
+- Define **matrix--matrix product** $A \, B$ by action on vectors:
+
+    $$(A \, B)(x) := A \, (B \, x) = f(g(x)) = (f \circ g)(x)$$
+
+    . . .
+
+- Calculate as
+
+    $$A \, B = \begin{bmatrix}
+    | & | \\
+    (A  \, b_1) & (A  \, b_2) \\
+    | & |
+    \end{bmatrix}$$
+
+    . . .
+
+- Since $(A B)(e_1) = A (B  \, e_1) = A \, b_1$
+
+
+## Summary
+
+- Vectors are basic objects
+
+- Linearly independent spans form a basis
+
+- Define matrices as recording action of a linear map
