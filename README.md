@@ -12,7 +12,7 @@ We will be using the [Julia language](www.julialang.org). Please follow [these i
 
 - MWF 1--2, room 2-139.
 
-- Office hours: 
+- Office hours:
 
   - Mon 5.20-6.20 in the **Julia lab**, 7th floor of Stata Center (turn left from Gates building elevator)
   - Tues 5-6 in the Julia lab
@@ -21,7 +21,7 @@ We will be using the [Julia language](www.julialang.org). Please follow [these i
 - Piazza forum: https://piazza.com/class/k65ke8eo9x760n
 
 ### Slides, notebooks and recordings from lectures
- 
+
 - Slides and notebooks for each lecture are available in the [lectures](lectures) directory.
 
 - Screen recordings of lectures are available [here](https://www.dropbox.com/sh/ubkqwrqxnukgllc/AAA2cH9r7YQL7WmYVt-bblxta?dl=0)
@@ -30,9 +30,9 @@ We will be using the [Julia language](www.julialang.org). Please follow [these i
 
 ### Evaluation
 
-- 10 problem sets (50%). No late submissions, but the lowest score will be dropped.
-- 1 midterm exam (20%): Wednesday, March 18
-- Final project (30%): Due Monday, May 11 
+- 9 problem sets (66.6%). No late submissions, but the lowest score will be dropped.
+<!-- - 1 midterm exam (20%): Wednesday, March 18 -->
+- Final project (33.4%): Due Tuesday, May 12
 
 Problem sets will consist of a mixture of theory and coding. They will be submitted and graded online.
 
