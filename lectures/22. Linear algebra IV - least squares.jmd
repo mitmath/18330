@@ -1,0 +1,429 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+# 22. Linear least squares problems
+
+## Last time
+
+- Orthogonality
+
+- Gram--Schmidt algorithm
+
+- QR factorization
+
+
+
+## Goals for today
+
+- Formulating data fitting problems
+
+- Optimization
+
+- Linear least squares problems
+
+- Solution using linear algebra
+
+
+## Parametric function
+
+- Given data points $(t_i, y_i)$
+
+- Suppose have presumed (statistical) **model** for data
+
+    . . .
+
+
+- I.e. suspect related as $y = f_\mathbf{p}(x)$,
+with noise:
+
+    $$y_i = f_\mathbf{p}(t_i) + \epsilon_i$$
+
+    where $\epsilon_i$ represents the noise on observation $i$
+
+    . . .
+
+- $f_\mathbf{p}$ is **parametric function** with parameter vector $\mathbf{p}$
+
+    . . .
+
+
+- Most common example: straight line $f_{\alpha, \beta}(x) = \alpha + \beta x$
+
+## Best fit
+
+
+- Want to find **best fit** to the data
+
+- How can we formalize this?
+
+    . . .
+
+    \ \
+
+- Find values of $\alpha, \beta$ that **minimize** distance of data from function
+
+- **Parameter estimation** in statistics
+
+
+
+## Loss function
+
+- Distance: **loss function** or **cost function** (optimization)
+
+- E.g.
+
+    . . .
+
+    $$\mathcal{L}(\alpha, \beta) := \sum_i \ell(y_i, f_{\alpha, \beta}(x_i))$$
+
+    where $\ell$ is a measure of distance
+
+
+    . . .
+
+    \ \
+
+- Most common choice
+
+    $$\ell(x, y) = \| x - y \|_{2}^2$$
+
+- **Least squares**
+
+
+## Least squares
+
+- Want to minimize
+
+    $$\mathcal{L}(\mathbf{p}) = \sum_i \left[ y_i - f_\mathbf{p}(t_i) \right]^2$$
+
+
+    . . .
+
+- Of form $\sum r_i^2$, where $r_i := y_i - f_\mathbf{p}(t_i)$ is $i$th **residual**
+
+- Sum of squares, so minimum is when all $r_i = 0$
+
+    . . .
+
+- But data do not lie exactly on any $y = f_{\alpha, \beta}(x)$
+
+- Choose curve that **minimizes** square sum of residuals
+
+    . . .
+
+- **least squares** minimization
+
+- Statistics: **linear regression**
+
+## Optimization
+
+- Example of an **optimization** problem
+
+- Optimization problems are usually **very hard**; huge field
+
+    . . .
+
+- Special methods for problems with certain **structure**
+
+    . . .
+
+    \ \
+
+
+- There are many numerical methods for optimization
+
+- Sometimes analytical solutions are possible -- e.g. linear least squares
+
+## Matrix formulation of linear least squares
+
+
+- Look for a matrix formulation: $\mathcal{L} = \sum_i r_i^2 = r^T r$
+
+    . . .
+
+    \ \
+
+    $$\mathbf{r} = \begin{bmatrix} r_1 \\
+                    r_2 \\
+                    \vdots \\
+                    r_m
+                    \end{bmatrix}
+                    =
+    \begin{bmatrix} 1 & t_1  \\
+                    1 & t_2  \\
+                    \vdots \\
+                    1 & t_m
+                    \end{bmatrix}
+    \begin{bmatrix}
+    \alpha \\ \beta
+    \end{bmatrix}
+    -     \begin{bmatrix} y_1 \\
+                        y_2 \\
+                        \vdots \\
+                        y_m
+                        \end{bmatrix}
+                 =: \mathsf{A} \mathbf{x} - \mathbf{b}$$
+
+    where $\mathbf{x} = \begin{bmatrix}
+    \alpha \\ \beta
+    \end{bmatrix}$ are the unknowns
+
+## Matrix formulation II
+
+- Ideally would like to solve $Ax = b$
+
+    . . .
+
+- But have **overdetermined system**:
+
+- Too many equations ($n$) for number of unknowns (2)
+
+    . . .
+
+    \ \
+
+- Best we can do is minimize $r^T r$
+
+## General linear least squares
+
+- General case: want to "solve" $\mathsf{A} \mathbf{x} = \mathbf{b}$
+
+    for **tall and narrow** matrix $A$
+
+    . . .
+
+- i.e. $(m \times n)$ matrix with $m > n$
+
+
+- Again overdetermined system
+
+    . . .
+
+    \ \
+
+
+- Best we can do is minimize
+
+    $$\| \mathsf{A} \mathbf{x} - \mathbf{b} \|^2$$
+
+    . . .
+
+    \ \
+
+- E.g. fit a polynomial of degree $<n$ to $(n + 1)$ points
+
+## Geometrical interpretation
+
+- Suppose $\mathbf{x}$ ranges over all of $\mathbb{R}^n$
+
+- Then $\mathsf{A} \mathbf{x}$ ranges over  column space / range of $\mathsf{A}$
+
+    . . .
+
+- **Column space** of $\mathsf{A}$: vec. space spanned by columns of $A$
+
+    . . .
+
+    \ \
+
+- Column space is a hyperplane
+
+    . . .
+
+
+- Looking for point $\mathbf{x}$ whose image $\mathsf{A} \mathbf{x}$ is **closest** to $b$
+
+    . . .
+
+
+- Intuitively: when $r := \mathsf{A} \mathbf{x} - \mathbf{b}$ **perpendicular** to column space
+
+## Solving linear least squares
+
+\renewcommand{\AA}{\mathsf{A}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\yy}{\mathbf{y}}
+
+- Want to find $\xx$ minimizing $\| \AA \xx - \bb \|$
+
+    . . .
+
+- Recall: $\| \xx \|^2 = \xx^\top \xx$
+
+    . . .
+
+
+
+- Take any vector $\yy$ and look at $\| \AA (\xx + \yy) - \bb\|$:
+
+    . . .
+
+    $$\| (\AA \xx - \bb) + \AA \yy \|^2 = [(\AA \xx - \bb) + \AA \yy]^\top [(\AA \xx - \bb) + \AA \yy]$$
+
+    . . .
+
+    $$= (\AA \xx - \bb)^\top (\AA \xx - \bb) + 2\yy^\top \AA^\top (\AA \xx - \bb) + (\AA \yy)^\top (\AA \yy)$$
+
+    . . .
+
+- Here used $\yy^\top \mathbf{z} = \mathbf{z}^\top \yy$, so $\yy^\top \mathbf{z} + \mathbf{z}^\top \yy = 2 \yy^\top \mathbf{z}$
+
+    $$= \| \AA \xx - \bb \|^2 + \| \AA \yy \|^2 + 2 \yy^\top \AA^\top (\AA \xx - \bb)$$
+
+## Solving linear least squares II
+
+- Arrived at $\| \AA \xx - \bb \|^2 + \| \AA \yy \|^2 + \color{red}{2 \yy^\top \AA^\top (\AA \xx - \bb)}$
+
+    . . .
+
+- Take $\xx$ such that $\AA^\top (\AA \xx - \bb) = 0$
+
+    . . .
+
+- Then for any $\yy$ we have
+
+    $$ \|\AA(\xx + \yy) - \bb \|^2 \ge \|\AA \xx - \bb \|^2 $$
+
+    . . .
+
+- So $\xx$ is minimizer
+
+    . . .
+
+- Unique solution of least squares problem given by
+
+    $$\AA^\top \AA \xx = \AA^\top \bb$$
+
+
+## Solving linear least squares III
+
+
+- Reduced linear least squares problem to *linear* equation:
+
+    $$\AA^\top \AA x = \AA^\top \bb$$
+
+    -- called **normal equations**
+
+- Square matrix $\AA^\top \AA$
+
+    . . .
+
+- Solvable if $\AA$ is **full rank**, i.e. columns span the space
+
+## Pseudoinverse
+
+- Mathematically get $\xx = (\AA^\top \AA)^{-1} \AA^\top \bb$
+
+    . . .
+
+- Notation: $\xx = \AA^+ \bb$
+
+    \ \
+
+- Where $\AA^+ := (\AA^\top \AA)^{-1} \AA^\top$  is **pseudo-inverse**
+
+    . . .
+
+- $\AA^\top \AA$ is invertible iff $\AA$ has full rank
+
+
+
+
+## Solving normal equations
+
+\newcommand{\QQ}{\mathsf{Q}}
+\newcommand{\RR}{\mathsf{R}}
+
+- Possible to solve normal equations using elimination, but to do so need to construct $\AA^\top \AA$
+
+    . . .
+
+- Slightly more efficient version of elimination for **symmetric** matrices: **Cholesky factorization**
+
+    . . .
+
+    \ \
+
+
+
+- Alternative: factorize $\AA = \QQ \RR$
+
+    . . .
+
+- Need generalization of QR when $\AA$ tall and narrow, $m \times n$
+
+    . . .
+
+- **Thin** $Q R$ factorization: $A = QR$ where
+
+    - $Q$ is ($m \times n$) with orthonormal columns
+    - $R$ is ($n \times n$) upper triangular
+
+    . . .
+
+
+- If $\AA$ is of full rank then $\RR$ is non-singular
+
+## Solving normal equations II
+
+- Want to solve $\AA^\top \AA = \AA^\top \bb$
+
+- Substitute $\AA = \QQ \RR$
+
+    . . .
+
+    \ \
+
+- So $\RR^\top \QQ^\top \QQ \RR \, \xx = \RR^\top \QQ^\top \bb$
+
+    . . .
+
+- $\RR^\top \RR \, \xx = \RR^\top \QQ^\top \bb$
+
+    . . .
+
+- $\RR \, \xx = \QQ^\top \bb$
+
+    . . .
+
+- So $\xx = \RR^{-1} \QQ^\top b$
+
+    . . .
+
+    \ \
+
+- Solve $\RR \xx = \QQ^\top \bb$ by backsubstitution
+
+## Backslash
+
+- Backslash in Julia is overloaded to give this least-squares solution when $A$ is an $(m \times n)$ matrix
+
+- It is not necessarily clear that this is a good idea!
+
+    . . .
+
+    \ \
+
+- E.g. simple linear fit: use `\` with above matrix
+
+## Summary
+
+- Linear least squares for overdetermined systems
+
+- Solvable using linear algebra
+
+- Solution given by normal equations -- linear system
+
+- Solve using QR decomposition
