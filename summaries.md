@@ -429,7 +429,7 @@ Finally we saw that we could write $A = Q R$, where $Q$ has as columns the
 orthonormal vectors, and $R$ is upper-triangular ("right triangular").
 This QR decomposition turns out to be of fundamental importance in numerical linera algebra.
 
-## Lecture 22: Linear least squares problems
+## Lecture 22: Linear least squares problems (Apr 8)
 
 We discussed the need to be able to fit parametric functions, i.e. functions
 containing some free parameters, to data, by choosing the parameters to minimize
