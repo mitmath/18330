@@ -331,3 +331,136 @@ In this way, starting from $x_0$ we can recursively calculate, in order, $f_0$, 
 Finally we saw that there is an equivalent point of view using the integral representation, where we set up a **Picard iteration**: starting from $x_0$, we repeatedly integrate the polynomial and re-add the initial condition. In this way we produce a sequence of polynomials that converge to infinite series solution.
 
 Note that these power series usually have a finite **radius of convergence**, so the series solution is *not valid* beyond a certain $t^*$. We can use the error control techniques from the last lecture to determine how far to move in each step, before we re-calculate a new solution for the next step using the same Taylor method.
+
+
+## Lecture 18: Midterm review (Mar 30)
+
+We reviewed the conceptual ideas that we have seen so far in the course and some of the technical
+details that we have covered.
+
+In particular we recalled that we are interested in solving mathematical **problems**
+and that we do so by replacing the true problem we wish to solve with an approximate
+**designed** problem, for example "calculate $f(x)$ but using floating-point arithmetic".
+
+Often these designed problems involve a parameter $N$ which we would like to converge to
+$\infty$, for example the number of points in a discretization, or the degree of a polynomial
+approximation, or a parameter $h$ that we would like to converge to $0$, such as a
+step size used in a finite-difference approximation. Even though the original problem
+does not contain such a parameter, it often (but not always) turns out that the solution
+methods available to us provide only approximations of the true solution that become increasingly
+good (at least, in principle with arbitrary precision) as the limit is approached.
+
+In that case, we need to calculate the **error** -- i.e. how far away we are from
+the limit if we take a finite $N$ instead $N \to \infty$. We are, in particular,
+interested in *how fast* the error goes to $0$ as $N \to \infty$ or $h \to 0$,
+i.e. the *rate of convergence*. If the convergence is faster then we need to do
+less work to get the same accuracy, which is better for us.
+
+We reviewed examples of these concepts from topics throughout the course.
+
+## Lecture 19: Linear algebra review (Apr 1)
+
+We started a new section of the course, on linear algebra, for which we
+reviewed some fundamental concepts.
+
+We started by discussing **vectors** and the fundamental idea of the **span** of
+a set of vectors, i.e. the vector space formed by taking *all possible linear
+combinations* of those vectors. We saw that if a set of vectors spans a space,
+then any vector in the space is reachable, so we can solve the vector equation
+that finds the coefficients of that linear combination.
+We saw that this gives a set of linear equations by decomposing the vectors in
+a basis and taking components.
+
+We then introduced the other main concept in linear algebra, namely **linear maps**,
+i.e. functions with the special property that they are linear. We saw that this
+greatly restricts what a linear map can do, and in fact we can specify the action
+of a linear map by the action on each member of a basis of the space. The result
+of this action can then be encoded in a **matrix**, i.e. a table of coefficients
+of the resulting linear combinations.
+
+We defined the matrix--vector product as the result of applying the corresponding
+linear map to the vector, and the matrix--matrix product as the
+result of consecutively applying the corresponding linear maps.
+
+## Lecture 20: Linear algebra II (Apr 3)
+
+We discussed how to solve a linear system of equations, or equivalently a vector equation
+or the matrix equation $A x = b$ for a square matrix $A$.
+
+We looked at the ("Gaussian") **elimination** or row reduction algorithm, in which
+we add multiples of one row to another in order to introduce 0s in the matrix.
+By doing this in a certain order, and acting on the augmented matrix where we
+adjoin the vector $b$ to the matrix, so that we operate on $b$ in the same way,
+we can find an equivalent system in which the matrix is upper-triangular, and
+hence can be solved easily using backsubstitution.
+
+We saw that each row operation can be represented by left-multiplying $A$ by
+some elementary matrix $L_i$, and hence that the result of applying all the row
+operations is a product of the $L_i$, which is a lower-triangular matrix $L$,
+whose entries are just the numbers that we computed during the reduction process.
+
+In this way, we saw that we could write a square matrix $A$ as the product $LU$;
+we called this the LU factorization of the matrix $A$.
+This allows us to solve athe equation $Ax = b_i$ for many right-hand sides $b_i$ more
+efficiently than redoing the elimination process each time, which would recalculate
+the same matrix $L$.
+
+## Lecture 21: Linear algebra III (Apr 6)
+
+We introduced geometry into the linear algebra picture by thinking about
+length and angle in Euclidean space. We introduced orthogonal projection operators
+and showed that the projection of a vector $u$ onto a vector $v$ has length given
+by the dot product $u \cdot v = \sum_i u_i v_i$.
+
+We defined two vectors to be **orthogonal** if their dot product is $0$, which means
+that the angle between them is $\pi/2$, so they are perpendicular.
+
+We saw that having orthogonal vectors is very useful, since it enables us to
+immediately find the coefficient of a given basis vector in a linear combination, by
+just taking the dot product of that basis vector with the vector of interest.
+
+In order to construct a suitable set of orthonormal vectors, we saw that a vector
+$v$ can be written as a piece in the direction of $u$, together with the remainder,
+and that that remainder is orthogonal to $u$. Using this idea repeatedly, we saw
+that we could take linear combinations of the columns of $a$ in a triangular way
+to make an orthonormal set of vectors that spans the same space.
+
+Finally we saw that we could write $A = Q R$, where $Q$ has as columns the
+orthonormal vectors, and $R$ is upper-triangular ("right triangular").
+This QR decomposition turns out to be of fundamental importance in numerical linera algebra.
+
+## Lecture 22: Linear least squares problems
+
+We discussed the need to be able to fit parametric functions, i.e. functions
+containing some free parameters, to data, by choosing the parameters to minimize
+some kind of **distance** between the data and the function.
+
+As an example we discussed fitting a straight line to a set of data, and we
+re-expressed this problem in a matrix language, namely trying to solve $Ax = b$.
+However, the matrix $A$ is tall and narrow, i.e. is of shape $m \times n$ with $m > n$,
+and hence the resulting linear system is overdetermined and will not in general
+be solvable.
+
+Instead, we ask how to find
+the vector $x$ that minimizes $\| Ax - b \|^2$. This is a particular kind of optimization
+problem, but one which turns out to be completely solvable analytically.
+
+We showed that the solution to this minimization problem is the unique vector
+$x$ satisfying
+
+$$A^T A x = A^T b$$
+
+i.e. a linear system with the square matrix $A^T A$, called the **normal equations**.
+
+We could solve this using elimination, but constructing $A^T A$ requires extra work,
+and it turns out to make the conditioning of the problem worse and so lead to a loss
+in accuracy.
+
+Instead, we defined a **thin** QR factorization of $A$ and used that to show that
+the solution to the original least squares problem is given by solving
+
+$$R x = Q^T b$$
+
+by backsubstitution.
+
+This is what Julia's backslash operator does when given a tall, narrow matrix $A$.
