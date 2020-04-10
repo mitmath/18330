@@ -464,3 +464,19 @@ $$R x = Q^T b$$
 by backsubstitution.
 
 This is what Julia's backslash operator does when given a tall, narrow matrix $A$.
+
+## Lecture 23: The Singular-Value Decomposition (SVD)  (Apr 10)
+
+We looked at a new matrix factorization (decomposition) of fundamental importance: the Singular-Value Decomposition (SVD).
+
+We approached this by taking a matrix $A$ and asking what the image under $A$ is of a unit sphere in $\mathbb{R}^n$. If we plot it, we see that it looks like an ellipse, i.e. a sphere that is stretched and rotated.  
+
+Associated with that ellipse are the lengths of its semi-axes, which we will call the **singular values**, $\sigma_i$, as well as their directions, the **left singular vectors** $\mathbf{u}_i$, which are orthonormal. Since these are clearly quantities of fundamental importance to describe the action of any matrix, we would like to calculate them.
+
+We saw that we vectors $y$ in the image of the sphere satisfy $y^\top S y = 1$ with a real and **symmetric** matrix $S$. We recalled that symmetric matrices have all their eigenvalues real, and a complete basis of eigenvectors that are orthogonal.
+
+We showed that this means that this means that $y = Q z$ with an orthogonal matrix $Q$, where $z$ is an axis-aligned ellipse, and where $Q$ are the eigenvectors of $S$. Thus the image of the unit sphere under $A$ is indeed an ellipse and we can calculate everything from the eigenvectors and eigenvalues of $S$.
+
+In order to actually calculate these eigen-features, we saw that the **power iteration method** can be used: we start with a non-zero vector $v$ and repeatedly multiply it by $A$ to get $A^n v$, then normalize. The resulting sequence of vectors converges to the leading eigenvector of $A$.
+
+If we instead use several initial vectors and apply $A^n$ to each one, these will all separately converge to the *same* eigenvector. To prevent this, we periodically re-orthogonalize, e.g. using Gram--Schmidt. In this way the $k$ vectors will converge to the $k$ leading eigenvectors.
