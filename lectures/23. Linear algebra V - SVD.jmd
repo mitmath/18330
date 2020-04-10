@@ -1,0 +1,338 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+
+# 23. Singular Value Decomposition (SVD) and eigen-decomposition
+
+
+
+## Last time
+
+
+\newcommand{\xx}{\mathbf{x}}
+\renewcommand{\AA}{\mathsf{A}}
+\renewcommand{\SS}{\mathsf{S}}
+
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\TT}{^{\top}}
+
+- Least squares
+
+- Optimization
+
+- Solution by linear algebra
+
+- Pseudo-inverse
+
+
+
+## Goals for today
+
+- Action of a matrix
+
+- Eigenvector decomposition
+
+- Singular Value Decomposition (SVD)
+
+
+## Action of a matrix
+
+- Consider arbitrary $(m \times n)$ matrix $A$
+
+    . . .
+
+- Study its action on unit sphere $\mathbb{S}_n$ in $\mathbb{R}^n$
+
+- $\mathbb{S}_n := \{ \xx \in \mathbb{R}^n: \| \xx \|_2 = 1 \}$
+
+    . . .
+
+    \ \
+
+- Visualization suggests $A(\mathbb{S}_n)$ is **ellipsoid** (hyper-ellipse)
+
+- Stretched and rotated sphere
+
+    . . .
+
+    \ \
+
+- Key quantities:
+
+    - Lengths $\sigma_i$ of semi-axes -- amount of stretch
+    - Directions $\mathbf{u}_i$ of stretches
+
+
+
+## Action of a matrix II
+
+- Let's try to understand how this comes about:
+
+    . . .
+
+- Suppose $\xx \in \mathbb{S}_n$; define $\yy := \AA \xx$ to be its image
+
+    . . .
+
+- Suppose that $\AA$ square + invertible for now
+
+    . . .
+
+- Then $\| \AA \inv \yy \|^2 = 1$
+
+    . . .
+
+    \ \
+
+- Hence
+
+    $$\yy \TT \SS \yy = 1$$
+
+    where $\SS := (\AA \inv) \TT (\AA \inv)$ is symmetric + positive definite
+
+
+## Eigenvalues
+
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\MM}{\mathsf{M}}
+\newcommand{\II}{\mathsf{I}}
+\newcommand{\QQ}{\mathsf{Q}}
+\newcommand{\LL}{\Lambda}
+
+
+
+- Recall: square $m \times m$ matrix $\MM$ has
+
+    **eigenvector** $\vv \neq \mathbf{0}$ with **eigenvalue** $\lambda \in \mathbb{C}$ if
+
+    $$\MM \vv = \lambda \vv$$
+
+    . . .
+
+    \ \
+
+- Geometrical meaning: Direction $\hat{\vv}$ is **invariant** (unchanged) under $\AA$
+
+- *Stretched* (and possibly reflected) by factor $\lambda$
+
+## Spectral theorem
+
+
+- **Spectrum** of matrix: set of eigenvalues
+
+    . . .
+
+    \ \
+
+
+- Eigenvalues satsify $\det(\AA - \lambda \II) = 0$ -- **characteristic polynomial**
+
+- Fundamental thm of algebra $\implies$ there are $m$ eigenvalues
+
+
+- For a real, **symmetric** matrix $\SS$, *exercise*:
+    - eigenvalues $\lambda_i$ are **real**
+
+    - eigenvectors $\vv_i$ with *distinct* $\lambda_i$ are **orthogonal**
+
+    . . .
+
+- "Hence" **spectral theorem**: real symmetric matrices have a basis of orthonormal eigenvectors
+
+    . . .
+
+## Eigen-decomposition
+
+- Have $\SS \QQ = \QQ \LL$, where
+
+    $$\QQ := (\vv_1 | \vv_2 | \cdots | \vv_n)$$
+
+    $$\LL := \begin{bmatrix} \lambda_1 &  &  &  \\
+                                  & \lambda_2 & &  \\
+                                 &  & \ddots &  \\
+                                 &  &  & \lambda_m
+                                \end{bmatrix}
+                                $$
+
+    . . .
+
+- Hence $\SS = \QQ \LL \QQ \TT$
+
+
+## Action of a matrix III
+
+\newcommand{\zz}{\mathbf{z}}
+\newcommand{\uu}{\mathbf{u}}
+
+- So $\yy \TT \QQ \LL \QQ \TT \yy = 1$
+
+    . . .
+
+- Hence $\zz \TT \LL \zz = 1$
+
+    where $\zz := \QQ \TT y$
+
+    . . .
+
+- So $\lambda_1 z_1^2 + \cdots + \lambda_n z_n^2 = 1$
+
+    . . .
+
+    \ \
+
+- Can show $(\AA \TT \AA) \inv$ has eigenvalues $\lambda_i > 0$ (exercise)
+
+    . . .
+
+- Hence $\zz$ lies on ellipse
+
+    with semi-axis lengths $\sigma_i := \sqrt{\lambda_i}$
+
+- $\yy$ lies on rotated ellipse
+
+
+## Singular values and singular vectors
+
+- $\sigma_i$ are **singular values** of $\AA$ [terrible name]
+
+    . . .
+
+
+- Directions $\mathbf{u}_i$, columns of $\QQ$, are **left singular vectors**
+
+    -- directions in which ellipse is stretched
+
+
+- $\vv_i$ such that  $\AA \vv_i = \sigma_i \uu_i$ are **right singular vectors**
+
+
+## Singular-value decomposition (SVD)
+
+\newcommand{\UU}{\mathsf{U}}
+\newcommand{\VV}{\mathsf{V}}
+\newcommand{\RR}{\mathsf{R}}
+
+- *Any* $(m \times n)$ matrix $\AA$ has an SVD:
+
+    $$\AA = \UU \Sigma \VV \TT$$
+
+    - columns of $\UU$ are $\uu_i$
+
+    - columns $\VV$ are $\vv_i$
+
+    - $\Sigma$ is diagonal matrix with $\sigma_i$ on diagonal
+
+
+    . . .
+
+- Geometrical interpretation:
+
+    \ \
+
+
+
+## Calculating eigenvalues
+
+- As usual, still don't know how to actually *calculate* anything!
+
+    . . .
+
+- Need to calculate eigenvalues $\lambda_i$ and eigenvectors $\vv_i$ of symmetric matrix $\SS$
+
+    . . .
+
+- Note: there are direct methods for the singular values $\sigma_i$ that avoid
+g $\AA \TT \AA$
+
+
+## Power iteration method
+
+- Simple method to get eigenvector with largest eigenvalue, **leading** eigenvector
+
+    . . .
+
+- Start with any initial $\vv \neq \mathbf{0}$
+
+    . . .
+
+- Apply $\AA$ repeatedly to form $\AA^n \vv$
+
+- In general will explode, so normalize
+
+- Converges to leading eigenvector!
+
+    . . .
+
+- To see this expand $\vv$ in basis of eigenvectors
+
+## Simultaneous power method
+
+- Suppose start with several vectors $\vv_1$, \ldots, $\vv_k$
+
+- If iterate each separately, all will converge to leading eigenvector
+
+    . . .
+
+    \ \
+
+- Solution: Orthogonalize using Gram--Schmidt
+
+    . . .
+
+- Converge to leading $k$ eigenvectors
+
+    . . .
+
+- This is part of QR algorithm:
+
+    1. Factorize $\QQ \RR = \AA$
+
+    2. Set $\AA \leftarrow \RR \QQ$
+
+    3. Repeat
+
+    . . .
+
+- $\AA$ converges to diagonal matrix of eigenvalues!
+
+## Rank of a matrix
+
+- Number of non-zero singular values = column rank = **rank**
+
+    . . .
+
+- SVD gives **best approximation** to $\AA$ by
+matrix of rank $k$:
+
+    $$\AA_k := \sum_{i=1}^k \sigma_i \uu_i \vv_i^T$$
+
+
+
+    . . .
+
+- Use for low-rank approximation of data -- PCA
+(Principal Component Analysis) in statistics
+
+- Image compression
+
+## Summary
+
+- SVD gives matrix as rotation + stretch + rotation
+
+- Closely related to eigendecomposition of $\AA \TT \AA$
+
+    \ \ 
+
+- Applications to data compression
