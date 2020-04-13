@@ -1,0 +1,367 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+
+# 24. Conditioning of linear systems and iterative methods
+
+
+
+## Last time
+
+
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\vv}{\mathbf{v}}
+
+
+\renewcommand{\AA}{\mathsf{A}}
+\renewcommand{\SS}{\mathsf{S}}
+
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\TT}{^{\top}}
+
+- Singular-value decomposition
+
+- Eigen-decomposition
+
+- Power iteration for eigenvectors
+
+
+
+## Goals for today
+
+- Condition number for solving a linear system
+
+- Iterative methods for solving linear systems
+
+## Sensitivity of solving linear systems
+
+- How sensitive to perturbations is solving $\AA \xx = \bb$?
+
+- To answer this question we need to be able to talk about the **norm** ("size")
+of vectors and of matrices
+
+    . . .
+
+    \ \
+
+- For vector $\vv \in \mathbb{R}^m$ we will use 2-norm:
+
+    $$\| \vv \|_2 := \sqrt{\sum_{i=1}^m v_i^2}$$
+
+## Induced matrix norm
+
+- There are various ways of measuring the size (norm) of a matrix that are useful for
+different purposes
+
+- We will focus on the so-called **induced** matrix norm, induced from
+a given norm on vectors
+
+    . . .
+
+    \ \
+
+- Suppose $\AA$ is a square $(m \times m)$ matrix
+
+- For each $\xx$ can measure length $\xx$ and of
+its image $\AA \xx$ under $\AA$
+
+- Natural to ask *how much* $\AA$ can stretch $\xx$
+
+## Induced matrix norm II
+
+- Define induced matrix norm as smallest $C$ such that
+
+    $$\| \AA \| \le C \| \xx \| \quad \forall \xx \in \mathbb{R}^m$$
+
+    . . .
+
+- Hence
+
+    $$\| \AA \| = \sup_{\| \xx \| = 1} \| \AA \xx \|$$
+
+- i.e. biggest stretching on unit circle
+
+- So for 2-norm, $\| \AA \| = \sigma_1$, largest singular value
+
+        . . .
+
+- Note that $\| \AA \xx \| \le \| \AA \| \| \xx \|$
+
+## Condition number
+
+- How sensitive is solution of the problem
+
+    \ \
+
+    > solve $\AA \xx = \bb$
+
+    to perturbations *of the problem*?
+
+- I.e. perturbations in $\AA$ or $\bb$?
+
+    . . .
+
+    \ \
+
+- Simplest case: Perturb *input* $\bb$ to $\bb + \Delta \bb$
+
+- How much is *output* $\xx$ perturbed?
+
+## Condition number II
+
+- We have
+
+    $$\AA (\xx + \Delta \xx) = \bb + \Delta \bb$$
+
+- Since $\AA \xx = \bb$, we find
+
+    $$\AA (\Delta \xx) \simeq \Delta \bb$$
+
+- Hence to first order in perturbations:
+
+    $$ \Delta \xx = \AA^{-1} (\Delta \bb)$$
+
+## Condition number III
+
+- So relative condition number is
+
+    $$ \kappa = \frac{\| \Delta \xx \| / \| \xx \|}
+                {\| \Delta \bb \| / \| \bb \|}$$
+
+        . . .
+
+- Using $\bb = \AA \xx$ we get
+
+    $$ = \frac{\| \AA^{-1} \Delta \bb \| \| \AA \xx \|}
+        { \| \xx \| \| \Delta \bb \|}$$
+
+## Condition number IV
+
+Have $\kappa = \frac{\| \AA^{-1} \Delta \bb \| \| \AA \xx \|}
+    { \| \xx \| \| \Delta \bb \|}$
+
+- Now use $\| \AA \xx \| \le \| \AA \| \| \xx \|$ to get
+
+    $$ \kappa \le \| \AA \| \| \AA^{-1} \|$$
+
+    . . .
+
+    \ \
+
+- Define **condition number of matrix $\AA$** as
+
+    $$\kappa(\AA) := \| \AA \| \| \AA^{-1} \|$$
+
+## Residual
+
+\newcommand{\rr}{\mathbf{r}}
+
+- Suppose we are solving $\AA \xx = \bb$
+
+- Suppose have approximate solution $\hat{\xx}$
+
+    . . .
+
+- As usual, do not know how far $\xx$ is from true solution
+
+- i.e. **forward error** $\hat{\xx} - \xx$
+
+- Instead, only know the **residual**
+
+    $$\rr := \AA \hat{\xx} - \bb$$
+
+
+## Backward error
+
+- We see that $\hat{\xx}$ **exactly** solves a **perturbed problem**:
+
+    $$\AA \hat{\xx} = \bb - \rr$$
+
+- Relative error is
+
+    $$ \frac{\| \Delta \xx \|}{\| \xx \|}
+        = \frac{\| \hat{\xx} - \xx \|}{\| \xx \|} \le \kappa(A) \frac{\| \rr \|}{\| \bb \|}$$
+
+    . . .
+
+    \ \
+
+- So forward error can be large even when backward error is small, if $\kappa(A)$ is large
+
+# Iterative methods for solving linear systems
+
+## Need for iterative methods
+
+- Although we have at least two exact, finite methods for solving linear systems,
+it may be useful to turn to an **iterative** method
+
+    . . .
+
+- Can get approximate solution faster
+
+- May not even be able to store matrix since too large, e.g. discretization of PDE
+
+- Some iterative methods just require to be able to compute $\AA \xx$
+    . . .
+
+    \ \
+
+- How can we turn $\AA \xx = \bb$ into an iterative method?
+
+- Recall from start of course:
+
+    \ \
+
+    > Rearrange the equation to have more than one occurrence of $\xx$
+
+
+## Splitting
+
+- To do this we try to **split $\AA$** into two pieces:
+
+    $$\AA \xx = (\AA_1 + \AA_2) \xx = \bb$$
+
+- Hence
+
+    $$\AA_1 \xx = \bb - \AA_2 \xx$$
+
+    . . .
+
+- Convert into an iterative method:
+
+    $$\AA_1 \xx_{n+1} = \bb - \AA_2 \xx_n$$
+
+    . . .
+
+- Seems like harder problem than we started with!
+
+    . . .
+
+- But easier if choose $\AA_1$ to be *easy to invert / solve*
+
+## Convergence
+
+\newcommand{\RR}{\mathsf{R}}
+
+- We have
+
+    $$\xx_{n+1} = \AA_1^{-1}(- \AA_2 \xx_n + b)$$
+
+- Convergence depends on properties of $\RR := \AA_1^{-1} \AA_2$
+
+- Namely how much it stretches vectors
+
+    . . .
+
+- Can show that convergence if $\rho(\RR) < 1$
+
+- Where $\rho(\RR)$ is **spectral radius** of $\RR$
+
+     $$\rho(\RR) = \max_i |\lambda_i(\RR)|$$
+
+- $\lambda_i(\RR)$ are eigenvalues of $\RR$
+
+
+- Can show that converges provided $\rho(\RR) < 1$
+
+- Rate of convergence is determined by size of $\rho(\RR)$
+
+
+
+## Jacobi method
+
+\newcommand{\DD}{\mathsf{D}}
+
+- E.g. choose $\AA_1 := \DD$ and $\AA_2 := \AA - \DD$
+
+    where $\DD := \text{diag}(\AA)$ is diagonal part of $\AA$
+
+
+    . . .
+
+- **Jacobi method**
+
+    \ \
+
+    . . .
+
+- Each iteration is $\mathcal{O}(n^2)$ steps
+
+    . . .
+
+- Only works for certain matrices $\AA$
+
+- In particular when **diagonally dominant**:
+
+    $$|A_{i, i}| > \sum_{j \neq i} |A_{i, j}|$$
+
+
+- I.e. diagonal term is $>$ sum of off-diagonals in same row
+
+## Gauss--Seidel
+
+- Instead decompose $\AA = \mathsf{L} + \mathsf{U}$
+
+- Same as Jacobi except uses already updated $x_i$s; twice as fast
+
+
+## Krylov methods
+
+- Methods that use *only* matrix--vector product $\AA \xx$
+
+- Do not need to even know / store $\AA$!
+
+    . . .
+
+    \ \
+
+- All we can calculate are iterates
+
+    $\bb$, $\AA \bb$, $\AA^2 b$, $\ldots$
+
+- **Krylov subspace**:
+
+    $$\mathcal{K}_n := \langle \bb, \AA \bb, \AA^2 b, \ldots, \AA^{n-1} b \rangle$$
+
+
+## GMRES (Generalized Minimal Residual method):
+
+- Look for best solution in Krylov subspace
+
+- In iteration $k$ choose solution $\xx_k$ from $\mathcal{K}$ minimising
+residual over $\mathcal{K}_k$:
+
+    $$ \min_{\mathbf{z} \in \mathcal{K}_K}\| \bb - \AA \mathbf{z} \|$$
+
+    . . .
+
+    \ \
+
+- Solve least squares problem by finding orthonormal basis for $\mathcal{K}_k$
+
+    -- **Arnoldi iteration**
+
+
+
+## Summary
+
+- Defined induced norm for a matrix
+
+- Condition number for solving linear system is
+
+    $$\kappa = \| \AA \| \| \AA^{-1} \|$$
+
+- Can find iterative methods for solving linear systems
