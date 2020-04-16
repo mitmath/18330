@@ -480,3 +480,39 @@ We showed that this means that this means that $y = Q z$ with an orthogonal matr
 In order to actually calculate these eigen-features, we saw that the **power iteration method** can be used: we start with a non-zero vector $v$ and repeatedly multiply it by $A$ to get $A^n v$, then normalize. The resulting sequence of vectors converges to the leading eigenvector of $A$.
 
 If we instead use several initial vectors and apply $A^n$ to each one, these will all separately converge to the *same* eigenvector. To prevent this, we periodically re-orthogonalize, e.g. using Gram--Schmidt. In this way the $k$ vectors will converge to the $k$ leading eigenvectors.
+
+
+## Lecture 24: Conditioning of linear systems and iterative methods (Apr 13)
+
+We looked at the sensitivity of the problem "solve the linear system $Ax = b$" with respect to perturbations in the input $b$.
+
+To do so, we need to be able to measure the size of perturbations, so we introduced norms of vectors and induced norms of matrices.
+
+We saw that for the linear system, the resulting perturbation in the output $x$ involves the inverse matrix $A^{-1}$, and that the condition number of the problem ends up as being the product of the norms of $A$ and $A^{-1}$, which we defined as the condition number of the matrix. This means that even if the residual $b - Ax$ is small for a given approximate solution $x$, the forward error, i.e. the distance of $x$ from the true solution, may not be, since the condition number appears.
+
+The 2-norm of $A^{-1}$ is given by the *smallest* singular value of $A$, so if this is small then the problem is ill-conditioned.
+
+Then we discussed iterative methods for linear systems. We can think about rearranging the equation $Ax = b$ into a suitable form for a standard iterative method by **splitting** $A$ into, for example, $A = D + (A - D)$, where $D$ is the diagonal part. Then $D x_{n+1} = b - (A - D)x_n$ is an iterative method that will converge to the solution of $Ax = b$, *provided* that it converges at all. Since $D$ can be easily inverted, and the calculation is $O(n^2)$ instead of $O(n^3)$ for elimination methods, this can be a practical method for solving linear systems.
+
+Finally we mentioned Krylov methods, which only require knowing how to calculate $A x$ for vectors $x$; it is not even necessary to know or store the matrix $A$. Forming the set of vectors $b, Ab, A^2b, \ldots, A^{k-1} b$ gives a **Krylov subspace** where we can look for solutions of the linear system.
+
+## Lecture 25: Approximating functions - Fourier analysis (Apr 15)
+
+We started the last part of the course, on how to approximate and manipulate functions as a whole.
+
+We recalled two approaches that we have looked at so far: Taylor series work only locally, near a point; Lagrange interpolation was difficult to work with.
+We commented that so far we have not said anything about periodic functions.
+
+In this section of the course we will take a different approach: approximating a function $f$ by a linear combination of basis functions, $f = \sum_n f_n \phi_n$, where $f_n$ are numeric coefficients and $\phi_n$ are the basis functions. To do this we need an *infinite* number of basis functions. The basis functions here are playing the role of "vectors" in our linear algebra discussiones (where we only dealt with finite linear combinations).
+
+We recalled that when we have a linear combination it is most useful if we can talk about **orthogonality**, since then we obtain a formula for $f_n$. We thus need to generalise the concept of dot product from the Euclidean context.
+
+The necessary generalisation is that of **inner product**: the inner product of two complex functions $f$ and $g$ is $(f, g) := \int \bar{f} g(x) \, dx$. This is linear (or conjugate linear) in each component, and satisfies $(f, f) \ge 0$; this is the reason for introducing the complex conjugate. It is necessary since we want $\| f \|^2 := (f, f)$, and $\| f \|$ is a positive number measuring some kind of "length" or "size" of $f$.
+
+Once we have an inner product, we define orthogonality by $(f, g) = 0$. Then we obtain $f_n = (f, \phi_n)$, up to a multiplicative constant (which depends on the normalization of the $\phi_n$).
+
+As an example, we discussed Fourier series: a continuous, periodic function $f$ on the interval $[0, 2\pi)$ can be written $f(t) = \sum_n \hat{f}_n e^{int}$, so $f = \sum_{n=-\infty}^\infty \hat{f}_n \phi_n$ with basis functions $\phi_n := e^{i n t}$. We can see by a simple calculation that indeed these are orthogonal, $(\phi_n, \phi_m) = 0$ for $n \neq m$. The fact that *any* suitable function $f$ can be written in this way is a deep result that is an extension of the spectral theorem on the existence of orthogonal eigenvectors for symmetric matrices to apply to "compact self-adjoint operators" on the Hilbert space of $L^2$ functions on $[0, 2\pi)$.
+
+We saw that if a function $f$ is differentiable then the $n$th Fourier coefficient of the derivative is just $i n$ times the $n$th Fourier coefficient of the original function. In this way we showed that if $f$ is $k$ times differentiable, its Fourier coefficients must decay at least as fast as $n^{-k}$ as $n \to \infty$. If in fact $f$ is analytic in a suitable region, then its coefficients decay *exponentially* fast; this is called **spectral convergence**.
+
+Thus on a computer we can obtain a numerical approximation to an arbitrary continuous, periodic function $f$ to close to machine epsilon with relatively few Fourier modes.
