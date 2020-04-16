@@ -21,11 +21,11 @@ header-includes: |
 
 In this problem we will consider a very special symmetric matrix. Recall that the second-order finite difference scheme for a function $f(x)$ is given by
 $$
-f'_n = \frac{f_{n+1}  - 2 f_n + f_{n-1}}{h^2}
+f''_n = \frac{f_{n+1}  - 2 f_n + f_{n-1}}{h^2}
 $$
 where $f_n = f(x_0 + nh)$ and $h = \frac{x_N - x_0}{N}$.
 
-Define the vector $\mathbf{f}$ such that $\mathbf{f}_n = f_n$. Then the corresponding derivative vector using finite differences can be written as $\mathbf{f}' = D \mathbf{f}$. Some care must be taken about the boundary conditions; for simplicity we will assume that $f_0 = f_N = 0$. Under these assumptions the matrix $D$ is a tridiagonal matrix:
+Define the vector $\mathbf{f}$ such that $\mathbf{f}_n = f_n$. Then the corresponding derivative vector using finite differences can be written as $\mathbf{f}'' = D \mathbf{f}$. Some care must be taken about the boundary conditions; for simplicity we will assume that $f_0 = f_N = 0$. Under these assumptions the matrix $D$ is a tridiagonal matrix:
 $$
 \begin{bmatrix} f'_1 \\ f'_2 \\ f'_3 \\ \vdots \\ f'_{N-2} \\ f'_{N-1}\end{bmatrix} =
 \underbrace{\begin{bmatrix} -2 & 1 \\ 1 & -2 &  1\\ & 1 & -2 & 1 \\ && \ddots & \ddots& \ddots \\ &&& 1& -2 &1 \\ &&&& 1& -2\end{bmatrix}}_{D_N} \begin{bmatrix} f_1 \\ f_2 \\ f_3 \\ \vdots \\ f_{N-2} \\ f_{N-1}\end{bmatrix}
@@ -33,7 +33,7 @@ $$
 
 You can construct the matrix $D$ in Julia using the `diagm` function. For simplicity keep everything dense in this problem, although there clearly a lot of structure that could be exploited.
 
-1. Consider the matrix $D$. Using the ansatz (i.e. hypothesis) $\mathbf{v}_n = e^{i \pi n k/N}$, where $1 \le k \le N-1$, show that $\mathbf{v}$ is an eigenvector of $D_N$. What is the corresponding eigenvalue? Remember that the eigenvalues should be real!
+1. Consider the matrix $D$. Using the ansatz (i.e. hypothesis) $\mathbf{v}_n = \sin(\pi n k/N)$, where $1 \le k \le N-1$, show that $\mathbf{v}$ is an eigenvector of $D_N$. What is the corresponding eigenvalue? Remember that the eigenvalues should be real!
 
 2. In class we discussed several ways to find eigenvalues of matrices. The simplest algorithm for finding eigenvalues is the **power method**.
 
