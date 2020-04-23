@@ -75,6 +75,8 @@ This is the convention we will use in this problem.
 
     where $I_1(n)$ is the modified Bessel function of the first kind, calculated in Julia as `besseli(n, 1)` using the `SpecialFunctions.jl` package.
 
+    Calculate the error (using `norm`) as the number of points used changes between $N=10$ and $N=1000$.
+
 5.  Write a function `reconstruct_fourier_series(f̂s::Vector, xs::Vector)` which reconstructs `f(x)` from the Fourier series coefficients.
 
     Make a plot of `||f(xt) - reconstruct_fourier_series(f̂s, xt)||/N` as the number of coefficients used $N$ is varied from $4 \to 200$ for each of the functions.
@@ -117,6 +119,10 @@ This is the convention we will use in this problem.
 
     How large can you take `N` such that `fast_fourier_coefficients` runs for under 1 second? What about for `fourier_coefficients_trapezoidal`?
 
+
+```julia
+
+```
 
 
 ## Exercise 2: Solving an ODE with a spectral method
@@ -177,6 +183,10 @@ idst(x) = FFTW.r2r(x, FFTW.RODFT00)
 
 4. Generate the error plots again, now for the right-hand side $g(x) = \exp(\sin(2 \pi x))-1$. Use the solution from your spectral solver with $N = 2^{13}$ as the true solution. Calculate the error for $N = 2^n$ for $n = 1\to 12$. Some care is needed to make sure you use the correct points from the "true" solution for comparison.
 
+
+```julia
+
+```
 
 ### Exercise 3: Finding roots in a different way
 
@@ -248,6 +258,9 @@ We will use this to find the **companion matrix** for $f_N(x)$, from which we ca
 
     At what value of $N$ do you find all the roots? Remember to plot only those roots that are real and between -1 and 1.
 
+```julia
+
+```
 
 ### Exercise 4: Gram--Schmidt for polynomials
 
@@ -272,6 +285,9 @@ For Legendre polynomials we have $a = -1$ , $b = 1$,  and $w(x) = 1$.  Using the
 
 4. Use the functions you found in [4.3] and your inner-product function, find the Legendre polynomial expansion coefficients for the function $f(x) = x \, (x-1/2)^2 \, (x^2 - 1/9) \, (x+1/4)$.
 
-    Plot the reconstructed polynomial using the first $n$ coefficients for $N = 1:7$ and the true function on the same axes. What do you see? How good are the Legendre polynomials at approximating the function?
+    Plot the reconstructed polynomial using the first $n$ coefficients for $N = 1:7$ and the true function. What do you see? How good are the Legendre polynomials at approximating the function?
 
-5. Plot the Legendre and Chebyshev coefficients. How do their decay rates compare?
+
+```julia
+
+```
