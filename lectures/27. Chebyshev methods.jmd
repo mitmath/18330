@@ -1,0 +1,319 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+
+# 27. Global approximation on an interval
+
+
+
+## Last time
+
+- Interpolation with trigonometric functions
+
+- Fast Fourier transform
+
+## Goals for today
+
+- Spectral convergence of the trapezium rule for smooth, periodic functions
+
+    \ \
+
+- Global approximation of functions on an interval
+
+- Chebyshev polynomials
+
+## Trapezium rule
+
+- Let's go back to the trapezium rule for a periodic function
+
+- Take $f = \sum_{k=-\infty}^\infty \hat{f}_k \phi_k$
+
+    . . .
+
+- Trapezium rule approximation of $I :=\int f$ with $N$ points is
+
+    $$S_N = \frac{h}{2} \sum_{j=0}^{N-1} f(j h)$$
+
+    with $h := \frac{2 \pi}{N}$
+
+    . . .
+
+    $$ = \frac{\pi}{N} \sum_{j=0}^{N-1} \sum_{k=-\infty}^\infty \hat{f}_k e^{i j k h}$$
+
+## Trapezium rule II
+
+- So
+
+    $$ S = \frac{\pi}{N} \sum_k    \hat{f}_k  \sum_{j=0}^{N-1} e^{i j k \frac{2 \pi}{N}}$$
+
+    . . .
+
+- $\sum_{j} = 0$ unless $j$ is integer multiple of $N$
+
+    . . .
+
+- So get $S_N = \sum_{k=-\infty}^\infty \hat{f}_{kN}$
+
+    . . .
+
+- $I = \hat{f}_0$
+
+    . . .
+
+- So $|I - S_N| = \sum_{k=1^\infty}(\hat{f}_{kN} + \hat{f}_{-kN})$
+
+    . . .
+
+- So if $\hat{f}_n$ decay exponentially fast then so does $|I - S_N|$
+
+
+## Global approximation
+
+- Can approximate *periodic* function $f$ globally: Fourier series
+
+- And calculate numerically
+
+    . . .
+
+- And get **spectral** (=super-fast) convergence if $f$ is analytic
+
+    . .
+
+- Can we do this for **non-periodic** functions too?
+
+    . . .
+
+    \ \
+
+- Take $f: [-1, +1] \to \mathbb{R}$
+
+- Other intervals via linear transformation
+
+## Global approximation on an interval
+
+- Recall setting for global approximation of a function $f$:
+
+    . . .
+
+- Searching for expansion
+
+    $$f = \sum_{n=0}^\infty f_n \phi_n$$
+
+    . . .
+
+- With basis functions $\phi_n$
+
+
+## Global approximation on an interval II
+
+- $f = \sum_{n=0}^\infty f_n \phi_n$
+
+- Basis functions $\phi_n$ must satisfy:
+
+    . . .
+
+
+    - $\phi_n$ must be functions on $[-1, 1]$
+
+    . . .
+
+    - $(\phi_n)_{n=0}^\infty$ must be complete
+
+        i.e. smooth $f$ = infinite linear combination
+
+    . . .
+
+    - Must be mutually orthogonal
+
+    . . .
+
+    \ \
+
+- What are suitable functions $\phi_n$ for interval $[-1, +1]$?
+
+. . .
+
+- Not sinusoids, since not periodic
+
+
+## Global approximation on an interval III
+
+- Can we somehow use knowledge of Fourier series?
+
+    . . .
+
+- Idea: Map $f: [-1, +1] \to \mathbb{R}$ into smooth **periodic** function
+
+    . . .
+
+- Can't just periodise since will introduce discontinuities!
+
+    . . .
+
+    \ \
+
+- Let $z = e^{i \theta}$ be on unit circle
+
+    . . .
+
+- Map to $[-1, +1]$ by **projection** to $x$-axis:
+
+- $x := \text{Re}(z)$
+
+    . . .
+
+- So $x = \cos(\theta)$
+
+
+## Global approximation on an interval IV
+
+- $\theta$ ranges over $0$ to $2\pi$
+
+    . . .
+
+- $x = \cos(\theta)$ ranges over $[-1, +1]$ -- twice
+
+    . . .
+
+    \ \
+
+- From $f(x)$ construct function $g(\theta) := f(x) = f(\cos(\theta))$ that is periodic!
+
+## Global approximation on an interval V
+
+
+- Approximate $g$ by a Fourier series:
+
+    $$g(\theta) = \text{Re} \left(\sum_n g_n e^{i n \theta} \right)$$
+
+    . . .
+
+    $$= \sum_n g_n \cos(n \theta)$$
+
+    . . .
+
+    $$ = \sum_n g_n \phi_n$$
+
+- Where $\phi_n(x) := \cos(n \arccos(x))$
+
+    . . .
+
+- This does not look like a pleasant set of functions!
+
+
+## Global approximation on an interval VI
+
+
+- What are the functions $\phi_n(x) := \cos(n \arccos(x))$ ?
+
+    . . .
+
+- Idea: Recall: $e^{i n \theta} = (e^{i \theta})^n$
+
+    . . .
+
+- Take real part:
+
+    $$ \cos(n \theta) = \left[ \cos(\theta) + i \sin(\theta) \right]^n$$
+
+    . . .
+
+    \ \
+- So can express $\cos(n \theta)$ in terms of $\cos(\theta)$
+
+- What is the relationship?
+
+## Global approximation on an interval VI
+
+
+- Example:
+
+    $$\cos(2 \theta) = \cos(\theta)^2 - \sin(\theta)^2$$
+
+    . . .
+
+- Recall: $\sin(\theta)^2 + \cos(\theta)^2 = 1$
+
+    . . .
+
+- So  $\cos(2 \theta) = 2 \cos(\theta)^2 - 1 = 2 x^2 - 1$
+
+    . . .
+
+- In general: $\cos(n \theta)$ is a *polynomial* in $x$ !
+
+- **Chebysev polynomials** (of the first kind), $T_n(x)$
+
+## Chebyshev polynomials
+
+- Have shown that function $f$ on $[-1, +1]$ can be written as
+
+    $$f(x) = \sum f_n T_n(x)$$
+
+- With $T_n$ the Chebyshev polynomials
+
+    . . .
+
+- Completeness follows from completeness of Fourier series
+
+    . . .
+
+    \ \
+
+- Are they orthogonal?
+
+## Chebyshev polynomials II
+
+- If we calculate $\int_{-1}^1 T_1(x) T_2(x) dx$ we do not get $0$
+
+    . . .
+
+    \ \
+
+- But inner product can include a **weight function** $w$:
+
+    $$(f, g) := \int f(x) \, g(x) \, w(x) \,
+    dx$$
+
+- $w$ must be *positive* function
+
+
+## Chebyshev polynomials III
+
+- $T_n$ are orthogonal with respect to weight function
+
+    $$w(x) = \frac{1}{\sqrt{1 - x^2}}$$
+
+    . . .
+
+- Factor due to change of variables $x = \cos(\theta)$ in integral
+
+    . . .
+
+- This is a consequence of the fact that Chebyshev polynomials satisfy
+a differential equation of Sturm--Liouville type
+
+
+
+## Summary
+
+- Spectral convergence of trapezium rule
+
+    \ \
+
+- By "transplanting" Fourier analysis, found orthogonal expansion of $f:[-1, +1] \to \mathbb{R}$
+
+- Basis functions are **Chebyshev polynomials**
+
+- Orthogonal with respect to a particular inner product

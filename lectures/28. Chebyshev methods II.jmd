@@ -345,7 +345,7 @@ $$1 = \ell(x) \sum_{j=0}^n \frac{w_j}{x - t_j}$$
 
     $$p(x) = \frac{\sum_{j=0}^n \frac{w_j}{x - t_j} f_j}{\sum_{j=0}^n \frac{w_j}{x - t_j}}$$
 
-- Barycentric Lagrange interpolation
+- Barycentric version of Lagrange interpolation
 
 ## Barycentric Lagrange interpolation V
 
