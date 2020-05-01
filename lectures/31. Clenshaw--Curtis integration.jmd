@@ -1,0 +1,271 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+
+# 31. Clenshaw--Curtis integration
+
+
+
+## Last time
+
+- Chebyshev expansions
+
+- How to choose number of interpolation points
+
+- Differentiation
+
+- Recurrence relation for Chebyshev polynomials
+
+
+## Goals for today
+
+- Recurrence relation for Chebyshev polynomials
+
+- Clenshaw--Curtis integration
+
+- Aliasing
+
+
+
+## Recurrence relation
+
+-  3-term **recurrence relation**
+relating $T_k$ to $T_{k-1}$ and $T_{k_2}$:
+
+    $$T_k(x) = 2x T_{k-1}(x) - T_{k-2}(x)$$
+
+    . . .
+
+- Allows us to calculate $T_k(x)$ explicitly (using $T_0 = 1$ and $T_1(x) = x$)
+
+    . . .
+
+- Where does this recurrence relation come from?
+
+## Recurrence relation II
+
+- Consider $x T_k(x)$
+
+    . . .
+
+- This is a polynomial of degree $k+1$, so
+
+    $$x T_k(x) = \sum_{j=0}^{k+1} \alpha_{k,j} T_j(x)$$
+
+    . . .
+
+- $\alpha_{k,j} \propto (x T_k, T_j)$, i.e. equal up to normalization
+
+## Recurrence relation II
+
+- We have
+
+    $$(x T_k, T_j) = \textstyle \int_{-1}^{-1} x T_k(x) T_j(x) dx$$
+
+- Change variables using $x = \cos(\theta)$:
+
+    $$(x T_k, T_j) = \textstyle  \int_{0}^{2 \pi} c_1 c_k c_j d\theta$$
+
+    where $c_j(\theta) := \cos(j \theta)$
+
+    . . .
+
+- Use trigonometric relation
+
+    $$\cos(A) \cos(B) = \textstyle \frac{1}{2} [\cos(A + B) + \cos(A - B)]$$
+
+    . . .
+
+- So
+
+    $$(x T_k, T_j) = \textstyle \frac{1}{2} \int_{0}^{2 \pi} c_1 [c_{k + j} + c_{k - j}] $$
+
+
+## Recurrence relation III
+
+- We have
+
+    $$(x T_k, T_j) = \textstyle \frac{1}{2} \int_{0}^{2 \pi} c_1 [c_{k + j} + c_{k - j}] $$
+
+    . . .
+
+- But $\int c_l c_m = 0$ if $l \neq m$
+
+    . . .
+
+
+- So $(x T_k, T_j)$ is 0 unless $j = k + 1$ or $j = k - 1$
+
+    . . .
+
+- Hence $x T_k = \alpha T_{k + 1} + \beta T_{k - 1}$
+
+    and we can calculate the constants $\alpha$ and $\beta$
+
+    . . .
+
+    \ \
+
+- In fact, *any* set of
+orthogonal polynomials have similar 3-term recurrence
+
+
+## Numerical integration
+
+- Given $f: [-1, +1] \to \mathbb{R}$
+
+- How can we calculate $\int f = \int_{-1}^{+1} f(x) \, dx$?
+
+    . . .
+
+    \ \
+
+- Recall: trapezium rule (equally-spaced points):
+
+    $\mathcal{O}(n^{-2})$ convergence
+
+
+    . . .
+
+    \ \
+
+- Can we do better?
+
+    . . .
+
+- Clenshaw & Curtis (1960)
+
+## Clenshaw--Curtis integration
+
+- We now have powerful **Chebyshev technology** at our disposal
+
+    . . .
+
+- Sample $f$ at $N+1$ Chebyshev points, giving $f_j$
+
+    . . .
+
+- Find $\alpha_k$ in Chebyshev expansion $f \simeq f_N := \sum_{k=0}^N \alpha_k T_k$
+
+    via Fast Cosine Transform
+
+    . . .
+
+- Double $N$ until last few $\alpha_k$ are of order $\epsilon_\text{mach}$
+
+## Clenshaw--Curtis integration II
+
+- Now calculate $\int f$ as $\simeq \int f_N$:
+
+    $$\textstyle \int f \simeq \sum_{k=0}^N \alpha_k \int T_k$$
+
+    . . .
+
+    \ \
+
+
+- Error $| \int f - \int f_N |$ decays as fast as $\|f - f_N \|$ does
+
+    . . .
+
+- E.g. exponential (spectral) convergence if $f$ is analytic
+
+## Clenshaw--Curtis integration III
+
+- Need to calculate
+
+    $$\textstyle \int f_N = \sum_{k=0}^N \alpha_k \int T_k$$
+
+
+    . . .
+
+- Change variable in integral: $x = \cos(\theta)$
+
+    $$I_k = \int_{-1}^{+1} T_k(x) \, dx = \int_{0}^\pi \cos(k \theta) \, \sin(\theta) \, d\theta$$
+
+    (note upper limit due to parity)
+
+    . . .
+
+- Find $I_k = \frac{(-1)^k + 1}{1 - k^2}$
+
+## Clenshaw--Curtis integration IV
+
+- So we have
+
+$$\int f = \sum_{k = 0}^N \alpha_k \, I_k$$
+
+    . . .
+
+- Integral becomes a dot product!
+
+    . . .
+
+
+- **Riesz representation theorem** for
+linear functional
+
+
+## Clenshaw--Curtis integration V
+
+- Alternative:
+
+- Once have found $N$ using decay of $\alpha_k$
+
+    . . .
+
+- Go back to $f_j$
+
+    . . .
+
+    \ \
+
+- Use Lagrange interpolant $p(x)$ in $f_j$
+
+- Integrate Lagrange interpolant -- explicit formulae
+
+    . . .
+
+- But leads to messier results -- effectively Discrete Cosine Transform
+of above
+
+## Aliasing
+
+- **Aliasing** is the following phenomenon
+
+    . . .
+
+- Consider sampling Cheb. polynomial $T_k$ at Cheb. points $t_j$
+
+- This can give the *same function values* as sampling different $T_\ell$
+
+    . .
+
+- On $(N+1)$-point Chebyshev grid, following have same values:
+
+- $T_m$, $T_{2n - m}$, $T_{2n + m}$, $\ldots$
+
+    . . .
+
+- Gives relationship between coefficients of *truncation* of $f$ and *interpolation* of $f$
+
+- See Trefethen, *Approx. Theory*, Chap. 4
+
+## Summary
+
+- 3-term recurrence relation for Chebyshev polynomials
+
+- Clenshaw--Curtis integration
+
+- Spectrally accurate for analytic functions
