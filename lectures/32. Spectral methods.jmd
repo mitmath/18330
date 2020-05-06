@@ -1,0 +1,167 @@
+---
+theme: Antibes
+mainfont: Helvetica
+monofont: 'Source Code Pro'
+monofontoptions: 'Scale=0.8'
+
+colorlinks: true
+linkcolor: white
+urlcolor: cyan
+
+header-includes: |
+    \usepackage{unicode-math}
+---
+
+
+# 32. Spectral methods for boundary-value problems
+
+
+## Last time
+
+- Recurrence relation for Chebyshev polynomials
+
+- Clenshaw--Curtis integration
+
+## Goals for today
+
+- Spectral methods
+
+- Boundary-value problems for ODEs
+
+- Eigenvalue problems
+
+- Time evolution
+
+
+## (Pseudo)-spectral methods for boundary-value problems
+
+- Want to solve **boundary-value problems**
+
+- E.g. Poisson equation for potential due to electric charges
+
+
+    . . .
+
+    \ \
+
+- Example:
+
+    $$u_{xx} = f(x) \quad \text{for } -1 < x < 1$$
+
+    with **boundary conditions** $u(-1) = u(+1) = 0$
+
+    . . .
+
+- Notation: derivative $u_x := u' := \frac{du}{dx}$
+
+- $u_{xx}$ = 2nd derivative
+
+## Boundary-value problems
+
+- Note that there is no time
+
+- Everything must be satisfied *simultaneously*
+
+    . . .
+
+- Information from *both* boundaries influences value at intermediate point
+
+    . . .
+
+- There are stepping methods (**shooting**) but they do not work well
+
+    . . .
+
+    \ \
+
+- Try to reduce to a linear algebra problem
+
+     . . .
+
+- Will follow Trefethen, *Spectral Methods in MATLAB* (Chaps. 6 + 7)
+
+## Collocation methods
+
+- We will use **collocation method** to solve
+
+- Sometimes called "pseudo-spectral"
+
+    . . .
+
+- Extension / inverse of methods used so far
+
+    . . .
+
+    \ \
+
+- Suppose that equation satisfed by function $u$ (unknown)
+
+    . . .
+
+- Look at collection of $N+1$ nodes $t_j$
+
+- With *unknown* values $u_j := u(t_j)$ at $t_j$
+
+## Collocation methods II
+
+- Let $p(x)$ be degree-$N$ polynomial interpolating $u_j$ at $t_j$
+
+- Note that $u_j$ are the *unknowns*!
+
+- Then we *impose*
+
+    $$p''(t_j) = u_j$$
+
+    . . .
+
+- So
+
+    $$\mathsf{M} \mathbf{u} = \mathbf{f}$$
+
+    where $\mathsf{M} := \mathsf{D}_N^2$
+
+- $D_N$ is differentiation matrix
+
+## Boundary conditions
+
+- Need to impose **boundary conditions**
+
+    . . .
+
+- e.g. Dirichlet:
+
+    $$u(-1) = u(1) = 0$$
+
+    . . .
+
+- Various ways to implement this
+
+- E.g. **boundary bordering**:
+
+    set rows 1 and $N$ of $\mathsf{M}$ to rows of identy matrix
+
+    to impose $u_0 = u_N = 0$
+
+    . . .
+
+- ODE is imposed at interior points
+
+## Chebyshev spectral methods
+
+- Formulation in terms of differentiation matrices holds for finite differences
+-- as in Problem Set
+
+    . . .
+
+- But Chebyshev methods have usual advantage: **spectral convergence**
+
+    . . .
+
+- Additional advantage: **interpolant** is output from method
+
+
+## Summary
+
+- Chebyshev spectral methods
+
+- Collocation: Assume ODE is satisfied at interior points
