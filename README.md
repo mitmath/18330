@@ -1,8 +1,8 @@
-# 18.330: Introduction to numerical analysis
+# 18.330: Introduction to Numerical Analysis
 
-## Spring 2020
+## Spring 2021
 
-Welcome to 18.330! This is an introductory course on numerical analysis.
+Welcome to course 18.330 at MIT! This is an introductory course on **numerical analysis**.
 
 We will be using the [Julia language](www.julialang.org). Please follow [these installation instructions](installation.md).
 
@@ -10,39 +10,34 @@ We will be using the [Julia language](www.julialang.org). Please follow [these i
 
 - Visiting professor David P. Sanders ([sandersd@mit.edu](mailto:sandersd@mit.edu))
 
-- MWF 1--2, room 2-139.
+- Tues, Thurs 1--2:30, virtual.
 
 - Office hours:
+  TBD
 
-  - Mon 5.20-6.20 in the **Julia lab**, 7th floor of Stata Center (turn left from Gates building elevator)
-  - Tues 5-6 in the Julia lab
-  - Thurs 5-6 in 2.332
-
-- Piazza forum: https://piazza.com/class/k65ke8eo9x760n
-
+- Piazza forum: TBD
+<!-- 
 ### Slides, notebooks and recordings from lectures
 
 - Slides and notebooks for each lecture are available in the [lectures](lectures) directory.
 
 - Screen recordings of lectures are available [here](https://www.dropbox.com/sh/ubkqwrqxnukgllc/AAA2cH9r7YQL7WmYVt-bblxta?dl=0)
 
-- Summaries of each lecture are [here](summaries.md)
+- Summaries of each lecture are [here](summaries.md) -->
 
 ### Evaluation
 
-- 9 problem sets (66.6%). No late submissions, but the lowest score will be dropped.
-<!-- - 1 midterm exam (20%): Wednesday, March 18 -->
-- Final project (33.4%): Due Tuesday, May 12
+- 9 problem sets (50%). No late submissions, but the lowest score will be dropped.
+- 1 midterm take-home exam (20%)
+- Final project (30%)
 
-Problem sets will consist of a mixture of theory and coding. They will be submitted and graded online.
+Problem sets will consist of a mixture of theory and coding in Julia. They will be submitted and graded online.
 
-The final project will be an exploration of a topic in numerical analysis that we have not covered in class (although at the level of the class), and will include a discussion of the mathematics behind the method, together with your own implementation.
+For the final project you will explore a topic in numerical analysis that we have not covered in class (but at the level of the class). The final project must include a discussion of the mathematics behind the method, together with your own implementation in Julia.
 
 ### Learning Julia
 
-- Prof. Steven Johnson will give an introduction to Julia on Friday, Feb 7 from 5-7pm in 32-141. Make sure to install Julia beforehand. See https://github.com/mitmath/julia-mit for information and resources on Julia.
-
-- For help with Julia you should be able to find people in the Julia lab most of the time (see above for directions)
+- Prof. Steven Johnson will give an introduction to Julia on Friday, Feb 19 from 5-7pm. Make sure to install Julia beforehand. See https://github.com/mitmath/julia-mit for information and resources on Julia.
 
 - More learning resources are available at https://julialang.org/learning/
 
