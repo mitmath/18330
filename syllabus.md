@@ -1,6 +1,6 @@
 # Approximate syllabus for 18.330 (spring 2020)
 
-- Invitation
+- What is numerical analysis?
 - Representing numbers
 - Approximating functions
 - Root finding
