@@ -6,6 +6,11 @@ Welcome to course 18.330 at MIT! This is an introductory course on **numerical a
 
 We will be using the [Julia language](www.julialang.org). Please follow [these installation instructions](installation.md).
 
+## Course materials
+- **Lectures** will be synchronous Zoom sessions, which will be recorded for asynchronous access by MIT students.
+
+- PDF **slides** and computational **notebooks** will be made publicly available on this page.
+
 ## Logistics
 
 - Visiting professor David P. Sanders ([sandersd@mit.edu](mailto:sandersd@mit.edu))
