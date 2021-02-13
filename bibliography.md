@@ -31,7 +31,7 @@ Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras).
 
 ## Somewhat more advanced books:
 
-- *A graduate introduction to numerical methods*, Fillion & Corless
+- *A Graduate Introduction to Numerical Methods*, Fillion & Corless
 
 - *Numerical Analysis*, Gautschi
 
