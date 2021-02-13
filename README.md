@@ -4,7 +4,12 @@
 
 Welcome to course 18.330 at MIT! This is an introductory course on **numerical analysis**.
 
-We will be using the [Julia language](www.julialang.org). Please follow [these installation instructions](https://computationalthinking.mit.edu/Spring21/installation/).
+## Installation of required software 
+We will be using the following **free / open source** software:
+- The [Julia language](www.julialang.org)
+- The [Pluto notebook](https://github.com/fonsp/Pluto.jl) environment
+
+Please follow [these  instructions](https://computationalthinking.mit.edu/Spring21/installation/) to install Julia and then Pluto.
 
 ## Course materials
 - **Lectures** will be synchronous Zoom sessions, which will be recorded for asynchronous access by MIT students.
