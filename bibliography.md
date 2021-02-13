@@ -5,11 +5,7 @@
 - *Fundamentals of Numerical Computation*, Driscoll & Braun.
 Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras). 
 
-  - Julia version: 
-
-- *Fundamentals of Numerical Computation*, Driscoll & Braun.
-Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras). 
-
+  
   - Free online version with Julia code: https://fncbook.github.io/fnc/frontmatter.html
 
 
