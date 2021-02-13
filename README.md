@@ -4,7 +4,7 @@
 
 Welcome to course 18.330 at MIT! This is an introductory course on **numerical analysis**.
 
-We will be using the [Julia language](www.julialang.org). Please follow [these installation instructions](installation.md).
+We will be using the [Julia language](www.julialang.org). Please follow [these installation instructions](https://computationalthinking.mit.edu/Spring21/installation/).
 
 ## Course materials
 - **Lectures** will be synchronous Zoom sessions, which will be recorded for asynchronous access by MIT students.
