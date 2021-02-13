@@ -12,15 +12,17 @@ We will be using the following **free / open source** software:
 Please follow [these  instructions](https://computationalthinking.mit.edu/Spring21/installation/) to install Julia and then Pluto.
 
 ## Course materials
-- **Lectures** will be synchronous Zoom sessions, which will be recorded for asynchronous access by MIT students.
+- **Lectures** will be synchronous Zoom sessions; these will be recorded for asynchronous access with an MIT account.
 
-- PDF **slides** and computational **notebooks** will be made publicly available on this page.
+- **Slides** (in PDF format) and Pluto **notebooks** will be **publicly** available in this repository after each lecture.
 
 ## Logistics
 
 - Visiting professor David P. Sanders ([sandersd@mit.edu](mailto:sandersd@mit.edu))
 
-- Tues, Thurs 1--2:30, virtual.
+- TA: TBD
+
+- Tues, Thurs 1--2:30, virtual
 
 - Office hours:
   TBD
