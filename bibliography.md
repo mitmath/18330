@@ -1,9 +1,19 @@
 # Bibliography
 
-## Books at about the level of the course
+## Recommended book: 
 
 - *Fundamentals of Numerical Computation*, Driscoll & Braun.
-Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras). **Highly recommended**
+Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras). 
+
+  - Julia version: 
+
+- *Fundamentals of Numerical Computation*, Driscoll & Braun.
+Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras). 
+
+  - Free online version with Julia code: https://fncbook.github.io/fnc/frontmatter.html
+
+
+## Other books at a similar level to the course
 
 - *Numerical Methods in Scientific Computing*, Dahlquist & Björck
 
@@ -14,7 +24,16 @@ Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras). **Highly rec
 - *An Introduction to Numerical Analysis*, Süli & Mayers
 
 
-## Somewhat more advanced
+## Online courses at a similar level:
+
+- [Mathematical computing](http://www.maths.usyd.edu.au/u/olver/teaching/MATH3976), Olver
+
+- [Programming for mathematical applications](http://persson.berkeley.edu/math124), Persson
+
+- [Numerical analysis](http://persson.berkeley.edu/math128a), Persson
+
+
+## Somewhat more advanced books:
 
 - *A graduate introduction to numerical methods*, Fillion & Corless
 
@@ -26,20 +45,13 @@ Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras). **Highly rec
 
 
 
-## Online courses
-
-- [Mathematical computing](http://www.maths.usyd.edu.au/u/olver/teaching/MATH3976), Olver
-
-- [Programming for mathematical applications](http://persson.berkeley.edu/math124), Persson
-
-- [Numerical analysis](http://persson.berkeley.edu/math128a), Persson
 
 
 
 
-## Julia resources
+## Free resources about the Julia language:
 
-- [Notes for MIT course 6.S083](https://github.com/dpsanders/6.S083)
+- [MIT *Computational Thinking* course 6.S083](https://computationalthinking.mit.edu/Spring21/)
 
 - [*ThinkJulia: How to Think Like a Computer Scientist*](https://benlauwens.github.io/ThinkJulia.jl/latest/book.html), Lauwens & Downey
 
