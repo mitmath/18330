@@ -28,3 +28,17 @@ data (variables) that belong together into a new object, and then define how to 
 We asked if we could get away with using rational numbers for scientific computations, but we saw that the number of digits in them
 rapidly balloons as soon as we start doing many operations, so that is not a good idea. This leads on to seeing how to represent real numbers
 in the next lecture.
+
+## Lecture 3: Representing real numbers (25 Feb)
+
+We started by thinking of real numbers as infinite decimal expansions.
+
+Then we looked at **fixed-point numbers**, where we represent a real number as an integer with an implicit, fixed
+decimal point (or, in general, "radix point" when using a different base, or radix, such as binary).
+
+However, fixed-point numbers to not allow us to represent a wide *range* of numbers. So we allowed the decimal / binary point to
+*move*, or **float**. This is done by multiplying by a power of the base.
+
+This means that spacing between consecutive floating-point numbers is equal for a while, until we hit the next power of 2, when the spacing is multiplied by 2. This, in turn, means that we have less absolute precision, but the same relative precision (number of significant figures) when representing larger numbers.
+
+We saw that decimal numbers like $0.1$ cannot be represented exactly in binary, so they are *round*ed to the nearest representable floating-point number.
