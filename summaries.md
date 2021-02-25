@@ -42,3 +42,17 @@ However, fixed-point numbers to not allow us to represent a wide *range* of numb
 This means that spacing between consecutive floating-point numbers is equal for a while, until we hit the next power of 2, when the spacing is multiplied by 2. This, in turn, means that we have less absolute precision, but the same relative precision (number of significant figures) when representing larger numbers.
 
 We saw that decimal numbers like $0.1$ cannot be represented exactly in binary, so they are *round*ed to the nearest representable floating-point number.
+
+## Lecture 4: Computing functions (27 Feb)
+
+We started off by finishing a couple of remaining topics from the slides from last time on floating-point arithmetic: how to use `BigFloat`s to perform calculations with higher precision, special values `Inf` for numbers that are too big, and `NaN` ("not a number") for results of meaningless calculations like `0 / 0`.
+
+Then we started to discuss how to compute *functions*, which form the foundation of the course (and of mathematics).
+
+We discussed the difference between the mathematical idea of a function, as an association between values in a domain and a codomain, and the computer science version of a function, also called a subroutine. 
+
+The computer science version makes us view a function as an **algorithm**, consisting of a sequence of steps making up a computation (sometimes called a "computational graph"). Julia allows us to see this in action using macros like `@code_typed`.
+
+We then discussed how we could try to compute an elementary function like `exp(x)` on an input `x`. Since the exponential function is defined by an *infinite* power series we can never hope to compute the exact value, but by taking ever more terms we should be able to get arbitrarily close, giving an approximation algorithm for the function, which is hence **computable**.
+
+The approximation obtained by taking only a finite number of terms is a **polynomial**. Polynomials are really the only functions that we can compute, using just `+` and `*` operations. We saw that polynomials can in principle approximate any (continuous) function arbitrarily closely; the problem then becomes *how to compute* such an approximation, a subject that will recur throughout the course, especially in the second half.
