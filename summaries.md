@@ -56,3 +56,20 @@ The computer science version makes us view a function as an **algorithm**, consi
 We then discussed how we could try to compute an elementary function like `exp(x)` on an input `x`. Since the exponential function is defined by an *infinite* power series we can never hope to compute the exact value, but by taking ever more terms we should be able to get arbitrarily close, giving an approximation algorithm for the function, which is hence **computable**.
 
 The approximation obtained by taking only a finite number of terms is a **polynomial**. Polynomials are really the only functions that we can compute, using just `+` and `*` operations. We saw that polynomials can in principle approximate any (continuous) function arbitrarily closely; the problem then becomes *how to compute* such an approximation, a subject that will recur throughout the course, especially in the second half.
+
+## Lecture 5: Taylor series and equation solving
+
+We began with a reminder about Taylor series approximations for smooth functions.
+These give you an infinite series for $f(a + h)$ near a point $a$ in powers of $h$.
+
+We recalled the Lagrange form of the remainder, which gives an expression for the remainder
+of a series after truncating it at $N$ terms, but with the feature that it depends on evaluating
+the $(N+1)$th derivative at an *unknown* point $\xi$. We then saw how to use that to give
+an *upper bound* on the error of the polynomial approximation over a *finite* interval.
+
+We moved on to discussing how to solve equations, which is equivalent to finding *roots* or *zeros*
+of a function. We reminded that the Fundamental Theorem of Algebra tells us that a polynomial of
+degree $n$ always has exactly $n$ roots in the complex plane (although some of them may be multiple roots).
+
+We then saw how to use Pluto to interactively visualize the Fundamental Theorem by sweeping through circles
+and calculating their image under a polynomial map. 
