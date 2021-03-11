@@ -36,6 +36,11 @@ md"""
 m = $(@bind m Slider(0:20, show_value=true))
 """
 
+# ╔═╡ 69600584-8297-11eb-1de3-039fe7c98ba0
+md"""
+**Periodic** orbit with period 2
+"""
+
 # ╔═╡ d82f1eae-7b9c-11eb-24d8-e1dcb2eef71a
 md"""
 # The Newton method for solving equations
@@ -71,7 +76,7 @@ n = $(@bind n Slider(0:10, show_value=true, default=0))
 
 # ╔═╡ 9addbcbe-7b9e-11eb-3e8c-fbab3be40e05
 md"""
-x₀ = $(@bind x0 Slider(-10:10, show_value=true, default=6))
+x₀ = $(@bind x0 Slider(-10:0.1:10, show_value=true, default=6))
 """
 
 # ╔═╡ b803743a-7b9e-11eb-203d-595e0a0493e2
@@ -232,21 +237,26 @@ end
 # ╔═╡ dfa00272-8228-11eb-1e35-2b3353e6ce9e
 cobweb(cos, m, (0, 1), 1.0)
 
+# ╔═╡ 00a1b9f2-8297-11eb-3aae-db44d100bc84
+cobweb(x -> 2.5 * x * (1-x), m, (0, 1), 0.72)
+
 # ╔═╡ 3982b718-8284-11eb-2e7a-8b2398769c39
 cobweb(cos, 10, (0, 1), 1.0)
 
 # ╔═╡ Cell order:
 # ╟─bccbfb08-8227-11eb-1cb5-03298c666e7d
 # ╟─c09f0cf2-8227-11eb-3300-f7442bb3bcc9
-# ╟─d022c0f0-8228-11eb-07a5-233172c167b0
 # ╠═dfa00272-8228-11eb-1e35-2b3353e6ce9e
+# ╟─d022c0f0-8228-11eb-07a5-233172c167b0
+# ╠═00a1b9f2-8297-11eb-3aae-db44d100bc84
+# ╟─69600584-8297-11eb-1de3-039fe7c98ba0
 # ╟─d82f1eae-7b9c-11eb-24d8-e1dcb2eef71a
 # ╟─e410c1d0-7ba1-11eb-394f-71dac89756b7
 # ╟─5ea7344c-7ba2-11eb-2cc5-0bbdca218c82
 # ╟─f4fda666-7b9c-11eb-0304-716c5e710462
+# ╠═ecb40aea-7b9c-11eb-1476-e54faf32d91c
 # ╟─2445da24-7b9d-11eb-02bd-eb99a3d95a2e
 # ╟─9addbcbe-7b9e-11eb-3e8c-fbab3be40e05
-# ╟─ecb40aea-7b9c-11eb-1476-e54faf32d91c
 # ╠═b803743a-7b9e-11eb-203d-595e0a0493e2
 # ╠═ec6c6328-7b9c-11eb-1c69-dba12ae522ad
 # ╟─ba570c4c-7ba2-11eb-2125-9f23e415a1dc
