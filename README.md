@@ -39,7 +39,7 @@ Please follow [these  instructions](https://computationalthinking.mit.edu/Spring
 
 ### Evaluation
 
-- 9 problem sets (50%). No late submissions, but the lowest score will be dropped.
+- 10 problem sets (50%). No late submissions, but the lowest score will be dropped.
 - 1 midterm take-home exam (20%)
 - Final project (30%)
 
