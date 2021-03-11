@@ -20,22 +20,21 @@ Please follow [these  instructions](https://computationalthinking.mit.edu/Spring
 
 - Visiting professor David P. Sanders ([sandersd@mit.edu](mailto:sandersd@mit.edu))
 
-- TA: TBD
+- TA: Nicholas Liu
 
-- Tues, Thurs 1--2:30, virtual
+- Tues, Thurs 1&ndash;2:30pm Eastern, virtual
 
-- Office hours:
-  TBD
+- Office hours: Tues, 5&ndash;7pm Eastern
 
-- Piazza forum: TBD
-<!-- 
-### Slides, notebooks and recordings from lectures
+- [Piazza forum](https://piazza.com/class/kl8f7m3q7q355)
 
-- Slides and notebooks for each lecture are available in the [lectures](lectures) directory.
+### Class notes
 
-- Screen recordings of lectures are available [here](https://www.dropbox.com/sh/ubkqwrqxnukgllc/AAA2cH9r7YQL7WmYVt-bblxta?dl=0)
+- [Lecture slides](lectures) 
 
-- Summaries of each lecture are [here](summaries.md) -->
+- [Pluto notebooks](notebooks)
+
+- [Summaries of each lecture](summaries.md)
 
 ### Evaluation
 
