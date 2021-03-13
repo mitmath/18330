@@ -11,35 +11,33 @@ We will be using the following **free / open source** software:
 
 Please follow [these  instructions](https://computationalthinking.mit.edu/Spring21/installation/) to install Julia and then Pluto.
 
-## Course materials
-- **Lectures** will be synchronous Zoom sessions; these will be recorded for asynchronous access with an MIT account.
-
-- **Slides** (in PDF format) and Pluto **notebooks** will be **publicly** available in this repository after each lecture.
-
 ## Logistics
 
 - Visiting professor David P. Sanders ([sandersd@mit.edu](mailto:sandersd@mit.edu))
 
-- TA: TBD
+- TA: Nicholas Liu
 
-- Tues, Thurs 1--2:30, virtual
+- Tues, Thurs 1&ndash;2:30pm Eastern, virtual
 
-- Office hours:
-  TBD
+- Office hours: Tues, 5&ndash;7pm Eastern
 
-- Piazza forum: TBD
-<!-- 
-### Slides, notebooks and recordings from lectures
+- [Piazza forum](https://piazza.com/class/kl8f7m3q7q355)
 
-- Slides and notebooks for each lecture are available in the [lectures](lectures) directory.
 
-- Screen recordings of lectures are available [here](https://www.dropbox.com/sh/ubkqwrqxnukgllc/AAA2cH9r7YQL7WmYVt-bblxta?dl=0)
+## Course materials
+- **Lectures** are synchronous Zoom sessions for MIT students
 
-- Summaries of each lecture are [here](summaries.md) -->
+- Notes are public:
+
+  - [Lecture slides](lectures) 
+
+  - [Pluto notebooks](notebooks)
+
+  - [Summaries of each lecture](summaries.md)
 
 ### Evaluation
 
-- 9 problem sets (50%). No late submissions, but the lowest score will be dropped.
+- 10 problem sets (50%). No late submissions, but the lowest score will be dropped.
 - 1 midterm take-home exam (20%)
 - Final project (30%)
 
