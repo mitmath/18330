@@ -96,3 +96,15 @@ f(x*) = 0.
 We looked at cobweb diagrams as a way of visualising iterations and saw how the derivative condition for stability of a fixed point manifests in a geometrical way. This leads to the idea that we should look for an iteration g(x) = x + ϕ(x) f(x) for some function ϕ. If we also impose that  g'(x*) = 0 then we are led to the **Newton method**, x_{n+1} = x_n - f(x_n) / f'(x_n).
 
 This method converges very fast when we are "sufficiently close" to a fixed point, but may behave badly when we are not.
+
+## Lecture 8: Solving equations in higher dimensions
+
+We started off looking at the geometry of nonlinear equations like x^2 + y^2 = 1. In general the solutions will be an uncountable set of points (x, y), but lying on (the union of) **1-dimensional curves** (as the Implicit Function Theorem tells us). We can think of such equations as **constraints** that restrict the possible values of (x, y).
+
+If we now impose an additional constraint and look for simultaneous solutions of f(x, y) = g(x, y) = 0, we expect to find *points*.
+
+In principal we could try to set up a fixed-point iteration to solve this, but in practice it is difficult to design one. Instead we turned immediatedly derived the **Newton method** for vector-valued functions f, by doing a derivation analogous to the second one we did for single-variable functions.
+
+This involves the **Jacobian matrix** of f, i.e. the matrix of second partial derivatives. In the process we realise that we need to be able to **solve a system of linear equations**. We saw how to do this in Julia using the `\` operator, but we will look at this in more detail in a couple of lectures.
+
+Finally we saw that the Newton method also plays a key role in optimization, where finding minima of f reduces to finding zeros of the gradient of f.
