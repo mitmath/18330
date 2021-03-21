@@ -97,7 +97,7 @@ We looked at cobweb diagrams as a way of visualising iterations and saw how the 
 
 This method converges very fast when we are "sufficiently close" to a fixed point, but may behave badly when we are not.
 
-## Lecture 8: Solving equations in higher dimensions
+## Lecture 8: Solving equations in higher dimensions (Mar 16)
 
 We started off looking at the geometry of nonlinear equations like x^2 + y^2 = 1. In general the solutions will be an uncountable set of points (x, y), but lying on (the union of) **1-dimensional curves** (as the Implicit Function Theorem tells us). We can think of such equations as **constraints** that restrict the possible values of (x, y).
 
@@ -108,3 +108,22 @@ In principal we could try to set up a fixed-point iteration to solve this, but i
 This involves the **Jacobian matrix** of f, i.e. the matrix of second partial derivatives. In the process we realise that we need to be able to **solve a system of linear equations**. We saw how to do this in Julia using the `\` operator, but we will look at this in more detail in a couple of lectures.
 
 Finally we saw that the Newton method also plays a key role in optimization, where finding minima of f reduces to finding zeros of the gradient of f.
+
+## Lecture 9: Calculating derivatives (Mar 18)
+
+We started off by looking at **finite difference methods** to numerically approximate the derivative f'(a) of a function f at a point a, starting 
+from the definition of derivative but ignoring the limit. Using a small value of the distance h between the points we use for the secant line that approximates the tangent line,
+we get an approximate numerical value of the derivative.
+
+We used a Taylor expansion with the Lagrange form of the remainder to bound the error when we expand f(a + h), and 
+hence an O(h) bound on the truncation error when we use the simplest forward difference. However, using a centred difference 
+instead gives a much better O(h^2) bound, with basically the same amount of computational work.
+
+Then we looked at a (numerically) exact method to calculate f'(a): **algorithmic differentiation**. 
+If we expand f(a + ϵ) to first order in ϵ, the coefficient of ϵ gives us f'(a).
+We can use this to calculate the derivative if we are able to calculate the expansion.
+
+We can take advantage of this computationally by defining a **dual number** type `Dual(c, d)` to
+represent c + dϵ, in other words to represent a function f such that f(a) = c and f'(a) = d.
+By defining arithmetic operations on `Dual`, we can set up an algebra (where, effectively, ϵ^2=0)
+that enables us to calculate exact derivatives automatically.
