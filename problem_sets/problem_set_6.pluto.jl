@@ -34,7 +34,7 @@ md"""
 
 - Use a single blank line to separate parts of your functions, e.g. initialization from the main loop.
 
-- Submit on Canvas by **Friday, 2 April 2021** at **11:59pm EDT**. 
+- Submit on Canvas by **Saturday, 3 April 2021** at **11:59pm EDT**. 
 """
 
 # ╔═╡ 010dc7b0-8db8-11eb-3c33-b71df92ed87b
