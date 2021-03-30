@@ -127,3 +127,27 @@ We can take advantage of this computationally by defining a **dual number** type
 represent c + dϵ, in other words to represent a function f such that f(a) = c and f'(a) = d.
 By defining arithmetic operations on `Dual`, we can set up an algebra (where, effectively, ϵ^2=0)
 that enables us to calculate exact derivatives automatically.
+
+## Lecture 10: Solving linear systems (Mar 25)
+
+We looked at numerical methods to solve the system of linear equations Ax = b for the vector x, where A is an n × n matrix and b an n-vector.
+
+We started with the Jacobi iteration, where we rearrange the equation Ax = b by solving the ith equation for the ith variable x_i. This gives an iterative method that sometimes converges, for example when the matrix is diagonally dominant. A modification where we use new information that we have generated about the x_i at the next time step gives the Gauss--Seidel method.
+
+Then we looked at the Gaussian elimination method, where we carry out row operations to reduce an (augmented) matrix to upper-triangular form. The row operations can be written as the effect of multiplying A by a special lower-triangular matrix, so the Gaussian elimination algorithm corresponds to factorising the matrix A as A = LU, with L a lower-triangular matrix and U an upper-triangular matrix. 
+
+We looked at the running time and computational complexity of algorithms. The factorisation step in LU factorisation requires O(n^3) operations; once the factorisation is available, solving the system needs O(n^2) steps.
+
+
+## Lecture 11: Power iteration and QR factorisation (Mar 30)
+
+We started off by looking at the power iteration x_{n+1} = A x_n, for a matrix A and a vector x. This corresponds to calculating ever-higher powers of a matrix A.
+
+We saw that when we normalise at each step, the result converges to an eigenvector of A, so this gives us a numerical method to calculate an eigenvector.
+
+To find the other eigenvectors we restricted attention to real, symmetric matrices, for which linear algebra tells us (the "spectral theorem") that there is a basis of n eigenvectors and that they are **orthogonal**.
+
+When we carry out the power iteration with k vectors, they all converge to the same dominant eigenvector. But by orthonogalising them at each step, using the Gram--Schmidt algorithm, they converge to the top k eigenvectors.
+
+We saw that the Gram--Schmidt algorithm can be thought of as a method to calculate a decomposition of a matrix A as A = QR, with Q an orthonal matrix and R an upper-triangular matrix. This can be used as an alternative numerical method for solving a linear system.
+
