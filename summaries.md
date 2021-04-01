@@ -151,3 +151,16 @@ When we carry out the power iteration with k vectors, they all converge to the s
 
 We saw that the Gram--Schmidt algorithm can be thought of as a method to calculate a decomposition of a matrix A as A = QR, with Q an orthonal matrix and R an upper-triangular matrix. This can be used as an alternative numerical method for solving a linear system.
 
+
+## Lecture 12: Linear least-squares problems
+
+We looked at least-squares problems, of which the simplest example is fitting a straight line to a cloud of data. The straight line has two parameters (intercept and slope) and we want to find the values of those parameters which minimise the distance.
+
+We can formulate this as an optimisation problem, minimising a loss function that measures the average distance of the data from the function. A common choice of distance measure is the square of the distance; this gives a least-squares problem.
+
+We rewrote this in matrix language and generalised it to finding the best solution of Ax = b for an over-determined system, i.e. for an (m × n) matrix A that is "tall and narrow", with more rows than columns. 
+
+We found the solution to the optimisation problem, which intuitively corresponds to choosing the x for which the vector x - b is orthogonal to the column space of A. This is given by the normal equations.
+The best way to solve the normal equations is to find the QR factorisation of A, to avoid having to construct the squared matrix A' * A, which amplifies rounding errors.
+
+We started to discuss the SVD, which tells us how much a matrix stretches and rotates vectors.
