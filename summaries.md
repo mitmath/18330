@@ -164,3 +164,8 @@ We found the solution to the optimisation problem, which intuitively corresponds
 The best way to solve the normal equations is to find the QR factorisation of A, to avoid having to construct the squared matrix A' * A, which amplifies rounding errors.
 
 We started to discuss the SVD, which tells us how much a matrix stretches and rotates vectors.
+
+
+## Lecture 15: Lagrange interpolation
+
+We looked at the problem of **interpolation**, i.e. finding a function $f$ that exactly passes through n+1 data points (x0, y0), (x1, y1), ..., (xn, yn).
