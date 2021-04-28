@@ -28,6 +28,8 @@ Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras).
 
 - [Numerical analysis](http://persson.berkeley.edu/math128a), Persson
 
+- [Numerical analyis](https://www.math.ucdavis.edu/~bremer/classes/fall2018/MAT128a/slides.html), Bremer
+
 
 ## Somewhat more advanced books:
 
