@@ -19,6 +19,8 @@ Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras).
 
 - *An Introduction to Numerical Analysis*, Süli & Mayers
 
+- *Numerical Analysis*, Sauer
+
 
 ## Online courses at a similar level:
 
@@ -27,6 +29,8 @@ Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras).
 - [Programming for mathematical applications](http://persson.berkeley.edu/math124), Persson
 
 - [Numerical analysis](http://persson.berkeley.edu/math128a), Persson
+
+- [Numerical analyis](https://www.math.ucdavis.edu/~bremer/classes/fall2018/MAT128a/slides.html), Bremer
 
 
 ## Somewhat more advanced books:
