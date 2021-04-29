@@ -19,6 +19,8 @@ Julia notebooks [here](https://github.com/tobydriscoll/fnc-extras).
 
 - *An Introduction to Numerical Analysis*, Süli & Mayers
 
+- *Numerical Analysis*, Sauer
+
 
 ## Online courses at a similar level:
 
