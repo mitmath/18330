@@ -67,7 +67,7 @@ It seems nice enough, apart from a little dip between 1.3 and 1.4:
 
 # ╔═╡ b6c570d4-0a4c-11eb-0bc1-d51e28a13085
 begin
-	plot(1.2:0.001:1.5, f, leg=false, alpha=1, size=(400, 300))
+	plot(1.2:0.00001:1.5, f, leg=false, alpha=1, size=(400, 300))
 	xlabel!("x")
 	ylabel!("f(x)")
 end
@@ -89,10 +89,28 @@ end
 # ╔═╡ 7483f810-574c-11eb-0656-9fb0f7957d5e
 f(4/3)
 
+# ╔═╡ 17edf477-f688-48d2-bb92-b2cf687130c0
+big(4/3)
+
+# ╔═╡ 8702f425-f6ac-42a8-8d5a-d1b4522919a3
+log(3 * (1 - (4/3)) + 1)
+
+# ╔═╡ b672fb07-341e-4951-a3bb-010f657af8e4
+f(big(4) / 3)
+
+# ╔═╡ 3886b2de-1e33-4936-9c14-be786130bab8
+
+
 # ╔═╡ b6acb09c-56de-11eb-1ba8-49d9aff92e96
 md"""
 #### What happens if we use intervals?
 """
+
+# ╔═╡ 7295afd1-cbe7-4d7f-9f90-493113a6f9be
+XX = 1.33 .. 1.34
+
+# ╔═╡ ed2b8fef-a78a-4c73-bdb7-74d4deffa39c
+typeof(XX)
 
 # ╔═╡ a55effe8-0a53-11eb-0ae6-17fd68c3cbf5
 let
@@ -124,13 +142,19 @@ This is a set, so we can define set operations like
 """
 
 # ╔═╡ 3db16da9-19e0-415f-9092-040e3294964b
-Base.in(x::Real, a::MyInterval) = a.left ≤ x ≤ a.right
+Base.in(x::Real, a::MyInterval) = a.left ≤ x ≤ a.right  # \le<TAB>
+
+# ╔═╡ ab3cb48d-b514-4dd7-b008-0e58b7e3f5f8
+∈
+
+# ╔═╡ 79d4d795-b7cf-4590-9d52-6979b6dda41e
+1 ∈ [3, 4, 1]
 
 # ╔═╡ edd3a4c7-919b-41ce-998f-8117ac73ee99
 let 
 	X = MyInterval(0.1, 0.3)
 	
-	0.2 ∈ X
+	0.2 ∈ X   # \in<TAB>
 end
 	
 
@@ -258,6 +282,64 @@ exp(cos(w + 1))
 # ╔═╡ 74bfd5d6-574e-11eb-17f6-b78744ce936d
 (3..5) ∩ (4..6)
 
+# ╔═╡ 2052c1c2-6ff9-49ea-a4cc-076c3ca1b28e
+prevfloat(exp(0.5))
+
+# ╔═╡ 87d5fb82-1f00-45f7-8fbd-0ccbe88fe780
+md"""
+This assumes that `exp` is **faithfully rounded**.
+"""
+
+# ╔═╡ 4ad5932c-bc58-4b79-9056-de18347247c7
+Base.exp(X::MyInterval) = 
+
+	MyInterval( prevfloat(exp(X.left)), 
+				nextfloat(exp(X.right))
+	)
+
+# ╔═╡ d25e8b5a-9721-41ee-9353-53693413dd98
+let 
+	X = MyInterval(0.1, 0.3)
+	exp(X)
+end
+
+# ╔═╡ 756643a3-5700-49aa-a3e9-c759026dee86
+plot(x -> x^2)
+
+# ╔═╡ a44d7ca0-f10c-49f1-8f32-ebae52b266aa
+let 
+	X = 3..4
+	X^2
+end
+
+# ╔═╡ eafa72a2-7af9-4af9-8b6d-ac4d6a1cac09
+let
+	X = (-2..1)
+	X^2
+end
+
+# ╔═╡ 6e805f1e-e600-4669-9e26-cc7fefccca4d
+let
+	X = (-2..1)
+	sin(X)
+end
+
+# ╔═╡ ca9216dc-00fe-49d1-a278-73ef2c5790a2
+
+
+# ╔═╡ 19ccde46-c45d-4830-ab58-7858335899f0
+md"""
+Want: $X - X = \{ x - x: x \in X \}$
+
+We get: $X - X = \{ x - y: x \in X, y \in X \}$
+"""
+
+# ╔═╡ 157cc9dc-f71d-44d1-bd76-fe9d6a1c05d8
+let
+	X = 0..1
+	X - X
+end
+
 # ╔═╡ d307fbae-56e3-11eb-3f91-d9f39a3d5b89
 md"""
 ## Function bounding
@@ -275,6 +357,12 @@ A partial cure to this is to **split** or **mince** the interval into pieces. As
 # ╔═╡ 8af11366-56e4-11eb-026e-0dc1866ac319
 @bind n Slider(1:100, show_value=true)
 
+# ╔═╡ 292751f3-c76b-4524-a319-96218a3e4e26
+let 
+	X = -2..2
+	X^2 - 2X
+end
+
 # ╔═╡ af813bf2-56e4-11eb-01af-2180ad97e0f3
 @bind n2 Slider(1:200, show_value=true)
 
@@ -283,8 +371,38 @@ md"""
 ## Searching for roots
 """
 
-# ╔═╡ 46fb7422-0a55-11eb-12bd-8b41a2b0200e
-X = 3..4
+# ╔═╡ 16aae80e-d25d-4d76-abf8-21d212389b11
+let 
+	f(x) = x^2 - 2
+	
+	# f(1.41..1.42)
+	
+	# f(1.41), f(1.42)
+	
+	# ForwardDiff.derivative(f, 1.41..1.42)
+	
+	IntervalRootFinding.roots(f, -Inf..Inf)
+end
+
+# ╔═╡ f2c76ffc-5f7b-4d22-abb5-b158febb5dbb
+
+
+# ╔═╡ aecc6317-aaa1-402c-b7bb-e73e2c6ac74e
+fp(x) = 2x
+
+# ╔═╡ d6313b7a-4f67-4366-bb21-047806c5d606
+fp(1.41..1.42)
+
+# ╔═╡ ff4ca92e-8f7c-4e3e-9d69-255867fc00dd
+
+
+# ╔═╡ b6fa995b-4604-46ed-966c-0d0703242f07
+0 ∈ f(10..11)
+
+# ╔═╡ 0651c1e1-a847-4f71-8d3d-959abc6c9459
+md"""
+Theorem: There is no root of the function $f$ in $[10..11]$ !
+"""
 
 # ╔═╡ e627e922-56de-11eb-1b5a-d1b60f2d07d6
 ff(x) = x^2 - 2
@@ -294,6 +412,9 @@ ff(X)
 
 # ╔═╡ e5f79113-0168-406c-a293-4b7dd15bad7f
 0 ∈ ff(X)
+
+# ╔═╡ 294d321e-1af4-4076-b22b-956fad3ee39b
+
 
 # ╔═╡ 2cc9797a-56e6-11eb-27ae-e764f08b2054
 md"""
@@ -465,9 +586,6 @@ fff( (x, y) ) = [x^2 + y^2 - 1, y - x]
 
 # ╔═╡ f99e3a1e-56df-11eb-35e1-dde81cf8ffb5
 xxx = 0.65..0.75
-
-# ╔═╡ 03f513d4-56e0-11eb-2745-39b68d5191a4
-Y = xxx × xxx
 
 # ╔═╡ 5e9584c0-0a5c-11eb-3e93-73077e62ef8f
 jacobian(fff, [0.7, 0.8])
@@ -680,6 +798,24 @@ end
 # ╔═╡ 977bbb2a-5745-11eb-2e16-c15791faea7f
 plot_branch_bound(f4, XXX, interval_lists, upper_bounds, i)
 
+# ╔═╡ b94edb69-4f96-47b6-ad05-66b61e3e462c
+begin
+	g( (x, y) ) = [x^2 + y^2 - 1, x - y]
+	
+	X = 10..11
+	Y = 13..14
+	
+	J = ForwardDiff.jacobian(g, [3..3.1, 4..4.1])
+	
+	inv(J)
+end
+
+# ╔═╡ 03f513d4-56e0-11eb-2745-39b68d5191a4
+Y = xxx × xxx
+
+# ╔═╡ 46fb7422-0a55-11eb-12bd-8b41a2b0200e
+X = 3..4
+
 # ╔═╡ Cell order:
 # ╠═c8776bbc-d0d4-4e15-90a2-7883ded587ba
 # ╠═680cc6ba-c0ae-47c1-8cf3-82ab8304259f
@@ -693,13 +829,21 @@ plot_branch_bound(f4, XXX, interval_lists, upper_bounds, i)
 # ╠═63668142-56de-11eb-2034-77957f6516e9
 # ╠═f86b58ae-0a52-11eb-3959-3dffbabdfb02
 # ╠═7483f810-574c-11eb-0656-9fb0f7957d5e
+# ╠═17edf477-f688-48d2-bb92-b2cf687130c0
+# ╠═8702f425-f6ac-42a8-8d5a-d1b4522919a3
+# ╠═b672fb07-341e-4951-a3bb-010f657af8e4
+# ╠═3886b2de-1e33-4936-9c14-be786130bab8
 # ╟─b6acb09c-56de-11eb-1ba8-49d9aff92e96
+# ╠═7295afd1-cbe7-4d7f-9f90-493113a6f9be
+# ╠═ed2b8fef-a78a-4c73-bdb7-74d4deffa39c
 # ╠═a55effe8-0a53-11eb-0ae6-17fd68c3cbf5
 # ╟─6661c95c-0a4b-11eb-0418-5199caf01453
 # ╟─33b7d804-33d3-4939-aab5-e302bce48d35
 # ╠═8b8db1ac-56e0-11eb-3a06-f70187123d15
 # ╟─c503b8a4-7b4c-4428-a481-0090b35e54e7
 # ╠═3db16da9-19e0-415f-9092-040e3294964b
+# ╠═ab3cb48d-b514-4dd7-b008-0e58b7e3f5f8
+# ╠═79d4d795-b7cf-4590-9d52-6979b6dda41e
 # ╠═edd3a4c7-919b-41ce-998f-8117ac73ee99
 # ╠═9bce488a-56e0-11eb-3caa-3dfe17a5250f
 # ╟─d5213479-16e9-4193-afb9-7f70d0016779
@@ -724,17 +868,38 @@ plot_branch_bound(f4, XXX, interval_lists, upper_bounds, i)
 # ╠═ff255350-574d-11eb-0c78-91dee341748b
 # ╠═261e9354-574e-11eb-15be-ab1a534ab0c2
 # ╠═74bfd5d6-574e-11eb-17f6-b78744ce936d
+# ╠═2052c1c2-6ff9-49ea-a4cc-076c3ca1b28e
+# ╟─87d5fb82-1f00-45f7-8fbd-0ccbe88fe780
+# ╠═4ad5932c-bc58-4b79-9056-de18347247c7
+# ╠═d25e8b5a-9721-41ee-9353-53693413dd98
+# ╠═756643a3-5700-49aa-a3e9-c759026dee86
+# ╠═a44d7ca0-f10c-49f1-8f32-ebae52b266aa
+# ╠═eafa72a2-7af9-4af9-8b6d-ac4d6a1cac09
+# ╠═6e805f1e-e600-4669-9e26-cc7fefccca4d
+# ╠═ca9216dc-00fe-49d1-a278-73ef2c5790a2
+# ╟─19ccde46-c45d-4830-ab58-7858335899f0
+# ╠═157cc9dc-f71d-44d1-bd76-fe9d6a1c05d8
 # ╟─d307fbae-56e3-11eb-3f91-d9f39a3d5b89
 # ╟─d548877a-af80-4e43-befe-3fb67db9eac9
 # ╠═8af11366-56e4-11eb-026e-0dc1866ac319
 # ╠═f615d0ba-56e3-11eb-2d6d-4bab810f6a24
+# ╠═292751f3-c76b-4524-a319-96218a3e4e26
 # ╠═af813bf2-56e4-11eb-01af-2180ad97e0f3
 # ╠═0fc92e58-56e4-11eb-3479-537013fbdba7
 # ╟─db2440fc-56de-11eb-1f8e-15cf07413d76
+# ╠═16aae80e-d25d-4d76-abf8-21d212389b11
+# ╠═b94edb69-4f96-47b6-ad05-66b61e3e462c
+# ╠═f2c76ffc-5f7b-4d22-abb5-b158febb5dbb
+# ╠═aecc6317-aaa1-402c-b7bb-e73e2c6ac74e
+# ╠═d6313b7a-4f67-4366-bb21-047806c5d606
+# ╠═ff4ca92e-8f7c-4e3e-9d69-255867fc00dd
+# ╠═b6fa995b-4604-46ed-966c-0d0703242f07
+# ╟─0651c1e1-a847-4f71-8d3d-959abc6c9459
 # ╠═46fb7422-0a55-11eb-12bd-8b41a2b0200e
 # ╠═e627e922-56de-11eb-1b5a-d1b60f2d07d6
 # ╠═89866847-f382-4339-ab04-f53a3a7fe8d0
 # ╠═e5f79113-0168-406c-a293-4b7dd15bad7f
+# ╠═294d321e-1af4-4076-b22b-956fad3ee39b
 # ╟─2cc9797a-56e6-11eb-27ae-e764f08b2054
 # ╠═ce9c63e6-5745-11eb-3e78-4b2ac35ad2bb
 # ╠═d784fa92-5745-11eb-121f-557774e90c39
