@@ -6,7 +6,7 @@ Welcome to course 18.330 at MIT! This is an introductory course on **numerical a
 
 ## Installation of required software 
 We will be using the following **free / open source** software:
-- The [Julia language](www.julialang.org)
+- The [Julia language](https://www.julialang.org)
 - The [Pluto notebook](https://github.com/fonsp/Pluto.jl) environment
 
 Please follow [these  instructions](https://computationalthinking.mit.edu/Spring21/installation/) to install Julia and then Pluto.
