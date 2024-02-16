@@ -1,51 +1,80 @@
-# 18.330: Intro to Numerical Analysis (Spring 2019)
+# 18.330: Introduction to Numerical Analysis
 
-To view the Jupyter notebooks from class online, click on the links below:
+## Spring 2021
 
-[Lecture 01: Invitation, Infinite Sums](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/01_Invitation.ipynb)
+Welcome to course 18.330 at MIT! This is an introductory course on **numerical analysis**.
 
-[Lecture 02: Numerical Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/02_Numerical_Integration.ipynb)
+## Installation of required software 
+We will be using the following **free / open source** software:
+- The [Julia language](https://www.julialang.org)
+- The [Pluto notebook](https://github.com/fonsp/Pluto.jl) environment
 
-[Lecture 03: Solving ODEs](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/03_Solving_ODEs.ipynb)
+Please follow [these  instructions](https://computationalthinking.mit.edu/Spring21/installation/) to install Julia and then Pluto.
 
-[Lecture 03a: The Big-O notation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/03a_Big_O_Notation.ipynb)
+## Logistics
 
-[Lecture 04: Machine Arithmetic](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/04_Machine_Arithmetic.ipynb)
+- Visiting professor David P. Sanders ([sandersd@mit.edu](mailto:sandersd@mit.edu))
 
-[Lecture 05: Numerical Differentiation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/05_Numerical_Differentiation.ipynb)
+- TA: Nicholas Liu
 
-[Lecture 06: Boundary Value Problems](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/06_Boundary_Value_Problems.ipynb)
+- Tues, Thurs 1&ndash;2:30pm Eastern, virtual
 
-[Lecture 07: Richardson Extrapolation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/07_Richardson_Extrapolation.ipynb)
+- Office hours: Tues, 5&ndash;7pm Eastern
 
-[Lecture 08: Root Finding](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/08_Root_Finding.ipynb)
+- [Piazza forum](https://piazza.com/class/kl8f7m3q7q355)
 
-[Lecture 09: Numerical Optimization](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/09_Numerical_Optimization.ipynb)
 
-[Lecture 10: Roots vs Extrema](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/10_Roots_vs_Extrema.ipynb)
+## Course materials
+- **Lectures** are synchronous Zoom sessions for MIT students
 
-[Lecture 11: Numerical Linear Algebra](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/11_Numerical_Linear_Algebra.ipynb)
+- Notes are public:
 
-[Lecture 12: Eigenvalues and Eigenvectors](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/12_Eigenvalues_and_Eigenvectors.ipynb)
+  - [Lecture slides](lectures) 
 
-[Lecture 13: Monte Carlo Integration](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/13_Monte_Carlo_Integration.ipynb)
+  - [Pluto notebooks](notebooks)
 
-[Lecture 14: Fourier Analysis I](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/14_Fourier_Analysis_I.ipynb)
+  - [Summaries of each lecture](summaries.md)
 
-[Lecture 15: Fourier Analysis II](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/15_Fourier_Analysis_II.ipynb)
+### Evaluation
 
-[Lecture 16: The Discrete Fourier Transform](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/16_Discrete_Fourier_Transform.ipynb)
+- 10 problem sets (50%). No late submissions, but the lowest score will be dropped.
+- 1 midterm take-home exam (20%)
+- Final project (30%)
 
-[Lecture 17: The Fast Fourier Transform](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/17_Fast_Fourier_Transform.ipynb)
+Problem sets will consist of a mixture of theory and coding in Julia. They will be submitted and graded online.
 
-[Lecture 18: Clenshaw-Curtis Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/18_Clenshaw_Curtis_Quadrature.ipynb)
+For the final project you will explore a topic in numerical analysis that we have not covered in class (but at the level of the class). The final project must include a discussion of the mathematics behind the method, together with your own implementation in Julia.
 
-[Lecture 19: Function Interpolation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/19_Function_Interpolation.ipynb)
+### Learning Julia
 
-[Lecture 20: Chebyshev methods](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/20_Chebyshev_Methods.ipynb)
+- Prof. Steven Johnson will give an introduction to Julia on Friday, Feb 19 from 5-7pm. Make sure to install Julia beforehand. See https://github.com/mitmath/julia-mit for information and resources on Julia.
 
-[Lecture 21: Gauss Quadrature](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/21_Gauss_Quadrature.ipynb)
+- More learning resources are available at https://julialang.org/learning/
 
-[Lecture 22: Ewald Summation](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/22_Ewald_Summation.ipynb)
+### Windows users
 
-[Extra Notebook: Solving a simple PDE with finite differences and using a spectral method](https://nbviewer.jupyter.org/github/mitmath/18330/blob/master/Spectral_PDEs.ipynb)
+If you use Windows, please download Git for Windows [here](https://gitforwindows.org)
+
+### Getting the files
+
+To get the files, use `git` from the command line (or from a GUI), as follows
+
+- Clone the repository once with
+```
+git clone https://github.com/mitmath/18330
+```
+This will create a new directory called `18330` with the matierials.
+
+
+- Update it to pull in new changes each time with
+```
+git pull
+```
+This needs to be executed from within the directory. (Use `cd` to change directory.)
+
+### Syllabus
+See [here](syllabus.md) for the approximate course syllabus.
+
+### Bibliography
+
+See [here](bibliography.md) for bibliography and related online courses and learning materials.
